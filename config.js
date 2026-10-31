@@ -6,6 +6,7 @@ window.BIO = {
   description: "Entre no meu universo.\nMeus projetos e conexões, em um só lugar.",
   // Opcional: coloque uma imagem na pasta e informe, por exemplo, "foto.jpg".
   avatar: "foto.jpg",
+  logo: "logo.jpg",
   accent: "#a6dcff",
   // Adicione seu áudio à pasta e informe o nome. Exemplo: "musica.mp3".
   // O som começa no primeiro toque; o visitante pode pausar pelo botão no topo.

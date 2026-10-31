@@ -15,6 +15,8 @@ Exemplos de destinos:
 
 Para usar sua foto, adicione `foto.jpg` na mesma pasta e configure `avatar: "foto.jpg"`. Deixe vazio para usar suas iniciais. A cor de destaque usa formato hexadecimal, por exemplo `#a6dcff`.
 
+A logo enviada está em `logo.jpg` e aparece no lugar do nome escrito, mantendo o nome acessível aos leitores de tela. O arquivo original foi preservado; o enquadramento e a integração do fundo preto são feitos pelo CSS. Para voltar ao nome em texto, configure `logo: ""`.
+
 Para usar sua música, adicione um áudio como `musica.mp3` e configure `music: "musica.mp3"`. Use um arquivo que você possa publicar. Os navegadores normalmente bloqueiam áudio automático: a música tenta começar no primeiro toque/clique, com volume inicial de 35% e botão para pausar. Sem arquivo configurado, não aparece controle de música. Arquivos enviados ao repositório público também podem ser acessados pelo público.
 
 As estrelas acompanham suavemente o movimento do ponteiro e a rolagem. Estrelas cadentes aparecem durante a navegação e ocasionalmente enquanto a página está aberta. Há um botão para pausar os efeitos. As animações também respeitam a preferência do dispositivo por movimento reduzido e param quando a aba fica oculta. As ondas não bloqueiam a rolagem nem os botões.

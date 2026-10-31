@@ -27,6 +27,24 @@
   document.getElementById("name").textContent = name;
   document.getElementById("handle").textContent = bio.handle || "";
   document.getElementById("description").textContent = bio.description || "";
+  if (bio.logo) {
+    try {
+      const logoUrl = new URL(bio.logo, document.baseURI);
+      if (["http:", "https:", "file:"].includes(logoUrl.protocol)) {
+        const logo = document.createElement("img");
+        logo.alt = name;
+        const wrapper = document.createElement("span");
+        wrapper.className = "brand-logo";
+        wrapper.append(logo);
+        logo.addEventListener("load", () => {
+          const heading = document.getElementById("name");
+          heading.replaceChildren(wrapper);
+          heading.classList.add("has-logo");
+        }, { once: true });
+        logo.src = logoUrl.href;
+      }
+    } catch { /* Mantenha o nome caso a imagem não esteja disponível. */ }
+  }
   if (/^#[0-9a-f]{6}$/i.test(bio.accent || "")) document.documentElement.style.setProperty("--accent", bio.accent);
   const avatar = document.getElementById("avatar");
   avatar.textContent = name.trim().split(/\s+/).slice(0, 2).map(s => Array.from(s)[0] || "").join("").toUpperCase();
