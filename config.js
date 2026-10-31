@@ -14,6 +14,6 @@ window.BIO = {
   links: [
     { title: "Vamos conversar", subtitle: "Me chame no WhatsApp", icon: "chat", url: "https://wa.me/5566984282688", featured: true },
     { title: "YouTube", subtitle: "SFelipe Oficial · Assista aos meus vídeos", icon: "video", url: "https://youtube.com/@sfelipeoficial?si=R0qql-XIYTqHbxz1" },
-    { title: "SFelipe Music", subtitle: "Entre no meu universo musical", icon: "music", url: "https://sfelipemarketing-gif.github.io/Sfelipe-music-/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZnRzaAVS7ChleHRuA2FlbQIxMQBwZG9mAmZkaWQWURWJjYRdOFCeRLSBjtHOhh9dawS7hXNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABpxiLcMGHRwaahgFDbHxhcIAtSIis6X-aSbDCWLT22f1EWtdXHXOjb7aexD23_aem_yJ95o4M5dnSz-jaNbbccIg" }
+    { title: "SFelipe Music", subtitle: "Entre no meu universo musical", icon: "music", url: "https://sfelipemarketing-gif.github.io/Sfelipe-music-/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZnRzaAVS7nhleHRuA2FlbQIxMQBwZG9mAmZkaWQWURWJjYRdOFCeRLSBjtHOhh9dawS7hXNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABpxiLcMGHRwaahgFDbHxhcIAtSIis6X-aSbDCWLT22f1EWtdXHXOjb7aexD23_aem_yJ95o4M5dnSz-jaNbbccIg" }
   ]
 };
