@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>ROSFEL — Vídeo 9:16</title>
+<style>
+:root{--bg:#080B0A;--graphite:#141A17;--white:#F5F7F5;--green:#42E695;--muted:rgba(245,247,245,.66);--faint:rgba(245,247,245,.4);--line:rgba(245,247,245,.1);--g12:rgba(66,230,149,.12);--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--white);font-family:"Inter Display","Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+svg{display:block}
+#film{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,247,245,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,247,245,.04) 1px,transparent 1px);background-size:90px 90px;-webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 50%,#000 30%,transparent 85%)}
+.orb{position:absolute;width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(66,230,149,.16),transparent 60%);pointer-events:none}
+
+/* HUD */
+.hud{position:absolute;left:60px;right:60px;z-index:10}
+#bars{top:56px;display:flex;gap:8px}
+#bars i{flex:1;height:5px;border-radius:4px;background:rgba(245,247,245,.16);overflow:hidden;position:relative}
+#bars i b{position:absolute;inset:0;width:0;background:var(--green);border-radius:4px}
+#brand{top:96px;display:flex;align-items:center;gap:18px;font-size:22px;letter-spacing:.26em;font-weight:600}
+#brand img{height:44px}
+#brand .sep{width:1px;height:24px;background:var(--line)}
+#brand .lbl{color:var(--faint);font-weight:500;font-size:20px}
+#foot{bottom:70px;display:flex;justify-content:space-between;font-size:18px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+#wipe{position:absolute;left:0;right:0;height:3px;background:var(--green);box-shadow:0 0 30px 6px rgba(66,230,149,.55);z-index:9;opacity:0}
+
+/* scenes */
+.scene{position:absolute;inset:0;padding:220px 80px 230px;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;will-change:opacity,transform}
+.scene>*{position:relative}
+.center{align-items:center;text-align:center}
+
+/* entry animations: delay = scene start + d*120ms */
+.scene [data-a]{animation:rise .9s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--d,0)*var(--u,.12s) + .2s)}
+@keyframes rise{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+.scene [data-a=fade]{animation-name:fade}@keyframes fade{from{opacity:0}to{opacity:1}}
+.scene [data-a=zoom]{animation-name:zoom}@keyframes zoom{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.scene [data-a=left]{animation-name:left}@keyframes left{from{opacity:0;transform:translateX(-140px)}to{opacity:1;transform:none}}
+.scene [data-a=right]{animation-name:right}@keyframes right{from{opacity:0;transform:translateX(140px)}to{opacity:1;transform:none}}
+.scene [data-a=pop]{animation-name:pop;animation-duration:.6s}@keyframes pop{0%{opacity:0;transform:scale(.3)}70%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:none}}
+.scene [data-a=logo]{animation-name:logo;animation-duration:1.6s}@keyframes logo{0%{opacity:0;transform:scale(.55) rotate(-8deg);filter:blur(14px)}60%{opacity:1;filter:blur(0)}100%{opacity:1;transform:none}}
+.scene [data-a=track]{animation-name:track;animation-duration:1.6s}@keyframes track{from{opacity:0;letter-spacing:1.4em}to{opacity:1;letter-spacing:.5em}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--d,0)*var(--u,.12s) + .3s)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.flow{stroke-dasharray:6 14;animation:flow 1.2s linear infinite}@keyframes flow{to{stroke-dashoffset:-40}}
+.blink{animation:blink 1.6s ease-in-out infinite}@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+.spin{transform-origin:center;transform-box:fill-box;animation:spin 30s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.out{animation:outk .5s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--o)*1s)}@keyframes outk{from{opacity:1;transform:none}to{opacity:0;transform:scale(.94)}}
+.in{animation:ink .7s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--o)*1s)}@keyframes ink{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
+.lit{animation:litk .5s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--o)*1s)}@keyframes litk{from{}to{background:rgba(66,230,149,.16);border-color:rgba(66,230,149,.7);color:#42E695}}
+.ch{animation:fade .05s linear both}
+.w{display:inline-block;animation:wordk .55s var(--ease) both}@keyframes wordk{from{opacity:0;transform:translateY(30px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+
+/* tap */
+.tap{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:4px solid var(--green);opacity:0;animation:tapk .8s ease-out both;animation-delay:calc(var(--s)*1s + var(--t)*1s);z-index:5;pointer-events:none}
+@keyframes tapk{0%{opacity:1;transform:scale(.15)}100%{opacity:0;transform:scale(1.3)}}
+.finger{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(245,247,245,.85);box-shadow:0 0 0 10px rgba(245,247,245,.18);opacity:0;animation:fingk 1.3s var(--ease) both;animation-delay:calc(var(--s)*1s + var(--t)*1s - .55s);z-index:6}
+@keyframes fingk{0%{opacity:0;transform:translate(120px,160px)}35%{opacity:1;transform:none}48%{transform:scale(.8)}60%{opacity:1;transform:none}100%{opacity:0;transform:translate(40px,60px)}}
+.press{animation:pressk .35s ease both;animation-delay:calc(var(--s)*1s + var(--t)*1s)}@keyframes pressk{0%{transform:scale(1)}40%{transform:scale(.93);filter:brightness(1.3)}100%{transform:none}}
+
+/* type */
+.eyebrow{display:flex;align-items:center;gap:18px;font-size:26px;letter-spacing:.24em;text-transform:uppercase;color:var(--green);font-weight:600}
+.eyebrow::before{content:"";width:50px;height:2px;background:var(--green)}
+.center .eyebrow{justify-content:center}
+h1{font-size:128px;line-height:.98;letter-spacing:-.045em;font-weight:700}
+h2{font-size:88px;line-height:1.02;letter-spacing:-.04em;font-weight:700;margin:26px 0}
+em{font-style:normal;color:var(--green)}
+.lead{font-size:38px;line-height:1.42;color:var(--muted)}
+.card{background:linear-gradient(180deg,rgba(20,26,23,.95),rgba(20,26,23,.7));border:1px solid var(--line);border-radius:30px}
+.ibox{width:76px;height:76px;border-radius:20px;display:grid;place-items:center;color:var(--green);background:var(--g12);border:1px solid rgba(66,230,149,.25);flex:none}
+.ico{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;border-radius:999px;border:1px solid var(--line);background:rgba(20,26,23,.85);font-size:28px;color:rgba(245,247,245,.9)}
+.chip .ico{width:26px;height:26px;color:var(--green)}
+.tag{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid rgba(66,230,149,.4);border-radius:999px;color:var(--green);font-size:22px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;background:rgba(66,230,149,.06)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.mono{font-family:ui-monospace,"DejaVu Sans Mono",monospace}
+.modhead{display:flex;align-items:flex-end;gap:28px;margin-bottom:34px}
+.modhead .num{font-size:170px;line-height:.8;font-weight:800;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(66,230,149,.7)}
+.modhead h2{margin:0;font-size:84px}
+.modhead p{font-size:30px;color:var(--muted);margin-top:12px;line-height:1.3}
+.win{border-radius:30px;overflow:hidden;border:1px solid rgba(245,247,245,.12);background:#0D1210;box-shadow:0 50px 120px -40px rgba(0,0,0,.9)}
+.win .bar{height:66px;display:flex;align-items:center;gap:12px;padding:0 28px;border-bottom:1px solid var(--line);background:#111714;font-size:21px;color:var(--faint)}
+.win .bar i{width:14px;height:14px;border-radius:50%;background:rgba(245,247,245,.16)}
+.win .bar span{margin-left:12px}
+.bubble{padding:22px 26px;border-radius:24px;font-size:29px;line-height:1.4}
+.note{display:flex;gap:16px;align-items:center;font-size:24px;color:var(--faint);line-height:1.4}
+.note .ico{color:var(--green);flex:none;width:30px;height:30px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-unlink" viewBox="0 0 24 24"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71"/><path d="M8 2v3"/><path d="M2 8h3"/><path d="M16 22v-3"/><path d="M22 16h-3"/></symbol>
+  <symbol id="i-present" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h3a3 3 0 0 1 3 3v0"/><path d="M15 18h-3a3 3 0 0 1-3-3v0"/><path d="M15 9v2"/><path d="M9 13v2"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 14.06 4 20M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9Z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.1 6.2 9.9 3.8a2 2 0 0 0-1.8 0L3.6 6.1A1 1 0 0 0 3 7v12.4a1 1 0 0 0 1.4.9l3.7-1.8a2 2 0 0 1 1.8 0l4.2 2.4a2 2 0 0 0 1.8 0l4.5-2.3a1 1 0 0 0 .6-.9V5.3a1 1 0 0 0-1.4-.9l-3.7 1.8a2 2 0 0 1-1.8 0Z"/><path d="M15 5.8v15"/><path d="M9 3.2v15"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+</svg>
+<div id="film">
+  <div class="grid"></div>
+  <div class="orb" id="orb1"></div><div class="orb" id="orb2"></div>
+  <div id="wipe"></div>
+  <div class="hud" id="bars"></div>
+  <div class="hud" id="brand"><img src="assets/logo-symbol.png" alt=""><span>ROSFEL</span><span class="sep"></span><span class="lbl" id="lbl"></span></div>
+  <div class="hud" id="foot"><span>Inteligência que transforma projetos</span><span id="cnt"></span></div>
+
+<!-- 1 INTRO -->
+<section class="scene center" data-dur="4.8" data-label="" data-nohud>
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+    <path d="M0 1560 H180 Q230 1560 260 1600 L460 1920" stroke="#42E695" stroke-width="3" fill="none" pathLength="1" class="draw" style="--d:0;filter:drop-shadow(0 0 8px #42E695)"/>
+    <path d="M1080 360 H900 Q850 360 820 320 L620 0" stroke="#42E695" stroke-width="3" fill="none" pathLength="1" class="draw" style="--d:2;filter:drop-shadow(0 0 8px #42E695)"/>
+    <circle cx="540" cy="760" r="330" fill="none" stroke="rgba(245,247,245,.07)" stroke-dasharray="3 10" class="spin"/>
+    <circle cx="540" cy="760" r="440" fill="none" stroke="rgba(245,247,245,.04)"/>
+  </svg>
+  <img src="assets/logo-symbol.png" alt="ROSFEL" data-a="logo" style="--d:0;width:470px;margin-top:-120px">
+  <div data-a="track" style="--d:5;font-size:64px;font-weight:600;margin-top:40px;padding-left:.5em">ROSFEL</div>
+  <div data-a="fade" style="--d:9;width:150px;height:3px;background:var(--green);margin:56px 0;box-shadow:0 0 20px var(--green)"></div>
+  <p data-a style="--d:10;font-size:60px;font-weight:300;letter-spacing:-.02em;line-height:1.15">Inteligência que<br><b style="font-weight:700">transforma projetos.</b></p>
+  <p data-a style="--d:14;margin-top:44px;font-size:21px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)">Tecnologia para o agro, engenharia e arquitetura</p>
+</section>
+
+<!-- 2 HOOK -->
+<section class="scene" data-dur="4.6" data-label="Uma pergunta">
+  <div class="eyebrow" data-a>Uma pergunta</div>
+  <h1 style="margin-top:40px;font-size:140px">
+    <div data-a style="--d:1">Quanto do</div>
+    <div data-a style="--d:3">seu tempo</div>
+    <div data-a style="--d:5">vai para</div>
+    <div data-a style="--d:8"><em>processos</em></div>
+    <div data-a style="--d:10"><em>repetitivos?</em></div>
+  </h1>
+  <svg data-a="zoom" style="--d:6;position:absolute;right:70px;bottom:250px" width="300" height="300" viewBox="0 0 300 300">
+    <circle cx="150" cy="150" r="130" fill="rgba(66,230,149,.05)" stroke="rgba(66,230,149,.6)" stroke-width="3"/>
+    <g stroke="rgba(245,247,245,.5)" stroke-width="3" id="ticks"></g>
+    <line x1="150" y1="150" x2="150" y2="70" stroke="#F5F7F5" stroke-width="6" stroke-linecap="round" style="transform-origin:150px 150px;animation:spin 1.4s linear infinite"/>
+    <line x1="150" y1="150" x2="150" y2="44" stroke="#42E695" stroke-width="3" stroke-linecap="round" style="transform-origin:150px 150px;animation:spin .35s linear infinite"/>
+    <circle cx="150" cy="150" r="9" fill="#42E695"/>
+  </svg>
+</section>
+
+<!-- 3 PROBLEMS -->
+<section class="scene" data-dur="9.19" style="--u:.2s" data-label="Por que existimos">
+  <div class="eyebrow" data-a>O dia a dia de quem projeta</div>
+  <h2 data-a style="--d:1">Horas que poderiam ser de <em>criação.</em></h2>
+  <div style="display:grid;gap:20px;margin-top:24px">
+    <div class="card" data-a="left" style="--d:4;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-cube"/></svg></div><span style="font-size:34px;font-weight:500">Famílias no Revit criadas manualmente</span></div>
+    <div class="card" data-a="right" style="--d:6;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-repeat"/></svg></div><span style="font-size:34px;font-weight:500">Modelagem e documentação repetitivas</span></div>
+    <div class="card" data-a="left" style="--d:8;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-folder"/></svg></div><span style="font-size:34px;font-weight:500">Arquivos e versões espalhados</span></div>
+    <div class="card" data-a="right" style="--d:10;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-alert"/></svg></div><span style="font-size:34px;font-weight:500">Retrabalho por inconsistências</span></div>
+    <div class="card" data-a="left" style="--d:12;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-unlink"/></svg></div><span style="font-size:34px;font-weight:500">Ferramentas que não se conectam</span></div>
+    <div class="card" data-a="right" style="--d:14;padding:26px 30px;display:flex;gap:26px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-present"/></svg></div><span style="font-size:34px;font-weight:500">Apresentações montadas do zero</span></div>
+  </div>
+</section>
+
+<!-- 4 QUOTE -->
+<section class="scene" data-dur="6.01" data-label="Nosso ponto de partida">
+  <div data-a="pop" style="font-size:260px;line-height:.6;color:var(--green);font-weight:700;height:130px">“</div>
+  <p style="font-size:84px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin-top:30px" data-words="0.5" data-gap="0.12">O tempo de quem projeta é <em>valioso demais</em> para ser consumido por processos repetitivos.</p>
+  <div data-a style="--d:26;margin-top:56px;display:flex;gap:18px;align-items:center;font-size:24px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)"><span style="width:50px;height:2px;background:var(--green)"></span>Nosso ponto de partida</div>
+</section>
+
+<!-- 5 VISION -->
+<section class="scene" data-dur="7.35" style="--u:.16s" data-label="Nossa visão">
+  <div class="eyebrow" data-a>Conheça a ROSFEL</div>
+  <h2 data-a style="--d:1">Uma inteligência que <em>participa</em> do projeto.</h2>
+  <p class="lead" data-a style="--d:3">Não apenas responde perguntas: atua <span style="color:var(--white)">dentro do fluxo de trabalho</span>, conectando cada etapa.</p>
+  <div style="position:relative;margin-top:50px;display:grid;gap:14px">
+    <svg width="20" height="560" viewBox="0 0 20 560" style="position:absolute;left:39px;top:30px"><line x1="10" y1="0" x2="10" y2="520" stroke="rgba(245,247,245,.15)" stroke-width="2"/><line x1="10" y1="0" x2="10" y2="520" stroke="#42E695" stroke-width="3" pathLength="1" class="draw" style="--d:5;animation-duration:2.6s"/></svg>
+    <div data-a style="--d:4;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:.9;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-spark"/></svg></span><span style="font-size:36px;font-weight:600">Concepção</span></div>
+    <div data-a style="--d:5;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:1.35;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-cube"/></svg></span><span style="font-size:36px;font-weight:600">Modelagem</span></div>
+    <div data-a style="--d:6;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:1.8;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-file"/></svg></span><span style="font-size:36px;font-weight:600">Documentação</span></div>
+    <div data-a style="--d:7;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:2.25;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-scan"/></svg></span><span style="font-size:36px;font-weight:600">Revisão</span></div>
+    <div data-a style="--d:8;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:2.7;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-present"/></svg></span><span style="font-size:36px;font-weight:600">Apresentação</span></div>
+    <div data-a style="--d:9;display:flex;align-items:center;gap:28px"><span class="lit" style="--o:3.15;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:#111714;color:var(--faint)"><svg class="ico"><use href="#i-check"/></svg></span><span style="font-size:36px;font-weight:600">Entrega</span></div>
+  </div>
+</section>
+
+<!-- 6 COMPARE -->
+<section class="scene" data-dur="15.98" style="--u:.2s" data-label="O poder da automação">
+  <div class="eyebrow" data-a>O poder da automação</div>
+  <h2 data-a style="--d:1">Mesmo projeto.<br><em>Outro ritmo.</em></h2>
+  <div class="card" data-a style="--d:3;padding:34px 36px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:32px;font-weight:600;display:flex;gap:16px;align-items:center"><svg class="ico" style="color:var(--faint)"><use href="#i-user"/></svg>Processo tradicional</span><span style="font-size:18px;letter-spacing:.18em;color:var(--faint)">TUDO MANUAL</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+      <span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Projeto</span><span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Famílias</span><span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Organização</span><span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Documentação</span><span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Verificação</span><span class="chip" style="font-size:22px;padding:10px 18px;color:var(--muted)">Apresentação</span>
+    </div>
+    <div style="margin-top:26px;height:22px;border-radius:12px;background:rgba(245,247,245,.05);display:flex;gap:4px;overflow:hidden">
+      <span class="bar" style="--o:1.62;flex:15;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:1.89;flex:15;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:2.16;flex:14;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:2.43;flex:15;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:2.70;flex:14;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:2.97;flex:14;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:3.24;flex:13;background:rgba(66,230,149,.4)"></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:18px;letter-spacing:.16em;color:var(--faint)"><span>ESFORÇO OPERACIONAL</span><span>CRIAÇÃO</span></div>
+  </div>
+  <div class="card" data-a style="--d:16;padding:34px 36px;margin-top:24px;border-color:rgba(66,230,149,.4);background:linear-gradient(180deg,rgba(66,230,149,.09),rgba(20,26,23,.8))">
+    <div style="font-size:32px;font-weight:600;display:flex;gap:16px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-spark"/></svg>Com a ROSFEL</div>
+    <div style="display:grid;gap:12px;margin-top:22px;font-size:27px">
+      <div data-a="right" style="--d:18;display:flex;justify-content:space-between;padding:14px 20px;border-radius:14px;border:1px solid rgba(66,230,149,.2)"><span>Você orienta</span><span style="font-size:18px;letter-spacing:.14em;color:var(--faint);align-self:center">PROFISSIONAL</span></div>
+      <div data-a="right" style="--d:20;display:flex;justify-content:space-between;padding:14px 20px;border-radius:14px;border:1px solid rgba(66,230,149,.2)"><span>A IA automatiza etapas repetitivas</span><span style="font-size:18px;letter-spacing:.14em;color:var(--green);align-self:center">IA</span></div>
+      <div data-a="right" style="--d:22;display:flex;justify-content:space-between;padding:14px 20px;border-radius:14px;border:1px solid rgba(66,230,149,.2)"><span>Você revisa e valida</span><span style="font-size:18px;letter-spacing:.14em;color:var(--faint);align-self:center">PROFISSIONAL</span></div>
+    </div>
+    <div style="margin-top:24px;height:22px;border-radius:12px;background:rgba(245,247,245,.05);display:flex;gap:4px;overflow:hidden">
+      <span class="bar" style="--o:5.40;flex:12;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:5.67;flex:10;background:rgba(66,230,149,.45)"></span><span class="bar" style="--o:5.94;flex:10;background:rgba(245,247,245,.25)"></span><span class="bar" style="--o:6.21;flex:68;background:var(--green);box-shadow:0 0 20px rgba(66,230,149,.6)"></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:18px;letter-spacing:.16em;color:var(--faint)"><span>ESFORÇO OPERACIONAL</span><span style="color:var(--green)">MAIS TEMPO PARA CRIAR</span></div>
+  </div>
+  <p data-a style="--d:34;font-size:50px;line-height:1.12;letter-spacing:-.03em;font-weight:600;margin-top:36px">Menos tempo executando tarefas. <em>Mais tempo criando soluções.</em></p>
+  <p data-a style="--d:36;font-size:19px;color:var(--faint);margin-top:14px">Representação conceitual e ilustrativa — não corresponde a medições de produtividade.</p>
+</section>
+
+<!-- 7 BIM -->
+<section class="scene" data-dur="6.3" data-label="Módulo · BIM">
+  <div class="modhead" data-a><span class="num">01</span><div><h2>ROSFEL <em>BIM</em></h2><p>IA aplicada aos processos BIM</p></div></div>
+  <div class="win" data-a="zoom" style="--d:2">
+    <div class="bar"><i></i><i></i><i></i><span>Assistente de famílias · conceito</span></div>
+    <div style="padding:30px;display:grid;gap:20px">
+      <div class="bubble" style="background:rgba(245,247,245,.06);border:1px solid var(--line);border-bottom-right-radius:6px;margin-left:80px;min-height:132px" data-type="0.7" data-cps="55">Criar família de janela de correr, 2 folhas, com largura e altura ajustáveis.</div>
+      <div style="position:relative;align-self:end;justify-self:end">
+        <div class="press" style="--t:2.35;display:inline-flex;gap:12px;align-items:center;padding:16px 30px;border-radius:999px;background:var(--green);color:#06120C;font-weight:700;font-size:26px"><svg class="ico" style="width:26px;height:26px"><use href="#i-spark"/></svg>Gerar família</div>
+        <i class="tap" style="--t:2.35;left:50%;top:50%"></i><i class="finger" style="--t:2.35;left:50%;top:50%"></i>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 330px;gap:20px;align-items:center">
+        <svg id="bimArt" viewBox="0 0 420 470" width="100%" height="470" data-a="fade" style="--d:22"></svg>
+        <div id="paramTable" style="display:grid;gap:12px"></div>
+      </div>
+      <div class="bubble" data-a style="--d:30;background:var(--g12);border:1px solid rgba(66,230,149,.3);border-bottom-left-radius:6px;font-size:25px">Estrutura proposta. <em>Revise antes de carregar no projeto.</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 DESIGN -->
+<section class="scene" data-dur="5.4" data-label="Módulo · Design">
+  <div class="modhead" data-a><span class="num">02</span><div><h2>ROSFEL <em>Design</em></h2><p>Da ideia à planta 2D e ao modelo 3D</p></div></div>
+  <div data-a style="--d:2;display:flex;gap:12px;margin-bottom:22px">
+    <span class="chip lit" style="--o:.6;font-size:24px;padding:12px 22px"><b class="mono" style="font-size:18px">01</b>Ideia</span>
+    <span class="chip lit" style="--o:1.7;font-size:24px;padding:12px 22px"><b class="mono" style="font-size:18px">02</b>Planta 2D</span>
+    <span class="chip lit" style="--o:3.3;font-size:24px;padding:12px 22px"><b class="mono" style="font-size:18px">03</b>Modelo 3D</span>
+  </div>
+  <div class="bubble card" data-a style="--d:3;font-size:28px;border-radius:24px" data-type="0.7" data-cps="70">“Residência térrea, 2 dormitórios, sala e cozinha integradas.”</div>
+  <div class="card" data-a style="--d:12;margin-top:22px;height:720px;position:relative;overflow:hidden">
+    <div class="out" style="--o:3.15;position:absolute;inset:0;display:grid;place-items:center"><svg id="planArt" viewBox="-40 -50 440 350" width="880"></svg></div>
+    <div class="in" style="--o:3.3;position:absolute;inset:0;display:grid;place-items:center"><svg id="houseArt" viewBox="0 0 460 380" width="900"></svg></div>
+  </div>
+</section>
+
+<!-- 9 MASTERPLAN -->
+<section class="scene" data-dur="6.21" data-label="Módulo · Masterplan">
+  <div class="modhead" data-a><span class="num">03</span><div><h2 style="font-size:70px">ROSFEL <em>Masterplan</em></h2><p>Planejamento de propriedades rurais e empreendimentos agroindustriais</p></div></div>
+  <div class="win" data-a="zoom" style="--d:2">
+    <div class="bar"><i></i><i></i><i></i><span>Estudo de implantação · conceito</span></div>
+    <svg id="siteArt" viewBox="0 0 1000 700" width="100%"></svg>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
+    <span class="chip" data-a style="--d:16"><svg class="ico"><use href="#i-map"/></svg>Implantação</span>
+    <span class="chip" data-a style="--d:18"><svg class="ico"><use href="#i-trend"/></svg>Circulação e logística</span>
+    <span class="chip" data-a style="--d:20"><svg class="ico"><use href="#i-plug"/></svg>Infraestrutura</span>
+    <span class="chip" data-a style="--d:22"><svg class="ico"><use href="#i-layers"/></svg>Cenários de expansão</span>
+  </div>
+</section>
+
+<!-- 10 REVIEW -->
+<section class="scene" data-dur="7.97" style="--u:.17s" data-label="Módulo · Review">
+  <div class="modhead" data-a><span class="num">04</span><div><h2>ROSFEL <em>Review</em></h2><p>Revisão assistida de projetos</p></div></div>
+  <div class="win" data-a="zoom" style="--d:2">
+    <div class="bar"><i></i><i></i><i></i><span>Estrutura · pavimento tipo</span><span style="margin-left:auto" class="mono">v03 ⇄ <b style="color:var(--green)">v04</b></span></div>
+    <svg id="reviewArt" viewBox="0 0 700 660" width="100%" height="600"></svg>
+  </div>
+  <div style="display:grid;gap:14px;margin-top:22px">
+    <div class="card" data-a="right" style="--d:16;padding:20px 26px;display:flex;gap:20px;align-items:center;border-color:rgba(66,230,149,.4);border-radius:20px"><b class="mono" style="width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#06120C">1</b><span style="font-size:28px">Possível interferência entre duto e viga</span></div>
+    <div class="card" data-a="right" style="--d:19;padding:20px 26px;display:flex;gap:20px;align-items:center;border-radius:20px"><b class="mono" style="width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--green);color:var(--green)">2</b><span style="font-size:28px">Cota divergente entre planta e corte</span></div>
+    <div class="card" data-a="right" style="--d:22;padding:20px 26px;display:flex;gap:20px;align-items:center;border-radius:20px"><b class="mono" style="width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--green);color:var(--green)">3</b><span style="font-size:28px">Elemento alterado na v04</span></div>
+  </div>
+  <p class="note" data-a style="--d:26;margin-top:22px"><svg class="ico"><use href="#i-shield"/></svg>O profissional responsável valida as conclusões e o atendimento às normas.</p>
+</section>
+
+<!-- 11 PRESENT -->
+<section class="scene" data-dur="6.24" data-label="Módulo · Present">
+  <div class="modhead" data-a><span class="num">05</span><div><h2>ROSFEL <em>Present</em></h2><p>Informações técnicas que viram apresentações</p></div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+    <span class="chip" data-a="pop" style="--d:3;font-size:24px;padding:12px 20px"><svg class="ico"><use href="#i-cube"/></svg>Modelo 3D</span>
+    <span class="chip" data-a="pop" style="--d:4;font-size:24px;padding:12px 20px"><svg class="ico"><use href="#i-ruler"/></svg>Plantas</span>
+    <span class="chip" data-a="pop" style="--d:5;font-size:24px;padding:12px 20px"><svg class="ico"><use href="#i-file"/></svg>Memoriais</span>
+    <span class="chip" data-a="pop" style="--d:6;font-size:24px;padding:12px 20px"><svg class="ico"><use href="#i-grid"/></svg>Imagens</span>
+    <span class="chip" data-a="pop" style="--d:7;font-size:24px;padding:12px 20px"><svg class="ico"><use href="#i-layers"/></svg>Dados técnicos</span>
+  </div>
+  <div style="position:relative;height:300px;display:grid;place-items:center">
+    <svg width="920" height="300" viewBox="0 0 920 300" style="position:absolute;inset:0">
+      <path d="M160 0 C160 80 400 70 460 150 M760 0 C760 80 520 70 460 150 M460 0 V150" fill="none" stroke="#42E695" stroke-width="2.5" class="flow"/>
+      <path d="M460 150 V300 M460 150 C 380 230 220 220 220 300 M460 150 C 540 230 700 220 700 300" fill="none" stroke="#42E695" stroke-width="2.5" class="flow"/>
+    </svg>
+    <div data-a="zoom" style="--d:9;position:relative;width:220px;height:220px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,rgba(66,230,149,.2),#111714 65%);border:2px solid var(--green);box-shadow:0 0 80px rgba(66,230,149,.4)">
+      <img src="assets/logo-symbol.png" alt="" style="width:120px" class="press" data-t>
+      <i class="tap" style="--t:1.75;left:50%;top:50%"></i><i class="finger" style="--t:1.75;left:50%;top:50%"></i>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <div class="card" data-a="pop" style="--d:17;padding:24px;height:230px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;gap:10px;height:120px"><div style="width:90px;background:#F5F7F5;border-radius:6px;padding:10px;display:grid;gap:6px;align-content:start"><i style="height:30px;background:#141A17"></i><i style="height:5px;background:#42E695;width:60%"></i><i style="height:4px;background:#bbb"></i><i style="height:4px;background:#bbb"></i></div><div style="width:90px;background:#dfe5e1;border-radius:6px"></div></div>
+      <b style="font-size:28px;display:flex;gap:12px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-file"/></svg>PDFs</b></div>
+    <div class="card" data-a="pop" style="--d:19;padding:24px;height:230px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;gap:8px;align-items:flex-end;height:120px"><i style="flex:1;height:40%;background:rgba(66,230,149,.4);border-radius:4px"></i><i style="flex:1;height:65%;background:rgba(66,230,149,.6);border-radius:4px"></i><i style="flex:1;height:50%;background:rgba(66,230,149,.5);border-radius:4px"></i><i style="flex:1;height:95%;background:#42E695;border-radius:4px"></i></div>
+      <b style="font-size:28px;display:flex;gap:12px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-layers"/></svg>Relatórios</b></div>
+    <div class="card" data-a="pop" style="--d:21;padding:24px;height:230px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="height:120px;border-radius:10px;background:#080B0A;border:1px solid rgba(66,230,149,.35);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:14px;gap:10px"><div style="display:grid;gap:8px"><i style="height:8px;background:#F5F7F5"></i><i style="height:8px;background:#42E695;width:60%"></i></div><svg viewBox="0 0 60 50" height="80"><path d="M10 35 30 23 50 35 30 47Z M10 35V20l20-12 20 12v15 M30 23V8" fill="none" stroke="#42E695" stroke-width="1.5"/></svg></div>
+      <b style="font-size:28px;display:flex;gap:12px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-present"/></svg>Apresentações</b></div>
+    <div class="card" data-a="pop" style="--d:23;padding:24px;height:230px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="height:120px;border-radius:10px;background:#0C110F;border:1px solid var(--line);display:grid;place-items:center;position:relative"><span style="width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:rgba(66,230,149,.15);border:2px solid var(--green)"><svg class="ico" style="fill:#42E695;color:#42E695"><use href="#i-play"/></svg></span></div>
+      <b style="font-size:28px;display:flex;gap:12px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-video"/></svg>Vídeos <span style="font-size:18px;color:var(--faint);font-weight:500;letter-spacing:.12em">ASSISTIDOS</span></b></div>
+  </div>
+</section>
+
+<!-- 12 ECOSYSTEM -->
+<section class="scene" data-dur="5.0" data-label="Tudo conectado">
+  <div class="eyebrow" data-a>Ecossistema ROSFEL</div>
+  <h2 data-a style="--d:1">Tudo <em>conectado.</em></h2>
+  <p class="lead" data-a style="--d:2">Cada módulo resolve uma etapa. O <span style="color:var(--white)">Workspace</span> centraliza documentos, versões e equipes.</p>
+  <svg id="ecoArt" viewBox="0 0 920 900" width="920" height="900" style="margin-top:20px"></svg>
+</section>
+
+<!-- 13 FUTURE -->
+<section class="scene" data-dur="7.22" style="--u:.16s" data-label="Nosso futuro">
+  <div class="eyebrow" data-a>Nosso futuro</div>
+  <h2 data-a style="--d:1">Uma plataforma <em>integrada</em>, etapa por etapa.</h2>
+  <div style="position:relative;margin-top:30px;display:grid;gap:22px;padding-left:120px">
+    <svg width="20" height="700" viewBox="0 0 20 700" style="position:absolute;left:40px;top:40px"><line x1="10" y1="0" x2="10" y2="640" stroke="rgba(245,247,245,.15)" stroke-width="2" stroke-dasharray="3 9"/><line x1="10" y1="0" x2="10" y2="150" stroke="#42E695" stroke-width="3" pathLength="1" class="draw" style="--d:4"/></svg>
+    <div data-a style="--d:4;position:relative"><span style="position:absolute;left:-112px;top:16px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:3px solid var(--green);box-shadow:0 0 30px rgba(66,230,149,.5);color:var(--green);font-weight:700;font-size:28px">01</span>
+      <div class="card" style="padding:26px 30px;border-color:rgba(66,230,149,.5)"><span class="tag"><span class="dot"></span>Estágio atual</span><div style="font-size:38px;font-weight:700;margin-top:14px">Em desenvolvimento</div><div style="font-size:26px;color:var(--muted);margin-top:6px">Concepção da plataforma e dos módulos</div></div></div>
+    <div data-a style="--d:7;position:relative"><span style="position:absolute;left:-112px;top:8px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid rgba(245,247,245,.25);color:var(--muted);font-weight:600;font-size:28px">02</span>
+      <div class="card" style="padding:24px 30px"><div style="font-size:34px;font-weight:700">Validação</div><div style="font-size:25px;color:var(--muted);margin-top:6px">Protótipos testados com profissionais</div></div></div>
+    <div data-a style="--d:10;position:relative"><span style="position:absolute;left:-112px;top:8px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid rgba(245,247,245,.25);color:var(--muted);font-weight:600;font-size:28px">03</span>
+      <div class="card" style="padding:24px 30px"><div style="font-size:34px;font-weight:700">Integração</div><div style="font-size:25px;color:var(--muted);margin-top:6px">Módulos conectados e integrações planejadas</div></div></div>
+    <div data-a style="--d:13;position:relative"><span style="position:absolute;left:-112px;top:8px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px dashed rgba(66,230,149,.6);color:var(--green)"><svg class="ico"><use href="#i-spark"/></svg></span>
+      <div class="card" style="padding:24px 30px"><div style="font-size:34px;font-weight:700">Ecossistema completo</div><div style="font-size:25px;color:var(--muted);margin-top:6px">Integrado, escalável e em evolução contínua</div></div></div>
+  </div>
+  <p class="note" data-a style="--d:18;margin-top:34px"><svg class="ico"><use href="#i-shield"/></svg><span>Ferramentas assistentes: o profissional segue responsável por validar resultados e cumprir as normas.</span></p>
+</section>
+
+<!-- 14 CLOSE -->
+<section class="scene center" data-dur="7.0" data-label="" data-nohud>
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+    <path d="M0 1560 H180 Q230 1560 260 1600 L460 1920" stroke="#42E695" stroke-width="3" fill="none" pathLength="1" class="draw" style="--d:0;filter:drop-shadow(0 0 8px #42E695)"/>
+    <path d="M1080 360 H900 Q850 360 820 320 L620 0" stroke="#42E695" stroke-width="3" fill="none" pathLength="1" class="draw" style="--d:2;filter:drop-shadow(0 0 8px #42E695)"/>
+    <circle cx="540" cy="700" r="300" fill="none" stroke="rgba(245,247,245,.07)" stroke-dasharray="3 10" class="spin"/>
+  </svg>
+  <img src="assets/logo-symbol.png" alt="ROSFEL" data-a="logo" style="--d:0;width:360px;margin-top:-80px">
+  <div data-a="track" style="--d:4;font-size:50px;font-weight:600;margin-top:34px;padding-left:.5em">ROSFEL</div>
+  <div data-a="fade" style="--d:7;width:150px;height:3px;background:var(--green);margin:56px 0;box-shadow:0 0 20px var(--green)"></div>
+  <p style="font-size:104px;line-height:1.02;letter-spacing:-.045em;font-weight:700" data-words="1.0" data-gap="0.14">Inteligência que transforma projetos.</p>
+  <p data-a style="--d:16;font-size:48px;color:var(--green);font-weight:500;margin-top:44px">Menos processos.<br>Mais possibilidades.</p>
+  <img src="assets/logo-full.png" alt="" data-a="fade" style="--d:24;width:620px;margin-top:110px;opacity:.9">
+</section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg', G='#42E695', W='#F5F7F5';
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e};
+const txt=(p,x,y,s,a={})=>{const t=el('text',Object.assign({x,y,fill:'rgba(245,247,245,.75)','font-size':14,'font-family':'Inter, sans-serif'},a),p);t.textContent=s;return t};
+const isoF=(cx,cy,s)=>(x,y,z)=>[cx+(x-y)*0.866*s, cy+(x+y)*0.5*s - z*s];
+const pts=a=>a.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ');
+function box(p,P,x,y,w,d,h,st={}){const g=el('g',{},p);const S=st.stroke||G,sw=st.sw||1.2;
+  el('polygon',{points:pts([[x,y+d,0],[x+w,y+d,0],[x+w,y+d,h],[x,y+d,h]].map(a=>P(...a))),fill:st.f1||'rgba(66,230,149,.07)',stroke:S,'stroke-width':sw,'stroke-linejoin':'round'},g);
+  el('polygon',{points:pts([[x+w,y,0],[x+w,y+d,0],[x+w,y+d,h],[x+w,y,h]].map(a=>P(...a))),fill:st.f2||'rgba(66,230,149,.13)',stroke:S,'stroke-width':sw,'stroke-linejoin':'round'},g);
+  el('polygon',{points:pts([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]].map(a=>P(...a))),fill:st.f3||'rgba(66,230,149,.22)',stroke:S,'stroke-width':sw,'stroke-linejoin':'round'},g);return g}
+
+/* ---------- timeline ---------- */
+const scenes=[...document.querySelectorAll('.scene')];
+let t0=0;const OV=.3;
+scenes.forEach((s,i)=>{const d=parseFloat(s.dataset.dur);s._a=t0;s._b=t0+d;s.style.setProperty('--s',t0.toFixed(3));t0+=d-OV});
+const TOTAL=scenes[scenes.length-1]._b;
+window.TOTAL=TOTAL;
+
+/* clock ticks */
+const tk=document.getElementById('ticks');for(let i=0;i<12;i++){const a=i*Math.PI/6;el('line',{x1:150+110*Math.sin(a),y1:150-110*Math.cos(a),x2:150+122*Math.sin(a),y2:150-122*Math.cos(a)},tk)}
+
+/* typing & words */
+document.querySelectorAll('[data-type]').forEach(n=>{const sc=n.closest('.scene')._a,st=parseFloat(n.dataset.type),cps=parseFloat(n.dataset.cps);const s=n.textContent;n.textContent='';
+  [...s].forEach((c,i)=>{const sp=document.createElement('span');sp.className='ch';sp.textContent=c;sp.style.animationDelay=(sc+st+i/cps).toFixed(3)+'s';n.appendChild(sp)});
+  const caret=document.createElement('span');caret.textContent='▍';caret.style.cssText=`color:#42E695;animation:blink .8s steps(1) infinite`;n.appendChild(caret)});
+document.querySelectorAll('[data-words]').forEach(n=>{const sc=n.closest('.scene')._a,st=parseFloat(n.dataset.words),gap=parseFloat(n.dataset.gap);let i=0;
+  const walk=(node,parent)=>{[...node.childNodes].forEach(c=>{if(c.nodeType===3){c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){parent.appendChild(document.createTextNode(' '));return}const sp=document.createElement('span');sp.className='w';sp.textContent=w;sp.style.animationDelay=(sc+st+(i++)*gap).toFixed(3)+'s';parent.appendChild(sp)})}else{const cl=c.cloneNode(false);parent.appendChild(cl);walk(c,cl)}})};
+  const tmp=n.cloneNode(true);n.innerHTML='';walk(tmp,n)});
+/* bars grow */
+document.querySelectorAll('span.bar').forEach(b=>{b.style.transformOrigin='left';b.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:600,easing:'cubic-bezier(.2,.7,.2,1)',fill:'both',delay:(b.closest('.scene')._a+parseFloat(getComputedStyle(b).getPropertyValue('--o')))*1000})});
+
+/* ---------- BIM ---------- */
+(function(){const s=document.getElementById('bimArt');
+  const gg=el('g',{stroke:'rgba(245,247,245,.05)'},s);for(let i=0;i<=420;i+=30)el('line',{x1:i,y1:0,x2:i,y2:470},gg);for(let i=0;i<=470;i+=30)el('line',{x1:0,y1:i,x2:420,y2:i},gg);
+  const P=isoF(150,320,1),Wd=200,H=170,D=14,fr=12;
+  box(s,P,-30,0,Wd+60,D,-10,{f1:'rgba(245,247,245,.03)',f2:'rgba(245,247,245,.04)',f3:'rgba(245,247,245,.06)',stroke:'rgba(245,247,245,.25)',sw:.8});
+  box(s,P,0,0,Wd,D,fr);box(s,P,0,0,fr,D,H);box(s,P,Wd-fr,0,fr,D,H);
+  el('polygon',{points:pts([[0,D,H],[Wd,D,H],[Wd,D,H-fr],[0,D,H-fr]].map(a=>P(...a))),fill:'rgba(66,230,149,.12)',stroke:G},s);
+  el('polygon',{points:pts([[0,0,H],[Wd,0,H],[Wd,D,H],[0,D,H]].map(a=>P(...a))),fill:'rgba(66,230,149,.22)',stroke:G},s);
+  const sash=(x1,x2,yy)=>{el('polygon',{points:pts([[x1,yy,fr],[x2,yy,fr],[x2,yy,H-fr],[x1,yy,H-fr]].map(a=>P(...a))),fill:'rgba(66,230,149,.07)',stroke:G,'stroke-width':1.4},s)};
+  sash(fr,Wd/2+8,D*.35);sash(Wd/2-8,Wd-fr,D*.75);
+  const dim=(a,b,off,label,rot)=>{const A=P(...a),B=P(...b);el('line',{x1:A[0]+off[0],y1:A[1]+off[1],x2:B[0]+off[0],y2:B[1]+off[1],stroke:G,'stroke-width':1.2},s);
+    const mx=(A[0]+B[0])/2+off[0]*1.7,my=(A[1]+B[1])/2+off[1]*1.7;txt(s,mx,my,label,{'text-anchor':'middle','font-size':16,fill:G,'font-family':'ui-monospace,monospace',transform:`rotate(${rot} ${mx} ${my})`})};
+  dim([0,D,0],[Wd,D,0],[-14,26],'L = 1200 mm',30);dim([0,0,0],[0,0,H],[-30,-8],'A = 1000 mm',-90);
+  const rows=[['Largura','1200 mm'],['Altura','1000 mm'],['Peitoril','1100 mm'],['Folhas','2'],['Caixilho','Alumínio']];
+  const sc=s.closest('.scene')._a;
+  document.getElementById('paramTable').innerHTML=rows.map((r,i)=>`<div class="ch" style="animation:right .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:${(sc+3.0+i*.15).toFixed(2)}s;display:flex;justify-content:space-between;padding:16px 18px;border-radius:14px;background:rgba(245,247,245,.04);border:1px solid var(--line);font-size:23px"><span style="color:var(--muted)">${r[0]}</span><span class="mono" style="color:#42E695">${r[1]}</span></div>`).join('');
+})();
+
+/* ---------- DESIGN ---------- */
+const walls2D=[[0,0,360,0],[0,260,360,260],[0,0,0,260],[360,0,360,260],[180,0,180,90],[130,150,130,260],[270,150,270,260]];
+const divider=[[0,40],[80,150],[190,290],[320,360]];
+(function(){const s=document.getElementById('planArt');
+  const ws=el('g',{stroke:W,'stroke-width':7,'stroke-linecap':'square',fill:'none'},s);
+  walls2D.forEach((w,i)=>el('line',{x1:w[0],y1:w[1],x2:w[2],y2:w[3],pathLength:1,class:'draw',style:`--d:${13+i}`},ws));
+  divider.forEach((d,i)=>el('line',{x1:d[0],y1:150,x2:d[1],y2:150,pathLength:1,class:'draw',style:`--d:${17+i}`},ws));
+  const dg=el('g',{stroke:G,'stroke-width':1.5,fill:'none'},s);
+  [[40,80],[150,190],[290,320]].forEach(([a,b])=>el('path',{d:`M${a} 150 L${a} ${150+(b-a)} A${b-a} ${b-a} 0 0 0 ${b} 150`,pathLength:1,class:'draw',style:'--d:20'},dg));
+  [[90,80,'Estar / Jantar'],[270,80,'Cozinha'],[65,215,'Dorm. 1'],[200,215,'Dorm. 2'],[315,215,'Banho']].forEach((l,i)=>{const t=txt(s,l[0],l[1],l[2],{'text-anchor':'middle','font-size':17,fill:'rgba(245,247,245,.8)'});t.setAttribute('data-a','fade');t.style.setProperty('--d',19+i)});
+  el('line',{x1:0,y1:-26,x2:360,y2:-26,stroke:'rgba(66,230,149,.6)'},s);txt(s,180,-34,'12,00 m',{'text-anchor':'middle','font-size':14,fill:G,'font-family':'ui-monospace,monospace'});
+})();
+(function(){const s=document.getElementById('houseArt');const P=isoF(230,95,.72);
+  box(s,P,-14,-14,388,288,4,{f1:'rgba(245,247,245,.04)',f2:'rgba(245,247,245,.06)',f3:'rgba(245,247,245,.05)',stroke:'rgba(245,247,245,.3)',sw:.8});
+  const all=[...walls2D];divider.forEach(d=>all.push([d[0],150,d[1],150]));const t=8,H=70;
+  const bx=all.map(w=>w[1]===w[3]?[w[0],w[1]-t/2,w[2]-w[0],t]:[w[0]-t/2,w[1],t,w[3]-w[1]]);
+  bx.sort((a,b)=>(a[0]+a[2]/2+a[1]+a[3]/2)-(b[0]+b[2]/2+b[1]+b[3]/2));
+  bx.forEach(b=>box(s,P,b[0],b[1],b[2],b[3],H,{sw:1,f1:'rgba(20,30,25,.92)',f2:'rgba(30,48,39,.95)',f3:'rgba(66,230,149,.55)'}));
+})();
+
+/* ---------- MASTERPLAN ---------- */
+(function(){const s=document.getElementById('siteArt');
+  const defs=el('defs',{},s);const pat=el('pattern',{id:'hatch',width:10,height:10,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);el('line',{x1:0,y1:0,x2:0,y2:10,stroke:'rgba(66,230,149,.4)','stroke-width':1.5},pat);
+  const cg=el('g',{fill:'none',stroke:'rgba(245,247,245,.05)'},s);for(let i=0;i<7;i++)el('path',{d:`M-20 ${120+i*80} C 250 ${60+i*80}, 500 ${200+i*70}, 1020 ${90+i*85}`},cg);
+  el('polygon',{points:'50,70 950,40 975,640 70,665',fill:'rgba(66,230,149,.03)',stroke:G,'stroke-width':2,'stroke-dasharray':'10 6'},s);
+  const rv=el('g',{'data-a':'fade',style:'--d:5'},s);el('path',{d:'M62 85 L300 77 Q280 150 230 175 Q150 200 66 215 Z',fill:'url(#hatch)',stroke:'rgba(66,230,149,.5)'},rv);txt(rv,150,140,'Reserva legal',{'text-anchor':'middle','font-size':20,fill:G,'font-weight':600});
+  const rd='M520 665 L520 400 Q520 360 480 360 L250 360 Q220 360 220 330 L220 250 M520 400 Q520 360 560 360 L800 360 Q830 360 830 330 L830 250 M520 360 L520 240';
+  el('path',{d:rd,fill:'none',stroke:'#26302B','stroke-width':28,'stroke-linejoin':'round',pathLength:1,class:'draw',style:'--d:4'},s);
+  el('path',{d:'M520 665 L520 400 Q520 360 560 360 L800 360',fill:'none',stroke:G,'stroke-width':3,class:'flow'},s);
+  const bld=(x,y,w,h,label,sub,d)=>{const g=el('g',{'data-a':'pop',style:`--d:${d};transform-origin:${x+w/2}px ${y+h/2}px`},s);el('rect',{x,y,width:w,height:h,rx:4,fill:'rgba(20,26,23,.95)',stroke:W,'stroke-width':1.6},g);
+    txt(g,x+w/2,sub?y+h/2-6:y+h/2+7,label,{'text-anchor':'middle','font-size':21,fill:W,'font-weight':600});if(sub)txt(g,x+w/2,y+h/2+22,sub,{'text-anchor':'middle','font-size':15,fill:'rgba(245,247,245,.5)'})};
+  bld(110,410,190,110,'Sede','Escritório · apoio',7);bld(320,150,180,90,'Galpão','Máquinas',8);bld(560,140,240,110,'Armazém','Insumos e produção',9);bld(560,560,120,50,'Balança',null,10);
+  const pg=el('g',{'data-a':'fade',style:'--d:11'},s);el('rect',{x:570,y:410,width:200,height:100,rx:6,fill:'none',stroke:'rgba(245,247,245,.4)','stroke-dasharray':'5 5'},pg);txt(pg,670,466,'Pátio de manobra',{'text-anchor':'middle','font-size':17});
+  const sg=el('g',{'data-a':'fade',style:'--d:12'},s);[[860,250],[915,250],[860,305],[915,305]].forEach(([x,y])=>{el('circle',{cx:x,cy:y,r:23,fill:'rgba(66,230,149,.14)',stroke:G,'stroke-width':1.5},sg)});txt(sg,887,360,'Silos',{'text-anchor':'middle','font-size':20,fill:W,'font-weight':600});
+  const ex=el('g',{'data-a':'fade',style:'--d:15'},s);el('rect',{x:710,y:520,width:240,height:105,rx:6,fill:'rgba(66,230,149,.08)',stroke:G,'stroke-width':2,'stroke-dasharray':'8 6',class:'blink'},ex);txt(ex,830,568,'Expansão',{'text-anchor':'middle','font-size':21,fill:G,'font-weight':700});txt(ex,830,594,'cenário em estudo',{'text-anchor':'middle','font-size':15,fill:'rgba(66,230,149,.75)'});
+  txt(s,520,692,'ACESSO',{'text-anchor':'middle','font-size':15,fill:G,'letter-spacing':'3','font-weight':600});
+  const NA=el('g',{transform:'translate(955 75)'},s);el('path',{d:'M0 -18 L8 10 L0 4 L-8 10 Z',fill:G},NA);
+})();
+
+/* ---------- REVIEW ---------- */
+(function(){const s=document.getElementById('reviewArt');const xs=[110,290,470,620],ys=[110,280,450,590],L='ABCD';
+  const ag=el('g',{stroke:'rgba(245,247,245,.18)','stroke-dasharray':'12 4 2 4'},s);
+  xs.forEach((x,i)=>{el('line',{x1:x,y1:50,x2:x,y2:630},ag);el('circle',{cx:x,cy:30,r:17,fill:'#0D1210',stroke:'rgba(245,247,245,.4)'},s);txt(s,x,36,String(i+1),{'text-anchor':'middle','font-size':16,fill:W})});
+  ys.forEach((y,i)=>{el('line',{x1:50,y1:y,x2:670,y2:y},ag);el('circle',{cx:28,cy:y,r:17,fill:'#0D1210',stroke:'rgba(245,247,245,.4)'},s);txt(s,28,y+6,L[i],{'text-anchor':'middle','font-size':16,fill:W})});
+  const bg=el('g',{stroke:'rgba(245,247,245,.55)','stroke-width':10,opacity:.5},s);ys.forEach(y=>el('line',{x1:xs[0],y1:y,x2:xs[3],y2:y},bg));xs.forEach(x=>el('line',{x1:x,y1:ys[0],x2:x,y2:ys[3]},bg));
+  xs.forEach((x,i)=>ys.forEach((y,j)=>{const b=i===2&&j===2;el('rect',{x:x-(b?16:12),y:y-(b?16:12),width:b?32:24,height:b?32:24,fill:W,opacity:.9},s)}));
+  const dp='M50 240 L200 240 Q210 240 210 250 L210 330 Q210 340 220 340 L670 340';el('path',{d:dp,fill:'none',stroke:G,'stroke-width':16,opacity:.18},s);el('path',{d:dp,fill:'none',stroke:G,'stroke-width':1.6,'stroke-dasharray':'6 4'},s);txt(s,560,328,'DUTO AC',{'font-size':14,fill:G,'letter-spacing':'2'});
+  el('line',{x1:470,y1:520,x2:620,y2:520,stroke:'rgba(245,247,245,.5)'},s);txt(s,545,511,'4,20',{'text-anchor':'middle','font-size':16,fill:W,'font-family':'ui-monospace,monospace'});
+  el('rect',{x:430,y:410,width:80,height:80,rx:10,fill:'none',stroke:G,'stroke-dasharray':'4 4'},s);
+  const sl=el('line',{x1:50,x2:670,y1:60,y2:60,stroke:G,'stroke-width':2,opacity:.7,style:'filter:drop-shadow(0 0 6px #42E695)'},s);sl.id='scanline';
+  const mk=(x,y,n,solid,d)=>{const g=el('g',{'data-a':'pop',style:`--d:${d};transform-origin:${x}px ${y}px`},s);el('circle',{cx:x,cy:y,r:34,fill:'rgba(66,230,149,.12)',stroke:'rgba(66,230,149,.4)',class:'blink'},g);el('circle',{cx:x,cy:y,r:18,fill:solid?G:'#0D1210',stroke:G,'stroke-width':2.5},g);txt(g,x,y+6,String(n),{'text-anchor':'middle','font-size':18,'font-weight':700,fill:solid?'#06120C':G})};
+  mk(290,322,1,true,10);mk(545,548,2,false,13);mk(512,410,3,false,16);
+})();
+
+/* ---------- ECOSYSTEM ---------- */
+(function(){const s=document.getElementById('ecoArt');const cx=460,cy=440,R=320;
+  const mods=[['BIM','Famílias e documentação','i-cube'],['DESIGN','Plantas e modelos','i-ruler'],['MASTERPLAN','Implantações rurais','i-map'],['REVIEW','Revisão assistida','i-scan'],['PRESENT','Apresentações','i-present']];
+  [R-110,R,R+90].forEach((r,i)=>el('circle',{cx,cy,r,fill:'none',stroke:`rgba(245,247,245,${i===1?.12:.05})`,'stroke-dasharray':i===1?'3 9':'none',class:i===1?'spin':''},s));
+  const P=mods.map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/5;return[cx+R*Math.cos(a),cy+R*Math.sin(a)]});
+  P.forEach((p,i)=>{const q=P[(i+1)%5];el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'rgba(66,230,149,.3)','stroke-width':1.5,pathLength:1,class:'draw',style:`--d:${8+i}`},s)});
+  P.forEach((p,i)=>{el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],stroke:G,'stroke-width':2.4,class:'flow'},s);
+    const dot=el('circle',{r:6,fill:G,style:'filter:drop-shadow(0 0 8px #42E695)'},s);el('animateMotion',{dur:`${1.6+i*.25}s`,repeatCount:'indefinite',path:`M${cx} ${cy} L${p[0]} ${p[1]}`},dot)});
+  const c=el('g',{'data-a':'zoom',style:`--d:3;transform-origin:${cx}px ${cy}px`},s);
+  el('circle',{cx,cy,r:140,fill:'rgba(66,230,149,.06)',stroke:'rgba(66,230,149,.3)'},c);el('circle',{cx,cy,r:112,fill:'#101613',stroke:G,'stroke-width':2.5,style:'filter:drop-shadow(0 0 26px rgba(66,230,149,.45))'},c);
+  el('image',{href:'assets/logo-symbol.png',x:cx-46,y:cy-70,width:92,height:63},c);txt(c,cx,cy+26,'WORKSPACE',{'text-anchor':'middle','font-size':22,fill:G,'font-weight':700,'letter-spacing':'3'});txt(c,cx,cy+54,'base integrada',{'text-anchor':'middle','font-size':17,fill:'rgba(245,247,245,.6)'});
+  P.forEach((p,i)=>{const g=el('g',{'data-a':'pop',style:`--d:${5+i*2};transform-origin:${p[0]}px ${p[1]}px`},s);
+    el('rect',{x:p[0]-125,y:p[1]-66,width:250,height:132,rx:24,fill:'#111714',stroke:'rgba(66,230,149,.55)','stroke-width':1.6},g);
+    el('use',{href:'#'+mods[i][2],x:p[0]-16,y:p[1]-54,width:32,height:32,class:'ico',style:'color:#42E695'},g);
+    txt(g,p[0],p[1]+8,mods[i][0],{'text-anchor':'middle','font-size':23,fill:W,'font-weight':700,'letter-spacing':'2.5'});
+    txt(g,p[0],p[1]+38,mods[i][1],{'text-anchor':'middle','font-size':16,fill:'rgba(245,247,245,.6)'})});
+})();
+
+/* ---------- HUD ---------- */
+const hudScenes=scenes.filter(s=>!('nohud' in s.dataset));
+const bars=document.getElementById('bars');scenes.forEach(()=>{const i=document.createElement('i');i.appendChild(document.createElement('b'));bars.appendChild(i)});
+const barFills=[...bars.querySelectorAll('b')];
+const lbl=document.getElementById('lbl'),cnt=document.getElementById('cnt'),brand=document.getElementById('brand'),foot=document.getElementById('foot'),wipe=document.getElementById('wipe');
+const orb1=document.getElementById('orb1'),orb2=document.getElementById('orb2');
+const ease=x=>1-Math.pow(1-x,3);
+let anims=null,svgs=null;
+function prepare(){anims=document.getAnimations();anims.forEach(a=>a.pause());svgs=[...document.querySelectorAll('svg')].filter(s=>s.pauseAnimations);svgs.forEach(s=>s.pauseAnimations())}
+function render(t){
+  if(!anims)prepare();
+  let cur=0;
+  scenes.forEach((s,i)=>{let o=0,tr='none';
+    if(t>=s._a&&t<=s._b){const pin=i===0?1:Math.min(1,(t-s._a)/OV),pout=i===scenes.length-1?1:Math.min(1,(s._b-t)/OV);o=Math.min(ease(pin),pout);
+      tr=`translateY(${((1-ease(pin))*70).toFixed(1)}px) scale(${(1+(1-pout)*.06).toFixed(4)})`;if(pin>=.5)cur=i}
+    s.style.opacity=o;s.style.transform=tr;s.style.visibility=o>0.001?'visible':'hidden';s.style.filter=o<1&&o>0?`blur(${((1-o)*8).toFixed(1)}px)`:'none'});
+  anims.forEach(a=>{a.currentTime=t*1000});
+  svgs.forEach(s=>s.setCurrentTime(t));
+  barFills.forEach((b,i)=>{const s=scenes[i];b.style.width=(Math.max(0,Math.min(1,(t-s._a)/(s._b-s._a)))*100)+'%'});
+  const cs=scenes[cur];lbl.textContent=cs.dataset.label;
+  const hudOn=!('nohud' in cs.dataset);brand.style.opacity=hudOn?1:0;foot.style.opacity=hudOn?1:0;
+  cnt.textContent=String(cur+1).padStart(2,'0')+' / '+String(scenes.length).padStart(2,'0');
+  // wipe line on transitions
+  let w=0,wy=0;scenes.slice(1).forEach(s=>{const k=(t-(s._a-.15))/.5;if(k>=0&&k<=1){w=Math.sin(k*Math.PI);wy=k*1920}});wipe.style.opacity=w;wipe.style.top=wy+'px';
+  // ambient
+  orb1.style.transform=`translate(${(-250+Math.sin(t*.35)*200).toFixed(1)}px,${(-300+Math.cos(t*.27)*220).toFixed(1)}px)`;
+  orb2.style.transform=`translate(${(380+Math.cos(t*.3)*200).toFixed(1)}px,${(1250+Math.sin(t*.22)*220).toFixed(1)}px)`;
+  // scan line in review
+  const sl=document.getElementById('scanline');if(sl){const y=60+(Math.sin(t*1.6)*.5+.5)*560;sl.setAttribute('y1',y);sl.setAttribute('y2',y)}
+}
+window.render=render;
+if(!/[?&]render/.test(location.search)){let st=performance.now();(function loop(){const t=((performance.now()-st)/1000)%TOTAL;render(t);requestAnimationFrame(loop)})()}
+</script>
+</body>
+</html>
