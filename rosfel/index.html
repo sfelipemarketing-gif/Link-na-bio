@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROSFEL — Apresentação Institucional</title>
+<meta name="description" content="ROSFEL — Inteligência que transforma projetos. Apresentação institucional interativa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080B0A; --graphite:#141A17; --white:#F5F7F5; --green:#42E695;
+  --muted:rgba(245,247,245,.64); --faint:rgba(245,247,245,.38); --line:rgba(245,247,245,.09);
+  --green-12:rgba(66,230,149,.12); --green-25:rgba(66,230,149,.25);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--white);font-family:"Inter Display","Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+svg{display:block}
+
+/* ---------- stage ---------- */
+.viewport{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
+.stage{width:1920px;height:1080px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;background:var(--bg);
+  opacity:0;visibility:hidden;transform:scale(1.025);filter:blur(6px);
+  transition:opacity .8s var(--ease),transform 1s var(--ease),filter .8s var(--ease),visibility 0s .8s}
+.slide.active{opacity:1;visibility:visible;transform:none;filter:none;transition:opacity .8s var(--ease),transform 1s var(--ease),filter .8s var(--ease),visibility 0s}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(245,247,245,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(245,247,245,.035) 1px,transparent 1px);
+  background-size:96px 96px;background-position:-1px -1px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 35%,transparent 85%);mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 35%,transparent 85%)}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at var(--gx,88%) var(--gy,8%),rgba(66,230,149,.11),transparent 38%),radial-gradient(circle at 0% 100%,rgba(66,230,149,.05),transparent 35%)}
+.slide>*{position:relative;z-index:1}
+
+/* corner marks */
+.marks i{position:absolute;width:22px;height:22px;border-color:rgba(245,247,245,.22);border-style:solid;border-width:0}
+.marks i:nth-child(1){top:28px;left:28px;border-top-width:1px;border-left-width:1px}
+.marks i:nth-child(2){top:28px;right:28px;border-top-width:1px;border-right-width:1px}
+.marks i:nth-child(3){bottom:28px;left:28px;border-bottom-width:1px;border-left-width:1px}
+.marks i:nth-child(4){bottom:28px;right:28px;border-bottom-width:1px;border-right-width:1px}
+.marks{position:absolute!important;inset:0;pointer-events:none}
+
+.top,.foot{position:absolute!important;left:96px;right:96px;display:flex;align-items:center;justify-content:space-between;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.top{top:50px}.foot{bottom:46px}
+.brand{display:flex;align-items:center;gap:18px;color:var(--white)}
+.brand img{height:34px;width:auto}
+.brand .sep{width:1px;height:20px;background:var(--line)}
+.brand span.sec{color:var(--faint)}
+.pg{font-variant-numeric:tabular-nums;color:var(--white)}
+.pg b{color:var(--green);font-weight:600}
+.ticks{display:flex;gap:6px}
+.ticks i{width:18px;height:2px;background:rgba(245,247,245,.14);border-radius:2px}
+.ticks i.on{background:var(--green)}
+
+.content{position:absolute!important;top:150px;left:96px;right:96px;bottom:118px}
+
+/* type */
+.eyebrow{display:flex;align-items:center;gap:16px;font-size:17px;letter-spacing:.24em;text-transform:uppercase;color:var(--green);font-weight:600}
+.eyebrow::before{content:"";width:40px;height:1px;background:var(--green)}
+h1{font-size:120px;line-height:.95;letter-spacing:-.045em;font-weight:700}
+h2{font-size:66px;line-height:1.05;letter-spacing:-.035em;font-weight:700;margin:26px 0 24px}
+h2 em,h1 em,.big em{font-style:normal;color:var(--green)}
+h3{font-size:26px;letter-spacing:-.01em;font-weight:600;line-height:1.25}
+.lead{font-size:24px;line-height:1.55;color:var(--muted);font-weight:400}
+.small{font-size:17px;line-height:1.5;color:var(--muted)}
+.mono{font-family:ui-monospace,"JetBrains Mono","DejaVu Sans Mono",monospace;letter-spacing:0}
+
+.card{background:linear-gradient(180deg,rgba(20,26,23,.92),rgba(20,26,23,.62));border:1px solid var(--line);border-radius:22px}
+.tag{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border:1px solid rgba(66,230,149,.32);border-radius:999px;color:var(--green);font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;background:rgba(66,230,149,.05)}
+.tag.neutral{border-color:var(--line);color:var(--faint);background:transparent}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(66,230,149,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(66,230,149,.5)}70%{box-shadow:0 0 0 10px rgba(66,230,149,0)}100%{box-shadow:0 0 0 0 rgba(66,230,149,0)}}
+
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ibox{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:var(--green);background:var(--green-12);border:1px solid rgba(66,230,149,.2);flex:none}
+
+.feat{list-style:none;display:grid;gap:16px;margin-top:30px}
+.feat li{display:flex;gap:16px;align-items:flex-start;font-size:21px;line-height:1.4;color:rgba(245,247,245,.86)}
+.feat li::before{content:"";flex:none;width:22px;height:22px;margin-top:3px;border-radius:7px;background:var(--green-12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2342E695' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/13px no-repeat;border:1px solid rgba(66,230,149,.3)}
+.proposed{margin-top:28px;display:flex;gap:12px;align-items:center;font-size:15px;color:var(--faint);letter-spacing:.04em}
+
+/* window mock */
+.win{border-radius:20px;overflow:hidden;border:1px solid rgba(245,247,245,.1);background:#0D1210;box-shadow:0 40px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(66,230,149,.04)}
+.win .bar{height:50px;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid var(--line);background:#111714;font-size:14px;color:var(--faint)}
+.win .bar i{width:11px;height:11px;border-radius:50%;background:rgba(245,247,245,.14)}
+.win .bar .t{margin-left:12px;letter-spacing:.06em}
+.win .bar .b{margin-left:auto}
+
+/* animations */
+.slide [data-a]{opacity:0}
+.slide.active [data-a]{animation:rise 1s var(--ease) both;animation-delay:calc(var(--d,0) * 110ms + 250ms)}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.slide.active [data-a="fade"]{animation-name:fade}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.slide.active [data-a="zoom"]{animation-name:zoom}
+@keyframes zoom{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}
+.slide.active .draw{animation:draw 2.2s var(--ease) forwards;animation-delay:calc(var(--d,0) * 110ms + 400ms)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.flow{stroke-dasharray:4 12;animation:flow 1.6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.blink{animation:blink 2.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+.spin{transform-origin:center;transform-box:fill-box;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- controls ---------- */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:20;transition:width .6s var(--ease);box-shadow:0 0 12px rgba(66,230,149,.6)}
+.controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(20,26,23,.82);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:.25;transition:opacity .3s}
+.controls:hover,.controls:focus-within,body.show-ui .controls{opacity:1}
+.controls button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--white);transition:background .2s,color .2s}
+.controls button:hover{background:rgba(66,230,149,.14);color:var(--green)}
+.controls button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.controls .count{min-width:72px;text-align:center;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.controls .ico{width:20px;height:20px}
+.dots{display:flex;gap:6px;padding:0 10px}
+.dots button{width:8px;height:8px;border-radius:50%;background:rgba(245,247,245,.22);padding:0}
+.dots button.on{background:var(--green);width:22px;border-radius:5px}
+.dots button:hover{background:var(--green)}
+@media (max-width:700px){.dots{display:none}.controls{opacity:1;bottom:10px}}
+
+/* ---------- slide specifics ---------- */
+/* 1 cover */
+.cover{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%}
+.cover .logo{width:1160px;height:auto}
+.cover .rule{width:120px;height:2px;background:var(--green);margin:56px 0 40px;box-shadow:0 0 18px rgba(66,230,149,.6)}
+.cover .sub{font-size:46px;font-weight:300;letter-spacing:-.02em}
+.cover .sub b{font-weight:600}
+.start{margin-top:64px;display:inline-flex;align-items:center;gap:14px;padding:20px 34px;border-radius:999px;background:var(--green);color:#06120C;font-size:20px;font-weight:600;letter-spacing:.02em;transition:transform .25s var(--ease),box-shadow .25s}
+.start:hover{transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(66,230,149,.6)}
+.start .ico{stroke-width:2.2}
+
+/* problems grid */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pcard{padding:26px 28px;display:flex;gap:20px;align-items:flex-start;transition:border-color .3s,transform .3s}
+.pcard:hover{border-color:rgba(66,230,149,.35);transform:translateY(-3px)}
+.pcard h3{font-size:21px;margin-bottom:6px}
+.pcard p{font-size:16.5px;line-height:1.45;color:var(--muted)}
+.quote{margin-top:44px;padding:30px 0 0 34px;border-left:2px solid var(--green);font-size:34px;line-height:1.3;letter-spacing:-.02em;font-weight:500}
+.quote small{display:block;margin-top:16px;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:500}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.lane{padding:28px 36px;position:relative;display:flex;flex-direction:column}
+.lane .tl{margin-top:auto!important;padding-top:20px}
+.lane h3{display:flex;align-items:center;gap:14px;font-size:24px}
+.lane.ai{border-color:rgba(66,230,149,.3);background:linear-gradient(180deg,rgba(66,230,149,.07),rgba(20,26,23,.6))}
+.steps{list-style:none;margin-top:24px;display:grid;gap:10px}
+.steps li{display:flex;align-items:center;gap:16px;padding:10px 18px;border-radius:12px;background:rgba(245,247,245,.03);border:1px solid var(--line);font-size:18px;color:rgba(245,247,245,.82)}
+.steps li .n{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:13px;background:rgba(245,247,245,.06);color:var(--faint);flex:none}
+.steps li .who{margin-left:auto;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.lane.ai .steps li{border-color:rgba(66,230,149,.18)}
+.lane.ai .steps li .n{background:var(--green-12);color:var(--green)}
+.lane.ai .steps li .who.g{color:var(--green)}
+.tl{margin-top:24px}
+.tl .lbl{display:flex;justify-content:space-between;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.tl .track{height:14px;border-radius:8px;background:rgba(245,247,245,.04);display:flex;gap:3px;overflow:hidden}
+.tl .track span{height:100%;border-radius:3px}
+.slide.active .tl .track span{animation:grow 1.4s var(--ease) both;animation-delay:calc(var(--d,0) * 110ms + 700ms);transform-origin:left}
+@keyframes grow{from{transform:scaleX(0)}to{transform:none}}
+
+/* misc */
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{padding:12px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(20,26,23,.7);font-size:17px;color:rgba(245,247,245,.85);display:inline-flex;gap:10px;align-items:center}
+.chip .ico{width:18px;height:18px;color:var(--green)}
+.note{display:flex;gap:14px;align-items:center;font-size:16px;color:var(--faint);line-height:1.45}
+.note .ico{color:var(--green);flex:none}
+.big{font-size:52px;line-height:1.12;letter-spacing:-.03em;font-weight:600}
+
+.modgrid{display:grid;grid-template-columns:600px 1fr;gap:84px;height:100%;align-items:center}
+
+/* print / pdf */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:var(--bg)}
+  .viewport{position:static;display:block}
+  .stage{transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important;transition:none!important;page-break-after:always;break-after:page}
+  .slide [data-a],.slide .draw,.tl .track span{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}
+  .controls,.progress,.start,.screen-only{display:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide,.slide.active{transition:opacity .3s}
+  .slide [data-a],.draw,.tl .track span,.flow,.blink,.spin,.dot{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-unlink" viewBox="0 0 24 24"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71"/><path d="M8 2v3"/><path d="M2 8h3"/><path d="M16 22v-3"/><path d="M22 16h-3"/></symbol>
+  <symbol id="i-present" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h3a3 3 0 0 1 3 3v0"/><path d="M15 18h-3a3 3 0 0 1-3-3v0"/><path d="M15 9v2"/><path d="M9 13v2"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 14.06 4 20M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9Z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.1 6.2 9.9 3.8a2 2 0 0 0-1.8 0L3.6 6.1A1 1 0 0 0 3 7v12.4a1 1 0 0 0 1.4.9l3.7-1.8a2 2 0 0 1 1.8 0l4.2 2.4a2 2 0 0 0 1.8 0l4.5-2.3a1 1 0 0 0 .6-.9V5.3a1 1 0 0 0-1.4-.9l-3.7 1.8a2 2 0 0 1-1.8 0Z"/><path d="M15 5.8v15"/><path d="M9 3.2v15"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+</svg>
+
+<div class="progress" id="progress"></div>
+
+<main class="viewport" id="viewport">
+<div class="stage" id="stage">
+
+<!-- ============ 01 COVER ============ -->
+<section class="slide" data-title="A nova forma de projetar" style="--gx:50%;--gy:0%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <svg id="coverArt" style="position:absolute;inset:0;z-index:0" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+  <div class="cover">
+    <img class="logo" src="assets/logo-full.png" alt="ROSFEL — Tecnologia para o agro, engenharia e arquitetura" data-a="zoom" style="--d:1">
+    <div class="rule" data-a="fade" style="--d:4"></div>
+    <p class="sub" data-a style="--d:5">Inteligência que <b>transforma projetos.</b></p>
+    <p class="small" data-a style="--d:6;margin-top:22px;letter-spacing:.22em;text-transform:uppercase;font-size:15px;color:var(--faint)">Apresentação institucional · Startup em desenvolvimento</p>
+    <button class="start screen-only" id="startBtn" data-a style="--d:8" aria-label="Iniciar apresentação">
+      <svg class="ico"><use href="#i-play"/></svg> Iniciar apresentação
+    </button>
+  </div>
+</section>
+
+<!-- ============ 02 PROBLEM ============ -->
+<section class="slide" data-sec="Por que existimos">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content" style="display:grid;grid-template-columns:720px 1fr;gap:80px;align-items:center">
+    <div>
+      <div class="eyebrow" data-a>Por que existimos</div>
+      <h2 data-a style="--d:1">Projetar exige tempo.<br>Muito dele ainda vai para <em>processos repetitivos.</em></h2>
+      <p class="lead" data-a style="--d:2">Engenheiros, arquitetos e profissionais do agro convivem diariamente com tarefas manuais e ferramentas que não conversam entre si. O resultado é menos tempo para o que realmente importa: pensar, decidir e criar.</p>
+      <div class="quote" data-a style="--d:4">“O tempo de quem projeta é valioso demais para ser consumido por processos repetitivos.”<small>Nosso ponto de partida</small></div>
+    </div>
+    <div class="pgrid">
+      <div class="card pcard" data-a style="--d:2"><div class="ibox"><svg class="ico"><use href="#i-cube"/></svg></div><div><h3>Famílias no Revit</h3><p>Horas dedicadas à criação manual de famílias paramétricas.</p></div></div>
+      <div class="card pcard" data-a style="--d:3"><div class="ibox"><svg class="ico"><use href="#i-repeat"/></svg></div><div><h3>Tarefas repetitivas</h3><p>Modelagem e documentação feitas passo a passo, de novo e de novo.</p></div></div>
+      <div class="card pcard" data-a style="--d:4"><div class="ibox"><svg class="ico"><use href="#i-folder"/></svg></div><div><h3>Organização complexa</h3><p>Projetos, versões e arquivos espalhados em diferentes lugares.</p></div></div>
+      <div class="card pcard" data-a style="--d:5"><div class="ibox"><svg class="ico"><use href="#i-ruler"/></svg></div><div><h3>Desenhos e estudos</h3><p>Tempo consumido por desenhos técnicos, plantas e estudos.</p></div></div>
+      <div class="card pcard" data-a style="--d:6"><div class="ibox"><svg class="ico"><use href="#i-alert"/></svg></div><div><h3>Retrabalho</h3><p>Inconsistências que só aparecem tarde — e custam caro para corrigir.</p></div></div>
+      <div class="card pcard" data-a style="--d:7"><div class="ibox"><svg class="ico"><use href="#i-unlink"/></svg></div><div><h3>Dados desconectados</h3><p>Dificuldade para integrar informações entre ferramentas.</p></div></div>
+      <div class="card pcard" data-a style="--d:8"><div class="ibox"><svg class="ico"><use href="#i-present"/></svg></div><div><h3>Apresentações lentas</h3><p>Materiais para clientes montados manualmente, do zero.</p></div></div>
+      <div class="card pcard" data-a style="--d:9"><div class="ibox"><svg class="ico"><use href="#i-split"/></svg></div><div><h3>Fluxo fragmentado</h3><p>Processos desconectados entre o planejamento e a entrega.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 VISION ============ -->
+<section class="slide" data-sec="Nossa visão" style="--gx:50%;--gy:70%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 560px;gap:80px;align-items:end">
+      <div>
+        <div class="eyebrow" data-a>Nossa visão</div>
+        <h2 data-a style="--d:1;margin-bottom:0">Uma inteligência que <em>participa</em> do projeto — da concepção à entrega.</h2>
+      </div>
+      <p class="lead" data-a style="--d:2">A ROSFEL não pretende ser apenas uma IA que responde perguntas. Nossa proposta é atuar <span style="color:var(--white)">dentro dos fluxos de trabalho</span>, conectando etapas que hoje acontecem de forma isolada.</p>
+    </div>
+    <svg id="visionArt" width="1728" height="420" viewBox="0 0 1728 420" style="margin-top:56px" aria-label="Diagrama: etapas do projeto conectadas pela camada de inteligência ROSFEL"></svg>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px">
+      <div class="card" data-a style="--d:8;padding:24px 28px;display:flex;gap:18px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-clock"/></svg></div><p style="font-size:19px;line-height:1.4"><b>Economizar tempo</b><br><span style="color:var(--muted)">automatizando processos repetitivos</span></p></div>
+      <div class="card" data-a style="--d:9;padding:24px 28px;display:flex;gap:18px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-layers"/></svg></div><p style="font-size:19px;line-height:1.4"><b>Integrar etapas</b><br><span style="color:var(--muted)">criação, modelagem, análise e organização</span></p></div>
+      <div class="card" data-a style="--d:10;padding:24px 28px;display:flex;gap:18px;align-items:center"><div class="ibox"><svg class="ico"><use href="#i-spark"/></svg></div><p style="font-size:19px;line-height:1.4"><b>Liberar a criatividade</b><br><span style="color:var(--muted)">mais foco em decisões e qualidade</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 AUTOMATION ============ -->
+<section class="slide" data-sec="O poder da automação">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div>
+        <div class="eyebrow" data-a>O poder da automação · Nosso principal diferencial</div>
+        <h2 data-a style="--d:1;margin:20px 0 22px">Dois fluxos de trabalho. <em>Uma diferença essencial.</em></h2>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="card lane" data-a style="--d:2">
+        <h3><span class="ibox" style="color:var(--muted);background:rgba(245,247,245,.05);border-color:var(--line)"><svg class="ico"><use href="#i-user"/></svg></span>Processo tradicional</h3>
+        <ol class="steps">
+          <li><span class="n">1</span>Desenvolve o projeto<span class="who">Manual</span></li>
+          <li><span class="n">2</span>Cria famílias e componentes<span class="who">Manual</span></li>
+          <li><span class="n">3</span>Organiza componentes e arquivos<span class="who">Manual</span></li>
+          <li><span class="n">4</span>Prepara a documentação<span class="who">Manual</span></li>
+          <li><span class="n">5</span>Verifica as informações<span class="who">Manual</span></li>
+          <li><span class="n">6</span>Monta a apresentação<span class="who">Manual</span></li>
+        </ol>
+        <div class="tl">
+          <div class="lbl"><span>Esforço operacional</span><span>Tempo para criar</span></div>
+          <div class="track">
+            <span style="flex:16;background:rgba(245,247,245,.22);--d:1"></span><span style="flex:16;background:rgba(245,247,245,.22);--d:2"></span><span style="flex:14;background:rgba(245,247,245,.22);--d:3"></span><span style="flex:15;background:rgba(245,247,245,.22);--d:4"></span><span style="flex:13;background:rgba(245,247,245,.22);--d:5"></span><span style="flex:14;background:rgba(245,247,245,.22);--d:6"></span><span style="flex:12;background:rgba(66,230,149,.35);--d:7"></span>
+          </div>
+        </div>
+      </div>
+      <div class="card lane ai" data-a style="--d:3">
+        <h3><span class="ibox"><svg class="ico"><use href="#i-spark"/></svg></span>Processo com a ROSFEL</h3>
+        <ol class="steps">
+          <li><span class="n">1</span>Fornece informações e orientações<span class="who">Profissional</span></li>
+          <li><span class="n">2</span>Famílias, organização e documentos<span class="who g">IA automatiza</span></li>
+          <li><span class="n">3</span>Verificação preliminar e apresentação<span class="who g">IA assiste</span></li>
+          <li><span class="n">4</span>Revisa e valida os resultados<span class="who">Profissional</span></li>
+          <li style="background:rgba(66,230,149,.08)"><span class="n">5</span>Finaliza o projeto com mais tempo para criar<span class="who g">Resultado</span></li>
+        </ol>
+        <div class="tl">
+          <div class="lbl"><span>Esforço operacional</span><span style="color:var(--green)">Tempo para criar</span></div>
+          <div class="track">
+            <span style="flex:12;background:rgba(245,247,245,.22);--d:1"></span><span style="flex:10;background:rgba(66,230,149,.4);--d:2"></span><span style="flex:10;background:rgba(245,247,245,.22);--d:3"></span><span style="flex:68;background:var(--green);box-shadow:0 0 16px rgba(66,230,149,.5);--d:4"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:26px">
+      <p class="big" data-a style="--d:6;font-size:40px">Menos tempo executando tarefas repetitivas. <em>Mais tempo criando soluções.</em></p>
+    </div>
+    <p class="note" data-a style="--d:7;margin-top:14px;font-size:14px"><svg class="ico" style="width:16px;height:16px"><use href="#i-alert"/></svg>Representação conceitual e ilustrativa — não corresponde a medições de produtividade.</p>
+  </div>
+</section>
+
+<!-- ============ 05 BIM ============ -->
+<section class="slide" data-sec="Módulo · BIM">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div class="modgrid">
+      <div>
+        <div class="eyebrow" data-a>Módulo 01</div>
+        <h2 data-a style="--d:1">ROSFEL <em>BIM</em></h2>
+        <p class="lead" data-a style="--d:2">Inteligência artificial aplicada aos processos BIM — para que famílias, componentes e documentação deixem de consumir horas de trabalho manual.</p>
+        <ul class="feat">
+          <li data-a style="--d:3">Auxílio na criação de famílias paramétricas no Autodesk Revit</li>
+          <li data-a style="--d:4">Automação de atividades repetitivas</li>
+          <li data-a style="--d:5">Organização de componentes e parâmetros</li>
+          <li data-a style="--d:6">Suporte à documentação de projetos</li>
+          <li data-a style="--d:7">Assistência em processos de modelagem</li>
+        </ul>
+        <div class="proposed" data-a style="--d:8"><span class="tag"><span class="dot"></span>Em desenvolvimento</span>Funcionalidades propostas</div>
+      </div>
+      <div class="win" data-a="zoom" style="--d:3">
+        <div class="bar"><i></i><i></i><i></i><span class="t">ROSFEL BIM · Assistente de famílias</span><span class="b tag neutral" style="padding:5px 12px;font-size:11px">Conceito de interface</span></div>
+        <div style="display:grid;grid-template-columns:330px 1fr 300px;height:640px">
+          <div style="border-right:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.5">
+            <div class="mono" style="font-size:11px;letter-spacing:.18em;color:var(--faint)">INSTRUÇÃO</div>
+            <div style="background:rgba(245,247,245,.05);border:1px solid var(--line);border-radius:14px 14px 4px 14px;padding:14px 16px;color:rgba(245,247,245,.88)">Criar família de janela de correr, 2 folhas, com largura, altura e peitoril ajustáveis.</div>
+            <div class="mono" style="font-size:11px;letter-spacing:.18em;color:var(--green);margin-top:6px">ROSFEL</div>
+            <div style="background:var(--green-12);border:1px solid rgba(66,230,149,.25);border-radius:14px 14px 14px 4px;padding:14px 16px;color:rgba(245,247,245,.88)">Estrutura proposta com geometria, parâmetros de tipo e de instância. <span style="color:var(--green)">Revise antes de carregar no projeto.</span></div>
+            <div style="margin-top:auto;display:grid;gap:10px">
+              <div style="display:flex;gap:10px;align-items:center;color:var(--muted)"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-check"/></svg>Geometria base</div>
+              <div style="display:flex;gap:10px;align-items:center;color:var(--muted)"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-check"/></svg>Parâmetros associados</div>
+              <div style="display:flex;gap:10px;align-items:center;color:var(--muted)"><svg class="ico blink" style="width:18px;height:18px;color:var(--green)"><use href="#i-eye"/></svg>Aguardando revisão</div>
+            </div>
+          </div>
+          <svg id="bimArt" viewBox="0 0 420 640" width="100%" height="640" aria-label="Modelo isométrico de família paramétrica de janela"></svg>
+          <div style="border-left:1px solid var(--line);padding:24px;font-size:14px">
+            <div class="mono" style="font-size:11px;letter-spacing:.18em;color:var(--faint);margin-bottom:14px">PARÂMETROS</div>
+            <div id="paramTable" style="display:grid;gap:8px"></div>
+            <div class="mono" style="font-size:11px;letter-spacing:.18em;color:var(--faint);margin:26px 0 12px">CATEGORIA</div>
+            <div class="chip" style="font-size:13px;padding:8px 14px"><svg class="ico"><use href="#i-cube"/></svg>Janelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 DESIGN ============ -->
+<section class="slide" data-sec="Módulo · Design" style="--gx:20%;--gy:10%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 620px;gap:80px;align-items:end">
+      <div>
+        <div class="eyebrow" data-a>Módulo 02</div>
+        <h2 data-a style="--d:1;margin-bottom:0">ROSFEL <em>Design</em></h2>
+      </div>
+      <p class="lead" data-a style="--d:2">Inteligência aplicada à criação e ao desenvolvimento de projetos: da ideia inicial à planta 2D e ao modelo 3D.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center;margin-top:48px">
+      <div class="card" data-a style="--d:3;height:500px;padding:30px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono" style="font-size:12px;letter-spacing:.2em;color:var(--green)">01 · IDEIA</span><svg class="ico" style="color:var(--faint)"><use href="#i-spark"/></svg></div>
+        <div style="margin-top:22px;padding:18px 20px;border-radius:14px;background:rgba(245,247,245,.04);border:1px solid var(--line);font-size:17px;line-height:1.5;color:rgba(245,247,245,.86)">“Residência térrea, 2 dormitórios, sala e cozinha integradas, banheiro social.”</div>
+        <svg id="bubbleArt" viewBox="0 0 440 260" width="100%" style="margin-top:auto"></svg>
+      </div>
+      <svg viewBox="0 0 70 20" width="70" height="20"><path d="M8 10h50" stroke="#42E695" stroke-width="1.5" class="flow"/><path d="m52 4 6 6-6 6" fill="none" stroke="#42E695" stroke-width="1.5"/></svg>
+      <div class="card" data-a style="--d:5;height:500px;padding:30px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono" style="font-size:12px;letter-spacing:.2em;color:var(--green)">02 · PLANTA 2D</span><svg class="ico" style="color:var(--faint)"><use href="#i-ruler"/></svg></div>
+        <svg id="planArt" viewBox="-40 -40 440 340" width="100%" style="margin-top:auto"></svg>
+      </div>
+      <svg viewBox="0 0 70 20" width="70" height="20"><path d="M8 10h50" stroke="#42E695" stroke-width="1.5" class="flow"/><path d="m52 4 6 6-6 6" fill="none" stroke="#42E695" stroke-width="1.5"/></svg>
+      <div class="card" data-a style="--d:7;height:500px;padding:30px;display:flex;flex-direction:column;border-color:rgba(66,230,149,.3)">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono" style="font-size:12px;letter-spacing:.2em;color:var(--green)">03 · MODELO 3D</span><svg class="ico" style="color:var(--faint)"><use href="#i-cube"/></svg></div>
+        <svg id="houseArt" viewBox="0 0 460 380" width="100%" style="margin-top:auto"></svg>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:34px">
+      <div class="chips" data-a style="--d:9">
+        <span class="chip"><svg class="ico"><use href="#i-ruler"/></svg>Apoio à elaboração de plantas baixas</span>
+        <span class="chip"><svg class="ico"><use href="#i-grid"/></svg>Estudos de layout 2D</span>
+        <span class="chip"><svg class="ico"><use href="#i-cube"/></svg>Auxílio à modelagem 3D</span>
+        <span class="chip"><svg class="ico"><use href="#i-folder"/></svg>Organização de informações projetuais</span>
+        <span class="chip"><svg class="ico"><use href="#i-spark"/></svg>Sugestões de alternativas</span>
+      </div>
+      <span class="tag" data-a style="--d:10"><span class="dot"></span>Proposto</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 MASTERPLAN ============ -->
+<section class="slide" data-sec="Módulo · Masterplan" style="--gx:80%;--gy:80%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div class="modgrid" style="grid-template-columns:560px 1fr">
+      <div>
+        <div class="eyebrow" data-a>Módulo 03</div>
+        <h2 data-a style="--d:1">ROSFEL <em>Masterplan</em></h2>
+        <p class="lead" data-a style="--d:2">Tecnologia para o planejamento de propriedades rurais e empreendimentos agroindustriais — com visão do todo e espaço para crescer.</p>
+        <ul class="feat">
+          <li data-a style="--d:3">Planejamento de implantações</li>
+          <li data-a style="--d:4">Organização de setores e edificações</li>
+          <li data-a style="--d:5">Estudos preliminares de circulação e logística</li>
+          <li data-a style="--d:6">Apoio ao planejamento de infraestrutura</li>
+          <li data-a style="--d:7">Visualização de cenários de expansão</li>
+        </ul>
+        <div class="proposed" data-a style="--d:8"><span class="tag"><span class="dot"></span>Em desenvolvimento</span>Funcionalidades propostas</div>
+      </div>
+      <div class="win" data-a="zoom" style="--d:3">
+        <div class="bar"><i></i><i></i><i></i><span class="t">ROSFEL Masterplan · Estudo de implantação</span>
+          <span class="b screen-only" style="display:flex;gap:6px">
+            <button class="chip" id="expBtn" style="font-size:12px;padding:6px 14px" aria-pressed="true"><svg class="ico" style="width:14px;height:14px"><use href="#i-trend"/></svg>Cenário de expansão</button>
+          </span>
+        </div>
+        <svg id="siteArt" viewBox="0 0 1000 690" width="100%" aria-label="Implantação esquemática de um empreendimento agroindustrial"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 REVIEW ============ -->
+<section class="slide" data-sec="Módulo · Review" style="--gx:10%;--gy:90%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div class="modgrid" style="grid-template-columns:540px 1fr">
+      <div>
+        <div class="eyebrow" data-a>Módulo 04</div>
+        <h2 data-a style="--d:1">ROSFEL <em>Review</em></h2>
+        <p class="lead" data-a style="--d:2">Assistência inteligente para revisão de projetos: um segundo olhar que organiza pontos de atenção para a análise do profissional.</p>
+        <ul class="feat">
+          <li data-a style="--d:3">Identificação preliminar de possíveis inconsistências</li>
+          <li data-a style="--d:4">Comparação entre versões</li>
+          <li data-a style="--d:5">Organização de observações técnicas</li>
+          <li data-a style="--d:6">Apoio à verificação de informações</li>
+          <li data-a style="--d:7">Relatórios para revisão profissional</li>
+        </ul>
+      </div>
+      <div class="win" data-a="zoom" style="--d:3">
+        <div class="bar"><i></i><i></i><i></i><span class="t">ROSFEL Review · Estrutura — Pavimento tipo</span>
+          <span class="b" style="display:flex;gap:8px;align-items:center"><span class="chip mono" style="font-size:12px;padding:5px 12px">v03</span><svg class="ico" style="width:16px;height:16px;color:var(--green)"><use href="#i-repeat"/></svg><span class="chip mono" style="font-size:12px;padding:5px 12px;border-color:rgba(66,230,149,.4);color:var(--green)">v04</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 400px;height:660px">
+          <svg id="reviewArt" viewBox="0 0 700 660" width="100%" height="660"></svg>
+          <div style="border-left:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono" style="font-size:11px;letter-spacing:.18em;color:var(--faint)">OBSERVAÇÕES PRELIMINARES</span><span class="tag" style="padding:4px 10px;font-size:11px">3</span></div>
+            <div class="rv card" style="padding:16px 18px;border-radius:14px;border-color:rgba(66,230,149,.35)"><div style="display:flex;gap:12px"><span class="mono" style="flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#06120C;font-size:13px;font-weight:700">1</span><div><p style="font-size:15.5px;font-weight:600">Possível interferência entre duto e viga</p><p style="font-size:13.5px;color:var(--muted);margin-top:4px">Eixo 2 · entre B e C</p></div></div></div>
+            <div class="rv card" style="padding:16px 18px;border-radius:14px"><div style="display:flex;gap:12px"><span class="mono" style="flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--green);color:var(--green);font-size:13px;font-weight:700">2</span><div><p style="font-size:15.5px;font-weight:600">Cota divergente entre planta e corte</p><p style="font-size:13.5px;color:var(--muted);margin-top:4px">Vão C–D · 4,20 m / 4,25 m</p></div></div></div>
+            <div class="rv card" style="padding:16px 18px;border-radius:14px"><div style="display:flex;gap:12px"><span class="mono" style="flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--green);color:var(--green);font-size:13px;font-weight:700">3</span><div><p style="font-size:15.5px;font-weight:600">Elemento alterado na v04</p><p style="font-size:13.5px;color:var(--muted);margin-top:4px">Pilar P6 · seção modificada</p></div></div></div>
+            <div style="margin-top:auto;padding:16px;border-radius:14px;background:rgba(245,247,245,.03);border:1px dashed rgba(245,247,245,.16);font-size:13.5px;line-height:1.5;color:var(--muted)"><svg class="ico" style="width:16px;height:16px;color:var(--green);display:inline;vertical-align:-3px;margin-right:6px"><use href="#i-shield"/></svg>Itens sinalizados para <b style="color:var(--white)">verificação do profissional responsável</b>, que valida as conclusões e o atendimento às normas.</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:12px;background:var(--green);color:#06120C;font-weight:600;font-size:15px"><svg class="ico" style="width:18px;height:18px"><use href="#i-file"/></svg>Gerar relatório de revisão</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 PRESENT ============ -->
+<section class="slide" data-sec="Módulo · Present">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 640px;gap:80px;align-items:end">
+      <div>
+        <div class="eyebrow" data-a>Módulo 05</div>
+        <h2 data-a style="--d:1;margin-bottom:0">ROSFEL <em>Present</em></h2>
+      </div>
+      <p class="lead" data-a style="--d:2">Automação de apresentações: informações técnicas transformadas em materiais claros, visuais e profissionais para clientes e equipes.</p>
+    </div>
+    <div style="position:relative;margin-top:50px;height:600px">
+      <svg id="presentArt" width="1728" height="600" viewBox="0 0 1728 600" style="position:absolute;inset:0"></svg>
+      <!-- inputs -->
+      <div style="position:absolute;left:0;top:40px;width:400px;display:grid;gap:14px">
+        <div class="mono" data-a style="--d:2;font-size:12px;letter-spacing:.2em;color:var(--faint)">INFORMAÇÕES DO PROJETO</div>
+        <div class="chip" data-a style="--d:3;border-radius:14px;padding:16px 20px"><svg class="ico"><use href="#i-cube"/></svg>Modelo 3D e BIM</div>
+        <div class="chip" data-a style="--d:4;border-radius:14px;padding:16px 20px"><svg class="ico"><use href="#i-ruler"/></svg>Plantas e desenhos técnicos</div>
+        <div class="chip" data-a style="--d:5;border-radius:14px;padding:16px 20px"><svg class="ico"><use href="#i-file"/></svg>Memoriais e especificações</div>
+        <div class="chip" data-a style="--d:6;border-radius:14px;padding:16px 20px"><svg class="ico"><use href="#i-grid"/></svg>Imagens e diagramas</div>
+        <div class="chip" data-a style="--d:7;border-radius:14px;padding:16px 20px"><svg class="ico"><use href="#i-layers"/></svg>Dados técnicos</div>
+      </div>
+      <!-- core -->
+      <div data-a="zoom" style="--d:6;position:absolute;left:584px;top:150px;width:300px;height:300px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(66,230,149,.16),rgba(20,26,23,.95) 65%);border:1px solid rgba(66,230,149,.4);box-shadow:0 0 80px -10px rgba(66,230,149,.35)">
+        <div><img src="assets/logo-symbol.png" alt="" style="height:82px;margin:0 auto 14px"><div style="font-size:15px;letter-spacing:.22em;color:var(--green);font-weight:600">ROSFEL PRESENT</div><div class="small" style="font-size:14px;margin-top:6px">organiza · compõe · gera</div></div>
+      </div>
+      <!-- outputs -->
+      <div style="position:absolute;right:0;top:0;width:700px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="card" data-a style="--d:8;padding:22px;height:280px;display:flex;flex-direction:column">
+          <div style="flex:1;border-radius:10px;background:#0C110F;border:1px solid var(--line);display:flex;gap:10px;padding:14px;justify-content:center">
+            <div style="width:96px;background:#F5F7F5;border-radius:4px;padding:10px;display:grid;gap:5px;align-content:start"><div style="height:30px;background:#141A17;border-radius:2px"></div><div style="height:4px;background:#42E695;width:60%"></div><div style="height:3px;background:#ccc"></div><div style="height:3px;background:#ccc"></div><div style="height:3px;background:#ccc;width:70%"></div><div style="height:26px;background:#dfe5e1;border-radius:2px;margin-top:4px"></div></div>
+            <div style="width:96px;background:#F5F7F5;border-radius:4px;padding:10px;display:grid;gap:5px;align-content:start;opacity:.8"><div style="height:3px;background:#ccc"></div><div style="height:3px;background:#ccc"></div><div style="height:44px;background:#dfe5e1;border-radius:2px"></div><div style="height:3px;background:#ccc"></div><div style="height:3px;background:#ccc;width:60%"></div></div>
+          </div>
+          <p style="margin-top:16px;font-size:19px;font-weight:600;display:flex;gap:10px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-file"/></svg>PDFs profissionais</p>
+        </div>
+        <div class="card" data-a style="--d:9;padding:22px;height:280px;display:flex;flex-direction:column">
+          <div style="flex:1;border-radius:10px;background:#0C110F;border:1px solid var(--line);padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="border-radius:6px;background:linear-gradient(135deg,rgba(66,230,149,.3),rgba(66,230,149,.05))"></div>
+            <div style="display:grid;gap:6px;align-content:center"><div style="height:5px;background:rgba(245,247,245,.5);width:80%"></div><div style="height:4px;background:rgba(245,247,245,.2)"></div><div style="height:4px;background:rgba(245,247,245,.2)"></div><div style="display:flex;gap:4px;align-items:flex-end;height:40px;margin-top:6px"><i style="flex:1;height:40%;background:rgba(66,230,149,.5)"></i><i style="flex:1;height:70%;background:rgba(66,230,149,.7)"></i><i style="flex:1;height:55%;background:rgba(66,230,149,.5)"></i><i style="flex:1;height:90%;background:#42E695"></i></div></div>
+          </div>
+          <p style="margin-top:16px;font-size:19px;font-weight:600;display:flex;gap:10px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-layers"/></svg>Relatórios ilustrados</p>
+        </div>
+        <div class="card" data-a style="--d:10;padding:22px;height:280px;display:flex;flex-direction:column">
+          <div style="flex:1;border-radius:10px;background:#0C110F;border:1px solid var(--line);padding:16px;display:grid;place-items:center">
+            <div style="width:88%;aspect-ratio:16/9;border-radius:6px;background:#080B0A;border:1px solid rgba(66,230,149,.3);padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center"><div style="display:grid;gap:6px"><div style="height:6px;background:#F5F7F5;width:80%"></div><div style="height:6px;background:#42E695;width:50%"></div><div style="height:3px;background:rgba(245,247,245,.25)"></div></div><svg viewBox="0 0 60 50"><path d="M10 35 30 23 50 35 30 47Z M10 35V20l20-12 20 12v15 M30 23V8" fill="none" stroke="#42E695" stroke-width="1.2"/></svg></div>
+          </div>
+          <p style="margin-top:16px;font-size:19px;font-weight:600;display:flex;gap:10px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-present"/></svg>Apresentações dinâmicas</p>
+        </div>
+        <div class="card" data-a style="--d:11;padding:22px;height:280px;display:flex;flex-direction:column">
+          <div style="flex:1;border-radius:10px;background:linear-gradient(135deg,#101714,#0A0E0C);border:1px solid var(--line);position:relative;display:grid;place-items:center;overflow:hidden">
+            <div style="width:64px;height:64px;border-radius:50%;background:rgba(66,230,149,.15);border:1px solid rgba(66,230,149,.5);display:grid;place-items:center;color:var(--green)"><svg class="ico" style="width:26px;height:26px;fill:#42E695"><use href="#i-play"/></svg></div>
+            <div style="position:absolute;left:14px;right:14px;bottom:12px;height:3px;background:rgba(245,247,245,.12);border-radius:2px"><div style="width:38%;height:100%;background:var(--green);border-radius:2px"></div></div>
+          </div>
+          <p style="margin-top:16px;font-size:19px;font-weight:600;display:flex;gap:10px;align-items:center"><svg class="ico" style="color:var(--green)"><use href="#i-video"/></svg>Vídeos explicativos<span style="font-size:13px;color:var(--faint);font-weight:400;margin-left:auto;letter-spacing:.08em;text-transform:uppercase">Assistido</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 ECOSYSTEM ============ -->
+<section class="slide" data-sec="Tudo conectado" style="--gx:70%;--gy:50%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div class="modgrid" style="grid-template-columns:600px 1fr;gap:40px">
+      <div>
+        <div class="eyebrow" data-a>Ecossistema ROSFEL</div>
+        <h2 data-a style="--d:1">Tudo <em>conectado.</em></h2>
+        <p class="lead" data-a style="--d:2">Cada módulo resolve uma etapa. Juntos, formam um fluxo contínuo — da concepção à entrega — apoiado pelo <span style="color:var(--white)">ROSFEL Workspace</span>, a base que centraliza e organiza os projetos.</p>
+        <div class="card" data-a style="--d:4;margin-top:34px;padding:26px 30px">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px"><div class="ibox" style="width:44px;height:44px"><svg class="ico"><use href="#i-grid"/></svg></div><h3 style="font-size:22px">ROSFEL Workspace <span style="font-size:14px;color:var(--faint);font-weight:500;letter-spacing:.1em;margin-left:6px">MÓDULO 06</span></h3></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;font-size:17px;color:rgba(245,247,245,.85)">
+            <span style="display:flex;gap:10px;align-items:center"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-file"/></svg>Gestão de documentos</span>
+            <span style="display:flex;gap:10px;align-items:center"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-folder"/></svg>Organização por projetos</span>
+            <span style="display:flex;gap:10px;align-items:center"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-git"/></svg>Controle de versões</span>
+            <span style="display:flex;gap:10px;align-items:center"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-users"/></svg>Colaboração entre equipes</span>
+            <span style="display:flex;gap:10px;align-items:center;grid-column:1/-1"><svg class="ico" style="width:18px;height:18px;color:var(--green)"><use href="#i-plug"/></svg>Integração planejada com outras ferramentas</span>
+          </div>
+        </div>
+      </div>
+      <svg id="ecoArt" viewBox="0 0 1080 800" width="1080" height="800" aria-label="Diagrama do ecossistema ROSFEL"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 FUTURE ============ -->
+<section class="slide" data-sec="Nosso futuro" style="--gx:100%;--gy:50%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 600px;gap:80px;align-items:end">
+      <div>
+        <div class="eyebrow" data-a>Nosso futuro</div>
+        <h2 data-a style="--d:1;margin-bottom:0">Uma plataforma <em>integrada</em>, construída etapa por etapa.</h2>
+      </div>
+      <p class="lead" data-a style="--d:2">A ROSFEL está em desenvolvimento. Este é o caminho que pretendemos percorrer — com transparência sobre onde estamos hoje.</p>
+    </div>
+    <div style="position:relative;margin-top:64px">
+      <svg width="1728" height="40" viewBox="0 0 1728 40" style="position:absolute;top:22px;left:0">
+        <line x1="40" y1="20" x2="1690" y2="20" stroke="rgba(245,247,245,.14)" stroke-width="2" stroke-dasharray="2 8"/>
+        <line x1="40" y1="20" x2="440" y2="20" stroke="#42E695" stroke-width="2" pathLength="1" class="draw" style="--d:3"/>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative">
+        <div data-a style="--d:3"><div style="width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid var(--green);box-shadow:0 0 30px rgba(66,230,149,.4);color:var(--green);font-weight:700;font-size:22px">01</div>
+          <div class="card" style="margin-top:28px;padding:28px;border-color:rgba(66,230,149,.4);height:270px"><span class="tag"><span class="dot"></span>Estágio atual</span><h3 style="margin-top:18px">Em desenvolvimento</h3><p class="small" style="margin-top:10px">Concepção da plataforma, definição dos módulos e da base tecnológica.</p></div></div>
+        <div data-a style="--d:4"><div style="width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid rgba(245,247,245,.25);color:var(--muted);font-weight:600;font-size:22px">02</div>
+          <div class="card" style="margin-top:28px;padding:28px;height:270px"><span class="tag neutral">Próxima etapa</span><h3 style="margin-top:18px">Validação</h3><p class="small" style="margin-top:10px">Protótipos dos primeiros módulos, testados junto a profissionais dos setores atendidos.</p></div></div>
+        <div data-a style="--d:5"><div style="width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid rgba(245,247,245,.25);color:var(--muted);font-weight:600;font-size:22px">03</div>
+          <div class="card" style="margin-top:28px;padding:28px;height:270px"><span class="tag neutral">Em seguida</span><h3 style="margin-top:18px">Integração</h3><p class="small" style="margin-top:10px">Módulos conectados no Workspace e integrações planejadas com ferramentas do mercado.</p></div></div>
+        <div data-a style="--d:6"><div style="width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px dashed rgba(66,230,149,.5);color:var(--green);font-size:22px"><svg class="ico" style="width:30px;height:30px"><use href="#i-spark"/></svg></div>
+          <div class="card" style="margin-top:28px;padding:28px;height:270px"><span class="tag neutral">Visão</span><h3 style="margin-top:18px">Ecossistema completo</h3><p class="small" style="margin-top:10px">Uma plataforma integrada, escalável e em evolução contínua para engenharia, arquitetura e agro.</p></div></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:44px;gap:40px">
+      <div class="note" data-a style="--d:8;font-size:18px;max-width:1100px"><svg class="ico" style="width:28px;height:28px"><use href="#i-shield"/></svg><span><b style="color:var(--white)">Nosso compromisso:</b> as ferramentas ROSFEL são assistentes. O profissional continua responsável por validar os resultados e cumprir as normas técnicas aplicáveis.</span></div>
+      <span class="small" data-a style="--d:9;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">Roteiro previsto · sujeito a evolução</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 CLOSING ============ -->
+<section class="slide" data-title="Encerramento" style="--gx:50%;--gy:50%">
+  <div class="marks"><i></i><i></i><i></i><i></i></div>
+  <svg id="closeArt" style="position:absolute;inset:0;z-index:0" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+  <div class="cover">
+    <img src="assets/logo-symbol.png" alt="ROSFEL" data-a="zoom" style="--d:1;height:200px;width:auto">
+    <div data-a style="--d:2;margin-top:30px;font-size:30px;letter-spacing:.5em;font-weight:600;padding-left:.5em">ROSFEL</div>
+    <div class="rule" data-a="fade" style="--d:3"></div>
+    <p data-a style="--d:4;font-size:80px;line-height:1.05;letter-spacing:-.04em;font-weight:700">Inteligência que<br>transforma projetos.</p>
+    <p data-a style="--d:6;font-size:36px;margin-top:34px;color:var(--green);font-weight:500;letter-spacing:-.01em">Menos processos. Mais possibilidades.</p>
+    <p data-a style="--d:8;margin-top:70px;font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)">Tecnologia para o agro, engenharia e arquitetura</p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<nav class="controls" aria-label="Navegação da apresentação">
+  <button id="prev" aria-label="Slide anterior"><svg class="ico"><use href="#i-left"/></svg></button>
+  <div class="dots" id="dots"></div>
+  <span class="count" id="count">01 / 12</span>
+  <button id="next" aria-label="Próximo slide"><svg class="ico"><use href="#i-right"/></svg></button>
+  <button id="fs" aria-label="Tela cheia"><svg class="ico"><use href="#i-max"/></svg></button>
+  <button id="pdf" aria-label="Imprimir ou exportar PDF"><svg class="ico"><use href="#i-print"/></svg></button>
+</nav>
+
+<script>
+/* ================= chrome (header/footer) ================= */
+const slides=[...document.querySelectorAll('.slide')];
+const N=slides.length, pad=n=>String(n).padStart(2,'0');
+slides.forEach((s,i)=>{
+  if(i===0||i===N-1) return;
+  const top=document.createElement('div');top.className='top';
+  top.innerHTML=`<div class="brand"><img src="assets/logo-symbol.png" alt=""><span>ROSFEL</span><span class="sep"></span><span class="sec">${s.dataset.sec||''}</span></div><div class="pg"><b>${pad(i+1)}</b> / ${pad(N)}</div>`;
+  const foot=document.createElement('div');foot.className='foot';
+  foot.innerHTML=`<span>Inteligência que transforma projetos</span><span class="ticks">${slides.map((_,k)=>`<i class="${k<=i?'on':''}"></i>`).join('')}</span>`;
+  s.prepend(top);s.append(foot);
+});
+
+/* ================= svg helpers ================= */
+const NS='http://www.w3.org/2000/svg';
+const G='#42E695', W='#F5F7F5';
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e};
+const txt=(p,x,y,s,a={})=>{const t=el('text',Object.assign({x,y,fill:'rgba(245,247,245,.7)','font-size':12,'font-family':'Inter, sans-serif'},a),p);t.textContent=s;return t};
+function isoF(cx,cy,s){return (x,y,z)=>[cx+(x-y)*0.866*s, cy+(x+y)*0.5*s - z*s]}
+function pts(arr){return arr.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ')}
+function box(p,P,x,y,w,d,h,st={}){
+  const g=el('g',{},p);
+  const top=[[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]].map(a=>P(...a));
+  const fl=[[x,y+d,0],[x+w,y+d,0],[x+w,y+d,h],[x,y+d,h]].map(a=>P(...a));
+  const fr=[[x+w,y,0],[x+w,y+d,0],[x+w,y+d,h],[x+w,y,h]].map(a=>P(...a));
+  const stroke=st.stroke||G, sw=st.sw||1;
+  el('polygon',{points:pts(fl),fill:st.f1||'rgba(66,230,149,.07)',stroke,'stroke-width':sw,'stroke-linejoin':'round'},g);
+  el('polygon',{points:pts(fr),fill:st.f2||'rgba(66,230,149,.13)',stroke,'stroke-width':sw,'stroke-linejoin':'round'},g);
+  el('polygon',{points:pts(top),fill:st.f3||'rgba(66,230,149,.22)',stroke,'stroke-width':sw,'stroke-linejoin':'round'},g);
+  return g;
+}
+
+/* ---------- cover art: architectural wireframe ---------- */
+(function(){
+  const s=document.getElementById('coverArt');
+  const g=el('g',{opacity:.55},s);
+  // isometric ground grid bottom right
+  const P=isoF(1560,690,1);
+  const gg=el('g',{stroke:'rgba(245,247,245,.07)','stroke-width':1},g);
+  for(let i=-200;i<=200;i+=40){
+    el('line',{x1:P(i,-200,0)[0],y1:P(i,-200,0)[1],x2:P(i,200,0)[0],y2:P(i,200,0)[1]},gg);
+    el('line',{x1:P(-200,i,0)[0],y1:P(-200,i,0)[1],x2:P(200,i,0)[0],y2:P(200,i,0)[1]},gg);
+  }
+  const bs=[[-160,-160,120,120,180],[0,-160,80,80,280],[-40,0,160,100,90],[100,40,80,120,140]];
+  bs.forEach(b=>box(g,P,b[0],b[1],b[2],b[3],b[4],{f1:'rgba(66,230,149,.015)',f2:'rgba(66,230,149,.03)',f3:'rgba(66,230,149,.05)',stroke:'rgba(66,230,149,.35)',sw:.8}));
+  // left: plan lines
+  const g2=el('g',{stroke:'rgba(245,247,245,.09)','stroke-width':1,fill:'none'},s);
+  el('rect',{x:120,y:640,width:360,height:260},g2);el('line',{x1:300,y1:640,x2:300,y2:790},g2);el('line',{x1:120,y1:790,x2:480,y2:790},g2);
+  el('path',{d:'M300 790 a60 60 0 0 1 60 -60',stroke:'rgba(66,230,149,.3)'},g2);
+  el('circle',{cx:300,cy:220,r:120,fill:'none',stroke:'rgba(245,247,245,.05)'},s);
+  el('circle',{cx:300,cy:220,r:180,stroke:'rgba(245,247,245,.04)','stroke-dasharray':'2 6',fill:'none',class:'spin'},s);
+  // glow strokes like the brand banner
+  el('path',{d:'M0 900 H180 Q230 900 260 940 L380 1080',stroke:G,'stroke-width':2,fill:'none',opacity:.6,pathLength:1,class:'draw',style:'--d:2;filter:drop-shadow(0 0 6px #42E695)'},s);
+  el('path',{d:'M1920 180 H1760 Q1710 180 1690 150 L1600 0',stroke:G,'stroke-width':2,fill:'none',opacity:.6,pathLength:1,class:'draw',style:'--d:3;filter:drop-shadow(0 0 6px #42E695)'},s);
+})();
+(function(){
+  const s=document.getElementById('closeArt');
+  el('path',{d:'M0 900 H180 Q230 900 260 940 L380 1080',stroke:G,'stroke-width':2,fill:'none',opacity:.6,pathLength:1,class:'draw',style:'--d:2;filter:drop-shadow(0 0 6px #42E695)'},s);
+  el('path',{d:'M1920 180 H1760 Q1710 180 1690 150 L1600 0',stroke:G,'stroke-width':2,fill:'none',opacity:.6,pathLength:1,class:'draw',style:'--d:3;filter:drop-shadow(0 0 6px #42E695)'},s);
+  [260,380,500].forEach((r,i)=>el('circle',{cx:960,cy:500,r,fill:'none',stroke:`rgba(245,247,245,${.06-i*.015})`,'stroke-dasharray':i===1?'2 8':'none',class:i===1?'spin':''},s));
+})();
+
+/* ---------- vision pipeline ---------- */
+(function(){
+  const s=document.getElementById('visionArt');
+  const steps=[['Concepção','i-spark'],['Modelagem','i-cube'],['Documentação','i-file'],['Revisão','i-scan'],['Apresentação','i-present'],['Entrega','i-check']];
+  const x0=144, dx=288, y=90;
+  el('line',{x1:x0,y1:y,x2:x0+dx*5,y2:y,stroke:'rgba(245,247,245,.18)','stroke-width':1.5,'stroke-dasharray':'3 7'},s);
+  el('line',{x1:x0,y1:y,x2:x0+dx*5,y2:y,stroke:G,'stroke-width':1.5,pathLength:1,class:'draw',style:'--d:3'},s);
+  // AI layer bar
+  const by=320;
+  el('rect',{x:40,y:by-38,width:1648,height:76,rx:38,fill:'rgba(66,230,149,.07)',stroke:'rgba(66,230,149,.45)'},s);
+  steps.forEach((st,i)=>{
+    const x=x0+dx*i;
+    el('line',{x1:x,y1:y+48,x2:x,y2:by-38,stroke:G,'stroke-width':1.2,class:'flow',opacity:.7},s);
+    const g=el('g',{'data-a':'zoom',style:`--d:${3+i};transform-origin:${x}px ${y}px`},s);
+    el('circle',{cx:x,cy:y,r:46,fill:'#111714',stroke:i===0||i===5?G:'rgba(245,247,245,.22)','stroke-width':1.5},g);
+    const u=el('use',{href:'#'+st[1],x:x-15,y:y-15,width:30,height:30,class:'ico',style:'color:#42E695'},g);
+    txt(g,x,y+86,st[0],{'text-anchor':'middle','font-size':21,fill:W,'font-weight':600});
+    txt(g,x,y+110,'Etapa '+String(i+1).padStart(2,'0'),{'text-anchor':'middle','font-size':13,fill:'rgba(245,247,245,.4)','letter-spacing':'2'});
+  });
+  const t=txt(s,864,by+7,'',{'text-anchor':'middle','font-size':19,fill:G,'font-weight':600,'letter-spacing':'5'});t.textContent='ROSFEL  ·  CAMADA DE INTELIGÊNCIA QUE CONECTA TODO O FLUXO';
+  for(let i=0;i<14;i++){const c=el('circle',{r:2.5,fill:G,cx:80+i*118,cy:by-20,class:'blink',style:`animation-delay:${i*0.18}s`},s);}
+})();
+
+/* ---------- BIM window family ---------- */
+(function(){
+  const s=document.getElementById('bimArt');
+  // blueprint grid
+  const gg=el('g',{stroke:'rgba(245,247,245,.04)'},s);
+  for(let i=0;i<=420;i+=30) el('line',{x1:i,y1:0,x2:i,y2:640},gg);
+  for(let i=0;i<=640;i+=30) el('line',{x1:0,y1:i,x2:420,y2:i},gg);
+  const P=isoF(150,380,1);
+  const Wd=200,H=170,D=14, sill=0;
+  // wall slab context
+  box(s,P,-30,0,Wd+60,D,-10,{f1:'rgba(245,247,245,.03)',f2:'rgba(245,247,245,.04)',f3:'rgba(245,247,245,.06)',stroke:'rgba(245,247,245,.2)',sw:.8});
+  // frame pieces
+  const fr=12;
+  const g=el('g',{'data-a':'fade',style:'--d:5'},s);
+  box(g,P,0,0,Wd,D,fr);                 // bottom
+  box(g,P,0,0,fr,D,H);                  // left
+  box(g,P,Wd-fr,0,fr,D,H);              // right
+  el('g',{},g); box(g,P,0,0,Wd,D,H).remove();
+  // top
+  const gt=el('g',{},g);
+  const top=[[0,D,H],[Wd,D,H],[Wd,D,H-fr],[0,D,H-fr]].map(a=>P(...a));
+  el('polygon',{points:pts(top),fill:'rgba(66,230,149,.12)',stroke:G},gt);
+  el('polygon',{points:pts([[0,0,H],[Wd,0,H],[Wd,D,H],[0,D,H]].map(a=>P(...a))),fill:'rgba(66,230,149,.22)',stroke:G},gt);
+  // glass sashes
+  const sash=(x1,x2,yy)=>{el('polygon',{points:pts([[x1,yy,fr],[x2,yy,fr],[x2,yy,H-fr],[x1,yy,H-fr]].map(a=>P(...a))),fill:'rgba(66,230,149,.06)',stroke:G,'stroke-width':1.3},g);
+    const a=P(x1+10,yy,H-30),b=P(x1+40,yy,H-60);el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'rgba(245,247,245,.35)'},g)};
+  sash(fr,Wd/2+8,D*0.35); sash(Wd/2-8,Wd-fr,D*0.75);
+  // dimensions
+  const dim=(a,b,off,label,rot)=>{const A=P(...a),B=P(...b);
+    el('line',{x1:A[0]+off[0],y1:A[1]+off[1],x2:B[0]+off[0],y2:B[1]+off[1],stroke:G,'stroke-width':1,pathLength:1,class:'draw',style:'--d:6'},s);
+    [A,B].forEach(p=>el('line',{x1:p[0],y1:p[1],x2:p[0]+off[0]*1.25,y2:p[1]+off[1]*1.25,stroke:'rgba(66,230,149,.5)','stroke-width':.8},s));
+    const mx=(A[0]+B[0])/2+off[0]*1.6, my=(A[1]+B[1])/2+off[1]*1.6;
+    txt(s,mx,my,label,{'text-anchor':'middle','font-size':13,fill:G,'font-family':'ui-monospace,monospace',transform:`rotate(${rot} ${mx} ${my})`});
+  };
+  dim([0,D,0],[Wd,D,0],[-14,26],'L = 1200 mm',30);
+  dim([0,0,0],[0,0,H],[-30,-8],'A = 1000 mm',-90);
+  // sill height callout
+  txt(s,210,92,'FAMÍLIA · JANELA DE CORRER',{'text-anchor':'middle','font-size':12,fill:'rgba(245,247,245,.45)','letter-spacing':'3'});
+  txt(s,210,114,'Janela_Correr_2F',{'text-anchor':'middle','font-size':16,fill:W,'font-weight':600,'font-family':'ui-monospace,monospace'});
+  // param table
+  const rows=[['Largura','1200 mm'],['Altura','1000 mm'],['Peitoril','1100 mm'],['Nº de folhas','2'],['Caixilho','Alumínio'],['Vidro','Incolor 6 mm']];
+  document.getElementById('paramTable').innerHTML=rows.map(r=>`<div style="display:flex;justify-content:space-between;padding:10px 12px;border-radius:9px;background:rgba(245,247,245,.03);border:1px solid var(--line)"><span style="color:var(--muted)">${r[0]}</span><span class="mono" style="color:${r[1].match(/mm|2/)?'#42E695':'#F5F7F5'}">${r[1]}</span></div>`).join('');
+})();
+
+/* ---------- design: bubbles, plan, 3d ---------- */
+(function(){
+  const s=document.getElementById('bubbleArt');
+  const b=[[110,120,62,'Social'],[250,80,46,'Cozinha'],[300,190,52,'Íntimo'],[170,215,34,'Banho']];
+  [[0,1],[0,2],[2,3],[0,3]].forEach(([i,j])=>el('line',{x1:b[i][0],y1:b[i][1],x2:b[j][0],y2:b[j][1],stroke:'rgba(66,230,149,.5)','stroke-dasharray':'3 5'},s));
+  b.forEach(c=>{el('circle',{cx:c[0],cy:c[1],r:c[2],fill:'rgba(66,230,149,.07)',stroke:'rgba(245,247,245,.4)','stroke-dasharray':'4 3'},s);txt(s,c[0],c[1]+5,c[3],{'text-anchor':'middle','font-size':15,fill:W})});
+})();
+const walls2D=[[0,0,360,0],[0,260,360,260],[0,0,0,260],[360,0,360,260],[180,0,180,90],[130,150,130,260],[270,150,270,260]];
+const divider=[[0,40],[80,150],[190,290],[320,360]];
+(function(){
+  const s=document.getElementById('planArt');
+  const ws=el('g',{stroke:W,'stroke-width':7,'stroke-linecap':'square',fill:'none'},s);
+  walls2D.forEach(w=>el('line',{x1:w[0],y1:w[1],x2:w[2],y2:w[3],pathLength:1,class:'draw',style:'--d:5'},ws));
+  divider.forEach(d=>el('line',{x1:d[0],y1:150,x2:d[1],y2:150,pathLength:1,class:'draw',style:'--d:6'},ws));
+  const dg=el('g',{stroke:G,'stroke-width':1.2,fill:'none'},s);
+  [[40,80],[150,190],[290,320]].forEach(([a,b])=>{el('path',{d:`M${a} 150 L${a} ${150+(b-a)} A${b-a} ${b-a} 0 0 0 ${b} 150`},dg)});
+  // windows
+  [[40,120],[230,320]].forEach(([a,b])=>{el('line',{x1:a,y1:0,x2:b,y2:0,stroke:'#080B0A','stroke-width':7},s);el('line',{x1:a,y1:-3,x2:b,y2:-3,stroke:G,'stroke-width':1.2},s);el('line',{x1:a,y1:3,x2:b,y2:3,stroke:G,'stroke-width':1.2},s)});
+  const L=[[90,80,'Estar / Jantar'],[270,80,'Cozinha'],[65,215,'Dorm. 1'],[200,215,'Dorm. 2'],[315,215,'Banho']];
+  L.forEach(l=>txt(s,l[0],l[1],l[2],{'text-anchor':'middle','font-size':15,fill:'rgba(245,247,245,.75)'}));
+  // dims
+  el('line',{x1:0,y1:-24,x2:360,y2:-24,stroke:'rgba(66,230,149,.6)'},s);txt(s,180,-30,'12,00',{'text-anchor':'middle','font-size':12,fill:G,'font-family':'ui-monospace,monospace'});
+  el('line',{x1:384,y1:0,x2:384,y2:260,stroke:'rgba(66,230,149,.6)'},s);txt(s,396,134,'8,70',{'font-size':12,fill:G,'font-family':'ui-monospace,monospace',transform:'rotate(90 396 134)','text-anchor':'middle'});
+})();
+(function(){
+  const s=document.getElementById('houseArt');
+  const P=isoF(230,95,0.72);
+  // floor slab
+  box(s,P,-14,-14,388,288,4,{f1:'rgba(245,247,245,.04)',f2:'rgba(245,247,245,.06)',f3:'rgba(245,247,245,.05)',stroke:'rgba(245,247,245,.3)',sw:.8});
+  const H=70,t=8;
+  const all=[...walls2D];
+  divider.forEach(d=>all.push([d[0],150,d[1],150]));
+  const boxes=all.map(w=>w[1]===w[3]?[w[0],w[1]-t/2,w[2]-w[0],t]:[w[0]-t/2,w[1],t,w[3]-w[1]]);
+  boxes.sort((a,b)=>(a[0]+a[2]/2+a[1]+a[3]/2)-(b[0]+b[2]/2+b[1]+b[3]/2));
+  const g=el('g',{'data-a':'fade',style:'--d:8'},s);
+  boxes.forEach(b=>box(g,P,b[0],b[1],b[2],b[3],H,{sw:.9,f1:'rgba(20,30,25,.92)',f2:'rgba(30,48,39,.95)',f3:'rgba(66,230,149,.55)'}));
+  // ground shadow lines
+  const p1=P(-40,300,0),p2=P(400,300,0);
+  el('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'rgba(245,247,245,.06)'},s);
+})();
+
+/* ---------- masterplan ---------- */
+(function(){
+  const s=document.getElementById('siteArt');
+  const defs=el('defs',{},s);
+  const pat=el('pattern',{id:'hatch',width:10,height:10,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);
+  el('line',{x1:0,y1:0,x2:0,y2:10,stroke:'rgba(66,230,149,.35)','stroke-width':1.5},pat);
+  // contours
+  const cg=el('g',{fill:'none',stroke:'rgba(245,247,245,.05)'},s);
+  for(let i=0;i<7;i++) el('path',{d:`M-20 ${120+i*80} C 250 ${60+i*80}, 500 ${200+i*70}, 1020 ${90+i*85}`},cg);
+  // boundary
+  el('polygon',{points:'50,70 950,40 975,640 70,665',fill:'rgba(66,230,149,.025)',stroke:G,'stroke-width':1.5,'stroke-dasharray':'10 6',pathLength:1},s);
+  // reserva
+  el('path',{d:'M62 85 L300 77 Q280 150 230 175 Q150 200 66 215 Z',fill:'url(#hatch)',stroke:'rgba(66,230,149,.5)'},s);
+  txt(s,150,140,'Reserva legal',{'text-anchor':'middle','font-size':15,fill:G,'font-weight':600});
+  // roads
+  const rd='M520 665 L520 400 Q520 360 480 360 L250 360 Q220 360 220 330 L220 250 M520 400 Q520 360 560 360 L800 360 Q830 360 830 330 L830 250 M520 360 L520 240';
+  el('path',{d:rd,fill:'none',stroke:'#26302B','stroke-width':26,'stroke-linejoin':'round'},s);
+  el('path',{d:rd,fill:'none',stroke:'rgba(245,247,245,.35)','stroke-width':1.2,'stroke-dasharray':'8 8'},s);
+  // flow on road
+  el('path',{d:'M520 665 L520 400 Q520 360 560 360 L800 360',fill:'none',stroke:G,'stroke-width':2.5,class:'flow'},s);
+  // buildings
+  const bld=(x,y,w,h,label,sub,d)=>{const g=el('g',{'data-a':'fade',style:`--d:${d}`},s);
+    el('rect',{x,y,width:w,height:h,rx:3,fill:'rgba(20,26,23,.95)',stroke:W,'stroke-width':1.3},g);
+    if(sub) el('line',{x1:x,y1:y+h/2,x2:x+w,y2:y+h/2,stroke:'rgba(245,247,245,.15)'},g);
+    txt(g,x+w/2,sub?y+h/2-8:y+h/2+5,label,{'text-anchor':'middle','font-size':15,fill:W,'font-weight':600});
+    if(sub) txt(g,x+w/2,y+h/2+20,sub,{'text-anchor':'middle','font-size':12,fill:'rgba(245,247,245,.5)'});};
+  bld(110,410,190,110,'Sede','Escritório · apoio',4);
+  bld(320,150,180,90,'Galpão','Máquinas e implementos',5);
+  bld(560,140,240,110,'Armazém','Insumos e produção',6);
+  bld(560,560,110,50,'Balança',null,7);
+  // patio
+  el('rect',{x:570,y:410,width:200,height:100,rx:6,fill:'none',stroke:'rgba(245,247,245,.35)','stroke-dasharray':'5 5'},s);
+  txt(s,670,465,'Pátio de manobra',{'text-anchor':'middle','font-size':14,fill:'rgba(245,247,245,.7)'});
+  // silos
+  const sg=el('g',{'data-a':'fade',style:'--d:8'},s);
+  [[860,250],[915,250],[860,305],[915,305]].forEach(([x,y])=>{el('circle',{cx:x,cy:y,r:22,fill:'rgba(66,230,149,.12)',stroke:G,'stroke-width':1.3},sg);el('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'rgba(66,230,149,.6)'},sg)});
+  txt(sg,887,355,'Silos',{'text-anchor':'middle','font-size':15,fill:W,'font-weight':600});
+  // reservoir + power
+  el('circle',{cx:170,cy:590,r:30,fill:'rgba(66,230,149,.06)',stroke:'rgba(245,247,245,.5)'},s);
+  txt(s,170,594,'Água',{'text-anchor':'middle','font-size':13,fill:'rgba(245,247,245,.7)'});
+  el('path',{d:'M80 640 L80 300 L540 290 L540 120 L940 100',fill:'none',stroke:'rgba(245,247,245,.3)','stroke-dasharray':'2 6'},s);
+  [[80,640],[80,300],[310,295],[540,290],[540,120],[740,110],[940,100]].forEach(([x,y])=>el('rect',{x:x-3,y:y-3,width:6,height:6,fill:G},s));
+  txt(s,330,282,'Rede elétrica',{'font-size':12,fill:'rgba(245,247,245,.5)'});
+  // expansion
+  const ex=el('g',{id:'expansion'},s);
+  el('rect',{x:710,y:520,width:240,height:105,rx:6,fill:'rgba(66,230,149,.06)',stroke:G,'stroke-width':1.5,'stroke-dasharray':'8 6',class:'blink'},ex);
+  txt(ex,830,565,'Cenário de expansão',{'text-anchor':'middle','font-size':15,fill:G,'font-weight':600});
+  txt(ex,830,588,'Novo armazém · estudo',{'text-anchor':'middle','font-size':12,fill:'rgba(66,230,149,.7)'});
+  el('path',{d:'M800 360 L800 520',stroke:G,'stroke-width':1.5,'stroke-dasharray':'4 6',fill:'none'},ex);
+  // entrance + north + scale
+  txt(s,520,688,'ACESSO',{'text-anchor':'middle','font-size':12,fill:G,'letter-spacing':'3','font-weight':600});
+  const n=el('g',{transform:'translate(940 50)'},s);
+  // north arrow placed bottom-left instead
+  n.setAttribute('transform','translate(905 650)');
+  el('circle',{cx:0,cy:0,r:0},n);
+  const na=el('g',{transform:'translate(100 640)'},s);
+  txt(s,330,650,'Esquemático · sem escala',{'font-size':12,fill:'rgba(245,247,245,.35)','letter-spacing':'1'});
+  const NA=el('g',{transform:'translate(960 60)'},s);
+  el('path',{d:'M0 -18 L8 10 L0 4 L-8 10 Z',fill:G},NA);txt(NA,0,30,'N',{'text-anchor':'middle','font-size':12,fill:W,'font-weight':600});
+  const btn=document.getElementById('expBtn');
+  btn.addEventListener('click',e=>{e.stopPropagation();const on=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',on);ex.style.transition='opacity .5s';ex.style.opacity=on?1:0;btn.style.borderColor=on?'rgba(66,230,149,.5)':'';btn.style.color=on?'#42E695':''});
+  btn.style.borderColor='rgba(66,230,149,.5)';btn.style.color='#42E695';
+})();
+
+/* ---------- review drawing ---------- */
+(function(){
+  const s=document.getElementById('reviewArt');
+  const xs=[110,290,470,620], ys=[110,280,450,590];
+  const L=['A','B','C','D'];
+  const ag=el('g',{stroke:'rgba(245,247,245,.18)','stroke-dasharray':'12 4 2 4'},s);
+  xs.forEach((x,i)=>{el('line',{x1:x,y1:50,x2:x,y2:630},ag);el('circle',{cx:x,cy:34,r:15,fill:'#0D1210',stroke:'rgba(245,247,245,.4)','stroke-dasharray':'none'},s);txt(s,x,39,String(i+1),{'text-anchor':'middle','font-size':13,fill:W})});
+  ys.forEach((y,i)=>{el('line',{x1:50,y1:y,x2:670,y2:y},ag);el('circle',{cx:30,cy:y,r:15,fill:'#0D1210',stroke:'rgba(245,247,245,.4)'},s);txt(s,30,y+5,L[i],{'text-anchor':'middle','font-size':13,fill:W})});
+  // beams
+  const bg=el('g',{stroke:'rgba(245,247,245,.55)','stroke-width':10,'stroke-linecap':'butt',opacity:.5},s);
+  ys.forEach(y=>el('line',{x1:xs[0],y1:y,x2:xs[3],y2:y},bg));
+  xs.forEach(x=>el('line',{x1:x,y1:ys[0],x2:x,y2:ys[3]},bg));
+  // columns
+  xs.forEach((x,i)=>ys.forEach((y,j)=>{const big=(i===2&&j===2);el('rect',{x:x-(big?16:12),y:y-(big?16:12),width:big?32:24,height:big?32:24,fill:'#F5F7F5',opacity:.9},s)}));
+  // duct
+  el('path',{d:'M50 240 L200 240 Q210 240 210 250 L210 330 Q210 340 220 340 L670 340',fill:'none',stroke:G,'stroke-width':14,opacity:.18},s);
+  el('path',{d:'M50 240 L200 240 Q210 240 210 250 L210 330 Q210 340 220 340 L670 340',fill:'none',stroke:G,'stroke-width':1.3,'stroke-dasharray':'6 4'},s);
+  txt(s,560,328,'DUTO AC',{'font-size':11,fill:G,'letter-spacing':'2'});
+  // dims
+  el('line',{x1:470,y1:520,x2:620,y2:520,stroke:'rgba(245,247,245,.5)'},s);txt(s,545,512,'4,20',{'text-anchor':'middle','font-size':13,fill:W,'font-family':'ui-monospace,monospace'});
+  // change cloud v04
+  el('rect',{x:430,y:410,width:80,height:80,rx:10,fill:'none',stroke:G,'stroke-dasharray':'4 4'},s);
+  // markers
+  const mk=(x,y,n,solid)=>{const g=el('g',{'data-a':'zoom',style:`--d:${5+n};transform-origin:${x}px ${y}px`},s);
+    el('circle',{cx:x,cy:y,r:30,fill:'rgba(66,230,149,.1)',stroke:'rgba(66,230,149,.35)',class:'blink'},g);
+    el('circle',{cx:x,cy:y,r:15,fill:solid?G:'#0D1210',stroke:G,'stroke-width':2},g);
+    txt(g,x,y+5,String(n),{'text-anchor':'middle','font-size':14,'font-weight':700,fill:solid?'#06120C':G});};
+  mk(290,322,1,true); mk(545,548,2,false); mk(512,410,3,false);
+  // scan line
+  const sl=el('line',{x1:50,x2:670,y1:0,y2:0,stroke:G,'stroke-width':1,opacity:.5},s);
+  const an=el('animate',{attributeName:'y1',values:'60;620;60',dur:'6s',repeatCount:'indefinite'},sl);
+  el('animate',{attributeName:'y2',values:'60;620;60',dur:'6s',repeatCount:'indefinite'},sl);
+})();
+
+/* ---------- present connectors ---------- */
+(function(){
+  const s=document.getElementById('presentArt');
+  const cx=734, cy=300;
+  [110,180,250,320,390].forEach((y,i)=>{const d=`M400 ${y+30} C 500 ${y+30}, 520 ${cy}, ${cx-150} ${cy}`;
+    el('path',{d,fill:'none',stroke:'rgba(245,247,245,.12)','stroke-width':1.2},s);el('path',{d,fill:'none',stroke:G,'stroke-width':1.5,class:'flow',opacity:.8},s)});
+  [[1028,140],[1028,440],[1388,140],[1388,440]].forEach(([x,y])=>{const d=`M${cx+150} ${cy} C 960 ${cy}, 960 ${y}, ${x} ${y}`;
+    if(x>1100) return;
+    el('path',{d,fill:'none',stroke:'rgba(245,247,245,.12)','stroke-width':1.2},s);el('path',{d,fill:'none',stroke:G,'stroke-width':1.5,class:'flow'},s)});
+  el('circle',{cx,cy,r:190,fill:'none',stroke:'rgba(66,230,149,.15)','stroke-dasharray':'2 8',class:'spin'},s);
+})();
+
+/* ---------- ecosystem ---------- */
+(function(){
+  const s=document.getElementById('ecoArt');
+  const cx=560, cy=400, R=290;
+  const mods=[['BIM','Famílias e documentação','i-cube'],['DESIGN','Plantas e modelos','i-ruler'],['MASTERPLAN','Implantações rurais','i-map'],['REVIEW','Revisão assistida','i-scan'],['PRESENT','Apresentações','i-present']];
+  [R-90, R, R+80].forEach((r,i)=>el('circle',{cx,cy,r,fill:'none',stroke:`rgba(245,247,245,${i===1?.12:.05})`,'stroke-dasharray':i===1?'3 9':'none',class:i===1?'spin':''},s));
+  const P=mods.map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/5;return [cx+R*Math.cos(a),cy+R*Math.sin(a)]});
+  // ring connections
+  P.forEach((p,i)=>{const q=P[(i+1)%5];el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'rgba(66,230,149,.22)','stroke-width':1},s)});
+  P.forEach((p,i)=>{
+    el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],stroke:'rgba(245,247,245,.12)','stroke-width':1.2},s);
+    el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],stroke:G,'stroke-width':1.6,class:'flow',style:`animation-delay:${-i*.3}s`},s);
+    const dot=el('circle',{r:4,fill:G,style:'filter:drop-shadow(0 0 6px #42E695)'},s);
+    el('animateMotion',{dur:`${3+i*.4}s`,repeatCount:'indefinite',path:`M${cx} ${cy} L${p[0]} ${p[1]}`},dot);
+  });
+  // center
+  const c=el('g',{'data-a':'zoom',style:`--d:3;transform-origin:${cx}px ${cy}px`},s);
+  el('circle',{cx,cy,r:120,fill:'rgba(66,230,149,.05)',stroke:'rgba(66,230,149,.25)'},c);
+  el('circle',{cx,cy,r:96,fill:'#101613',stroke:G,'stroke-width':1.8,style:'filter:drop-shadow(0 0 22px rgba(66,230,149,.35))'},c);
+  el('image',{href:'assets/logo-symbol.png',x:cx-38,y:cy-58,width:76,height:52},c);
+  txt(c,cx,cy+22,'WORKSPACE',{'text-anchor':'middle','font-size':17,fill:G,'font-weight':700,'letter-spacing':'3'});
+  txt(c,cx,cy+44,'base integrada',{'text-anchor':'middle','font-size':13,fill:'rgba(245,247,245,.55)'});
+  P.forEach((p,i)=>{
+    const g=el('g',{'data-a':'zoom',style:`--d:${4+i};transform-origin:${p[0]}px ${p[1]}px`},s);
+    el('rect',{x:p[0]-104,y:p[1]-56,width:208,height:112,rx:20,fill:'#111714',stroke:'rgba(66,230,149,.45)','stroke-width':1.3},g);
+    el('use',{href:'#'+mods[i][2],x:p[0]-12,y:p[1]-44,width:24,height:24,class:'ico',style:'color:#42E695'},g);
+    txt(g,p[0],p[1]+4,mods[i][0],{'text-anchor':'middle','font-size':17,fill:W,'font-weight':700,'letter-spacing':'2.5'});
+    txt(g,p[0],p[1]+28,mods[i][1],{'text-anchor':'middle','font-size':13,fill:'rgba(245,247,245,.55)'});
+  });
+})();
+
+/* ================= navigation ================= */
+let cur=0;
+const stage=document.getElementById('stage'), prog=document.getElementById('progress'), count=document.getElementById('count'), dots=document.getElementById('dots');
+slides.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Ir para o slide '+(i+1));b.onclick=()=>go(i);dots.appendChild(b)});
+function go(i){
+  i=Math.max(0,Math.min(N-1,i));
+  slides.forEach((s,k)=>{s.classList.toggle('active',k===i);s.setAttribute('aria-hidden',k!==i)});
+  cur=i;prog.style.width=((i+1)/N*100)+'%';count.textContent=pad(i+1)+' / '+pad(N);
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  if(history.replaceState) history.replaceState(null,'','#'+(i+1));
+}
+function fit(){const sc=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${sc})`}
+addEventListener('resize',fit);fit();
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.getElementById('pdf').onclick=()=>print();
+const fsBtn=document.getElementById('fs');
+function toggleFS(){const d=document;if(!d.fullscreenElement&&d.documentElement.requestFullscreen)d.documentElement.requestFullscreen().catch(()=>{});else if(d.exitFullscreen&&d.fullscreenElement)d.exitFullscreen()}
+fsBtn.onclick=toggleFS;
+if(!document.documentElement.requestFullscreen) fsBtn.style.display='none';
+document.getElementById('startBtn').onclick=e=>{e.stopPropagation();if(document.documentElement.requestFullscreen&&!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});go(1)};
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(cur+1)}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(cur-1)}
+  else if(e.key==='Home')go(0);else if(e.key==='End')go(N-1);
+  else if(e.key==='f'||e.key==='F')toggleFS();
+});
+let tx=null;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));tx=null});
+let hideT;addEventListener('mousemove',()=>{document.body.classList.add('show-ui');clearTimeout(hideT);hideT=setTimeout(()=>document.body.classList.remove('show-ui'),2200)});
+const h=parseInt(location.hash.slice(1));go(isNaN(h)?0:h-1);
+</script>
+</body>
+</html>
