@@ -587,9 +587,9 @@ function s3(t){
   [...document.querySelectorAll('#S3 .sb .ib')].forEach((el,i)=>{const kk=tw(t,T.s3c-0.1+i*0.15,.6,'back');S(el,{s:lerp(.4,1,kk)*(T.s3c<=t?1:1),o:1});});
   S('chart',V(t,T.s3c+0.1,null,{dy:40}));
   [...document.querySelectorAll('#S3 .cb')].forEach((el,i)=>{const kk=tw(t,T.s3d-0.05+i*0.1,.9,'out');el.style.transform=`scaleY(${kk.toFixed(3)})`;el.style.transformOrigin='bottom';});
-  R('t3a',t,T.s3e-0.05,T.s3f-0.2); R('t3b',t,T.s3e+0.25,T.s3f-0.2,{st:.08});
-  R('t3c',t,T.s3f-0.05,T.s3g-0.2); R('t3d',t,T.s3f+0.25,T.s3g-0.2,{st:.08});
-  [['m1',T.s3g],['m2',T.s3h],['m3',T.s3i]].forEach(([id,c])=>{const kk=tw(t,c-0.08,.6,'back');S(id,{o:cl(tw(t,c-0.08,.35)),y:(1-kk)*60,s:lerp(.9,1,kk),b:(1-cl(kk))*10});});
+  R('t3a',t,T.s3e-0.05,T.s3f-0.4,{dout:.3}); R('t3b',t,T.s3e+0.25,T.s3f-0.4,{st:.08,dout:.3});
+  R('t3c',t,T.s3f-0.05,T.s3g-0.42,{dout:.3}); R('t3d',t,T.s3f+0.25,T.s3g-0.42,{st:.08,dout:.3});
+  [['m1',T.s3g],['m2',T.s3h],['m3',T.s3i]].forEach(([id,c])=>{const kk=tw(t,c-0.04,.6,'back');S(id,{o:cl(tw(t,c-0.04,.35)),y:(1-kk)*60,s:lerp(.9,1,kk),b:(1-cl(kk))*10});});
   $('m3s').style.transform=`scaleX(${tw(t,T.s3i+0.45,.45,'io').toFixed(3)})`;
 }
 
