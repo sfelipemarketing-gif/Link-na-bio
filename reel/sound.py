@@ -105,9 +105,9 @@ def main(root):
         place(sfx, whoosh(.6), t - .3, .8)               # scene transitions
     for t in (1.9, 2.55, 3.2):
         place(sfx, whoosh(.25, False), t, .7); place(sfx, impact(.5), t, .35)  # match cuts
-    place(sfx, whoosh(.5), 3.85, .5)                     # COM IA type
+    place(sfx, whoosh(.4), 3.6, .6); place(sfx, whoosh(.9), 3.95, .45)  # risco + partículas
     # Runway reveal + UI
-    place(sfx, ping(660), 6.2); place(sfx, ping(990, .4), 8.5)
+    place(sfx, ping(660), 7.3); place(sfx, ping(990, .4), 8.5); place(sfx, ping(1100, .4), 9.2); place(sfx, ping(1320, .4), 9.9)
     for i in range(30):                                  # prompt typing in UI
         place(sfx, tick(2600 + rng.integers(-300, 300)), 13.0 + i * .04, .5)
     place(sfx, snap(), 14.3, .9)                         # Gerar
@@ -118,24 +118,24 @@ def main(root):
         if i % 2 == 0:
             place(sfx, tick(2300 + rng.integers(-400, 400)), 17.9 + i * (2.4 / nchar), .45)
     place(sfx, whoosh(.7), 20.4, .7)                     # liquid transition
-    place(sfx, drop(), 21.0, 1.0)
+    place(sfx, drop(), 21.6, 1.0); place(sfx, drop(), 24.2, .5)
     # image -> motion
-    place(sfx, ping(740), 26.0); place(sfx, whoosh(1.0), 27.4, .6); place(sfx, whoosh(1.4), 28.3, .35)
+    place(sfx, ping(740), 26.0); place(sfx, ping(990, .4), 29.2, .7); place(sfx, whoosh(1.0), 29.8, .6)
     # tip: labels
     place(sfx, impact(.8), 31.35, .4)
-    for t, f in ((37.1, 880), (38.3, 990), (39.6, 1320)):
+    for t, f in ((37.05, 880), (38.08, 990), (39.56, 1320)):
         place(sfx, ping(f), t, 1.0)
     place(sfx, whoosh(.8), 40.9, .6)
     for i, t in enumerate((41.8, 42.05, 42.3)):
         place(sfx, tick(1600 + i * 200, .05), t, .8)
     # timeline: magnetic snaps
-    for t in (46.2, 46.75, 47.3):
+    for t in (47.05, 47.5, 47.95):
         place(sfx, snap(), t, 1.0)
-    place(sfx, whoosh(.8), 47.6, .35)
-    for t in (49.15, 49.4, 49.65):
+    place(sfx, whoosh(.8), 48.5, .35)
+    for t in (49.44, 49.7, 49.95):
         place(sfx, tick(2000, .05), t, .8)
     # ending
-    for t in (51.8, 52.2, 52.55):
+    for t in (51.4, 51.75, 52.1, 52.45, 52.8):
         place(sfx, whoosh(.2, False), t, .5)
     place(sfx, riser(3.0), 50.6, .9)
     place(sfx, impact(2.5), 53.6, .45)

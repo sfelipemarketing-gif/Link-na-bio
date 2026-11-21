@@ -1,5 +1,7 @@
 # Reel — RUNWAY AI: da ideia ao vídeo cinematográfico
 
+**v3 (atual):** motion design 100% vetorial, sem imagens nem legendas. Fundo branco com tons de azul e texto cinético sincronizado palavra por palavra com a narração (`render.html`). A versão anterior, com imagens, ficou em `render_v2_images.html`.
+
 Final: `out/runway-ai-reel-sfelipe0c.mp4`. Vertical 9:16, 1080×1920, 30 fps, about 60 s, H.264 + AAC.
 
 ## What was produced and with which tool
