@@ -1,0 +1,7 @@
+{h1}Sua apresentação ainda parece um PDF parado? {h2}E o seu site... ainda só existe na sua cabeça? {h3}Pois é. Muita gente ainda faz isso do jeito mais {hd}difícil, {hl}mais lento e {hm}mais limitado. {h4}Mas... e se uma IA te ajudasse a transformar {h4b}ideia em experiência visual?
+{s2}Essa é a Lovable. {s2b}Você descreve o que quer, em português mesmo, e ela constrói com você: {s2c}apresentações interativas, {s2d}sites e {s2e}protótipos, {s2f}com estrutura, design e lógica conectados.
+{s3}Nas apresentações, ela organiza o seu conteúdo com hierarquia visual, {s3b}blocos curtos, {s3c}ícones e {s3d}animações suaves. {s3e}Não é só um slide bonito. {s3f}É uma apresentação que comunica melhor. {s3g}Mais clareza. {s3h}Mais impacto. {s3i}Menos slide morto.
+{s4}Nos sites, a lógica é a mesma. {s4b}Você joga uma ideia solta, {s4c}e ela vira página: {s4hero}hero, {s4cta}chamada pra ação, {s4ben}benefícios, {s4dep}depoimentos, {s4rod}rodapé. {s4z}Da ideia ao layout, em minutos.
+{s5}Na prática? {s5a}Uma apresentação explicando como a IA ajuda pequenas empresas. {s5b}Um site institucional moderno pra uma startup. {s5c}Ou um pitch visual pra vender o seu produto.
+{s6}E o ponto aqui não é só estética. {s6b}É velocidade, {s6c}clareza e {s6d}poder de comunicação. {s6e}É transformar ideia em algo que as pessoas realmente entendem.
+{s7}Porque hoje, não basta ter uma ideia boa. {s7b}Você precisa apresentar bem. {s7c}E quando a tecnologia te ajuda a comunicar melhor... {s7d}a diferença aparece.

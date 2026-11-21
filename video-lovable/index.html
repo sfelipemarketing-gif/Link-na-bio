@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lovable motion 9:16</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
+body{font-family:"Inter Display","Inter",system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#08080A}
+.abs{position:absolute}
+.full{position:absolute;inset:0}
+.layer{position:absolute;inset:0;transform-origin:540px 860px}
+.ctr{left:0;width:1080px;text-align:center}
+/* background */
+.blob{position:absolute;width:1100px;height:1100px;border-radius:50%;left:-10px;top:400px;filter:blur(40px)}
+#grid{position:absolute;inset:-100px;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:90px 90px;-webkit-mask-image:radial-gradient(ellipse 60% 45% at 50% 45%,#000 0%,transparent 100%)}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 70% at 50% 45%,transparent 50%,rgba(0,0,0,.72) 100%)}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;opacity:.07;mix-blend-mode:overlay}
+/* type */
+.g{background:linear-gradient(95deg,#FF7A1A 0%,#F2477E 38%,#B15CF4 70%,#5E6DF8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.k1{font-size:132px;font-weight:800;letter-spacing:-.045em;line-height:1.02}
+.k2{font-size:104px;font-weight:800;letter-spacing:-.04em;line-height:1.04}
+.k3{font-size:54px;font-weight:500;letter-spacing:-.02em;color:#A2A2AD;line-height:1.2}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .14em;margin-bottom:-.14em}
+.wi{display:inline-block;will-change:transform}
+.pill{display:inline-flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;font-size:30px;font-weight:700;letter-spacing:.18em;color:#fff;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
+.pill .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#FF7A1A,#B15CF4);box-shadow:0 0 18px #F2477E}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.12);border-radius:32px;box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.1)}
+.gbg{background:linear-gradient(135deg,#FF7A1A 0%,#F2477E 40%,#B15CF4 75%,#5E6DF8 100%)}
+.bar{height:16px;border-radius:9px;background:rgba(255,255,255,.14)}
+.ib{display:flex;align-items:center;justify-content:center;border-radius:22px}
+svg.ic{display:block}
+/* captions */
+#cap{position:absolute;left:40px;width:1000px;top:1478px;text-align:center;font-size:60px;font-weight:800;letter-spacing:-.015em;line-height:1.12;text-shadow:0 6px 30px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.7)}
+#cap span{display:inline-block;margin:0 .13em;transition:none}
+#cap .fut{color:rgba(255,255,255,.38)}
+#cap .now{color:#fff}
+#cap .now.hl{background:linear-gradient(95deg,#FF8A2A,#F2477E 55%,#B15CF4);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 4px 18px rgba(0,0,0,.8))}
+#handle{position:absolute;top:1782px;left:0;width:1080px;display:flex;justify-content:center;z-index:50}
+#handle div{font-size:34px;font-weight:600;letter-spacing:.015em;color:rgba(255,255,255,.82);padding:12px 30px;border-radius:999px;background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.12)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- BACKGROUND -->
+  <div class="full" id="bgwrap">
+    <div class="blob" id="b1" style="background:radial-gradient(circle,rgba(255,110,30,.55) 0%,rgba(255,110,30,0) 62%)"></div>
+    <div class="blob" id="b2" style="background:radial-gradient(circle,rgba(242,71,126,.5) 0%,rgba(242,71,126,0) 62%)"></div>
+    <div class="blob" id="b3" style="background:radial-gradient(circle,rgba(94,109,248,.55) 0%,rgba(94,109,248,0) 62%)"></div>
+    <div id="grid"></div>
+  </div>
+
+  <div class="layer" id="world">
+
+  <!-- ========== SCENE 1 : HOOK ========== -->
+  <div class="layer" id="S1">
+    <!-- h1 -->
+    <div class="layer" id="h1g">
+      <div class="abs ctr" style="top:250px"><div class="k3 split" id="h1a">Sua apresentação ainda parece um</div></div>
+      <div class="abs ctr" style="top:330px"><div class="k1 split" id="h1b">PDF parado?</div></div>
+      <div class="abs" id="pdf" style="left:270px;top:620px;width:540px;height:700px;border-radius:26px;background:#1d1d21;border:1px solid #2c2c32;box-shadow:0 50px 100px rgba(0,0,0,.6);padding:44px 46px">
+        <div style="display:flex;align-items:center;gap:18px">
+          <div style="background:#4a4a52;color:#18181b;font-weight:800;font-size:26px;padding:8px 14px;border-radius:10px">PDF</div>
+          <div style="color:#6d6d77;font-size:26px;font-weight:500">Relatório_final_v7.pdf</div>
+        </div>
+        <div class="bar" style="margin-top:56px;width:80%;height:30px;background:#34343b"></div>
+        <div class="bar" style="margin-top:34px;width:100%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:94%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:97%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:60%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:44px;width:100%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:91%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:96%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:70%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:44px;width:88%;background:#2b2b31"></div>
+        <div class="bar" style="margin-top:20px;width:52%;background:#2b2b31"></div>
+        <div style="position:absolute;bottom:34px;left:0;width:100%;text-align:center;color:#55555e;font-size:24px">Página 1 de 47</div>
+        <div id="pauseic" style="position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px;border-radius:50%;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;gap:18px">
+          <div style="width:18px;height:58px;border-radius:5px;background:#bdbdc6"></div><div style="width:18px;height:58px;border-radius:5px;background:#bdbdc6"></div>
+        </div>
+      </div>
+    </div>
+    <!-- h2 -->
+    <div class="layer" id="h2g">
+      <div class="abs ctr" style="top:250px"><div class="k3 split" id="h2a">E o seu site ainda só existe</div></div>
+      <div class="abs ctr" style="top:330px"><div class="k1 split" id="h2b">na sua cabeça?</div></div>
+      <svg class="abs" id="cloud" style="left:90px;top:600px" width="900" height="760" viewBox="0 0 900 760">
+        <path id="cloudp" d="M190 520 C90 520 60 420 120 370 C70 290 140 200 230 225 C250 130 380 100 440 170 C500 90 650 110 670 215 C770 200 840 290 790 370 C850 430 810 530 720 520 C700 590 600 610 540 560 C480 620 330 620 300 560 C250 590 200 570 190 520 Z" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-dasharray="14 14" stroke-linecap="round"/>
+        <circle id="cb1" cx="260" cy="640" r="26" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-dasharray="8 8"/>
+        <circle id="cb2" cx="200" cy="710" r="14" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-dasharray="6 6"/>
+        <g id="wire" opacity=".9">
+          <rect x="250" y="245" width="400" height="270" rx="18" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3" stroke-dasharray="10 9"/>
+          <line x1="250" y1="285" x2="650" y2="285" stroke="rgba(255,255,255,.3)" stroke-width="3" stroke-dasharray="10 9"/>
+          <rect x="285" y="315" width="190" height="22" rx="8" fill="rgba(255,255,255,.18)"/>
+          <rect x="285" y="350" width="140" height="22" rx="8" fill="rgba(255,255,255,.12)"/>
+          <rect x="285" y="400" width="110" height="38" rx="19" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-dasharray="8 7"/>
+          <rect x="500" y="315" width="120" height="120" rx="14" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="3" stroke-dasharray="8 7"/>
+          <text x="560" y="390" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="54" font-weight="700">?</text>
+          <rect x="285" y="465" width="330" height="18" rx="8" fill="rgba(255,255,255,.08)"/>
+        </g>
+      </svg>
+    </div>
+    <!-- h3 -->
+    <div class="layer" id="h3g">
+      <div class="abs ctr" style="top:300px"><div class="k3 split" id="h3a">Muita gente ainda faz do jeito mais…</div></div>
+      <div class="abs ctr" id="hd" style="top:520px"><span class="k1" style="color:#ECECF1;position:relative">difícil.<i class="strike abs" style="left:-10px;right:-10px;top:56%;height:12px;border-radius:6px;background:#FF5A4E;transform-origin:left center"></i></span></div>
+      <div class="abs ctr" id="hl" style="top:720px"><span class="k1" style="color:#ECECF1;position:relative">lento.<i class="strike abs" style="left:-10px;right:-10px;top:56%;height:12px;border-radius:6px;background:#FF5A4E;transform-origin:left center"></i></span></div>
+      <div class="abs ctr" id="hm" style="top:920px"><span class="k1" style="color:#ECECF1;position:relative">limitado.<i class="strike abs" style="left:-10px;right:-10px;top:56%;height:12px;border-radius:6px;background:#FF5A4E;transform-origin:left center"></i></span></div>
+      <div class="abs" id="hglass" style="left:470px;top:1160px;width:140px;height:140px" data-ic="hourglass" data-s="140" data-c="#7a7a85"></div>
+    </div>
+    <!-- h4 -->
+    <div class="layer" id="h4g">
+      <div class="abs" id="orb" style="left:140px;top:560px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FF7A1A 0%,#F2477E 35%,#B15CF4 60%,#5E6DF8 80%,transparent 100%);filter:blur(90px);opacity:.0"></div>
+      <div class="abs ctr" style="top:300px"><div class="k3 split" id="h4a" style="color:#E6E6EC">E se uma IA te ajudasse<br>a transformar</div></div>
+      <div class="abs ctr" style="top:640px"><div class="k1 split" id="h4b">ideia</div></div>
+      <div class="abs" id="h4arrow" style="left:480px;top:830px;width:120px;height:120px" data-ic="sparkle" data-s="120" data-c="#fff"></div>
+      <div class="abs ctr" style="top:990px"><div class="k1 split g" id="h4c">experiência<br>visual</div></div>
+    </div>
+  </div>
+
+  <!-- ========== SCENE 2 : INTRO ========== -->
+  <div class="layer" id="S2">
+    <div class="abs" id="lglow" style="left:140px;top:360px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(242,71,126,.45),rgba(177,92,244,.18) 40%,transparent 68%)"></div>
+    <div class="abs" id="lockup" style="left:0;top:660px;width:1080px;height:200px;display:flex;align-items:center;justify-content:center;gap:34px">
+      <img id="lheart" src="assets/heart.png" style="height:190px">
+      <div style="position:relative;height:166px;overflow:hidden" id="lwmwrap"><img id="lwm" src="assets/wordmark.png" style="height:166px;display:block"></div>
+    </div>
+    <div class="abs" id="prompt" style="left:80px;top:560px;width:920px;height:180px;padding:0 40px;display:flex;align-items:center;gap:26px;border-radius:44px" >
+      <div class="ib gbg" style="width:84px;height:84px;flex:none;border-radius:26px" data-ic="sparkle" data-s="46" data-c="#fff"></div>
+      <div id="ptext" style="flex:1;font-size:40px;font-weight:500;line-height:1.25;color:#F1F1F5;letter-spacing:-.01em"></div>
+      <div class="ib" style="width:84px;height:84px;flex:none;border-radius:50%;background:#fff" data-ic="send" data-s="40" data-c="#111"></div>
+    </div>
+    <svg class="abs" id="links" style="left:0;top:0" width="1080" height="1920">
+      <path id="ln1" d="M540 742 C540 840 215 830 215 935" fill="none" stroke="url(#lg)" stroke-width="4"/>
+      <path id="ln2" d="M540 742 L540 935" fill="none" stroke="url(#lg)" stroke-width="4"/>
+      <path id="ln3" d="M540 742 C540 840 865 830 865 935" fill="none" stroke="url(#lg)" stroke-width="4"/>
+      <path id="ln4" d="M215 1235 L215 1290 M540 1235 L540 1290 M865 1235 L865 1290" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="3" stroke-dasharray="6 8"/>
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2477E"/><stop offset="1" stop-color="#5E6DF8"/></linearGradient></defs>
+    </svg>
+    <div class="abs glass oc" id="oc1" style="left:70px;top:935px;width:290px;height:300px;padding:34px 30px">
+      <div class="ib gbg" style="width:96px;height:96px" data-ic="present" data-s="50" data-c="#fff"></div>
+      <div style="font-size:36px;font-weight:700;margin-top:30px;letter-spacing:-.02em">Apresentações</div>
+      <div class="bar" style="margin-top:22px;width:85%;height:12px"></div><div class="bar" style="margin-top:12px;width:60%;height:12px"></div>
+    </div>
+    <div class="abs glass oc" id="oc2" style="left:395px;top:935px;width:290px;height:300px;padding:34px 30px">
+      <div class="ib gbg" style="width:96px;height:96px" data-ic="globe" data-s="50" data-c="#fff"></div>
+      <div style="font-size:36px;font-weight:700;margin-top:30px;letter-spacing:-.02em">Sites</div>
+      <div class="bar" style="margin-top:22px;width:85%;height:12px"></div><div class="bar" style="margin-top:12px;width:60%;height:12px"></div>
+    </div>
+    <div class="abs glass oc" id="oc3" style="left:720px;top:935px;width:290px;height:300px;padding:34px 30px">
+      <div class="ib gbg" style="width:96px;height:96px" data-ic="layout" data-s="50" data-c="#fff"></div>
+      <div style="font-size:36px;font-weight:700;margin-top:30px;letter-spacing:-.02em">Protótipos</div>
+      <div class="bar" style="margin-top:22px;width:85%;height:12px"></div><div class="bar" style="margin-top:12px;width:60%;height:12px"></div>
+    </div>
+    <div class="abs ctr" id="chips" style="top:1290px;display:flex;justify-content:center;gap:24px">
+      <div class="pill chip" style="letter-spacing:.02em;font-size:32px;font-weight:600"><span class="dot"></span>Estrutura</div>
+      <div class="pill chip" style="letter-spacing:.02em;font-size:32px;font-weight:600"><span class="dot"></span>Design</div>
+      <div class="pill chip" style="letter-spacing:.02em;font-size:32px;font-weight:600"><span class="dot"></span>Lógica</div>
+    </div>
+  </div>
+
+  <!-- ========== SCENE 3 : PRESENTATIONS ========== -->
+  <div class="layer" id="S3">
+    <div class="abs ctr" id="p3" style="top:200px"><div class="pill"><span class="dot"></span>APRESENTAÇÕES</div></div>
+    <div class="abs" id="ghost1" style="left:110px;top:310px;width:860px;height:510px;border-radius:30px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)"></div>
+    <div class="abs" id="ghost2" style="left:90px;top:330px;width:900px;height:520px;border-radius:30px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"></div>
+    <div class="abs glass" id="slide" style="left:60px;top:350px;width:960px;height:560px;padding:46px 50px;background:linear-gradient(160deg,#17171d,#0f0f13);overflow:hidden">
+      <div id="sl_tag" style="font-size:24px;font-weight:700;letter-spacing:.16em;color:#8d8d99">01 — ESTRATÉGIA</div>
+      <div id="sl_title" style="font-size:56px;font-weight:800;letter-spacing:-.035em;margin-top:14px;line-height:1.05">IA para <span class="g">pequenos negócios</span></div>
+      <div class="abs" style="left:50px;top:230px;width:440px">
+        <div class="sb" style="display:flex;align-items:center;gap:18px;margin-bottom:30px"><div class="ib" style="width:58px;height:58px;border-radius:16px;background:rgba(255,122,26,.15)" data-ic="zap" data-s="30" data-c="#FF8A3D"></div><div><div style="font-size:28px;font-weight:700">Atendimento</div><div class="bar" style="width:220px;height:10px;margin-top:10px"></div></div></div>
+        <div class="sb" style="display:flex;align-items:center;gap:18px;margin-bottom:30px"><div class="ib" style="width:58px;height:58px;border-radius:16px;background:rgba(242,71,126,.15)" data-ic="cpu" data-s="30" data-c="#F2477E"></div><div><div style="font-size:28px;font-weight:700">Automação</div><div class="bar" style="width:180px;height:10px;margin-top:10px"></div></div></div>
+        <div class="sb" style="display:flex;align-items:center;gap:18px"><div class="ib" style="width:58px;height:58px;border-radius:16px;background:rgba(94,109,248,.18)" data-ic="trend" data-s="30" data-c="#8C97FF"></div><div><div style="font-size:28px;font-weight:700">Vendas</div><div class="bar" style="width:200px;height:10px;margin-top:10px"></div></div></div>
+      </div>
+      <div class="abs" id="chart" style="left:540px;top:220px;width:370px;height:280px;border-radius:22px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);padding:26px">
+        <div style="font-size:22px;color:#9a9aa6;font-weight:600">Crescimento</div>
+        <div style="position:absolute;left:30px;right:30px;bottom:26px;height:170px;display:flex;align-items:flex-end;gap:18px">
+          <div class="cb gbg" style="flex:1;border-radius:10px;height:35%"></div>
+          <div class="cb gbg" style="flex:1;border-radius:10px;height:50%"></div>
+          <div class="cb gbg" style="flex:1;border-radius:10px;height:45%"></div>
+          <div class="cb gbg" style="flex:1;border-radius:10px;height:72%"></div>
+          <div class="cb gbg" style="flex:1;border-radius:10px;height:100%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="abs ctr" style="top:980px"><div class="k3 split" id="t3a">Não é só um</div></div>
+    <div class="abs ctr" style="top:1050px"><div class="k2 split" id="t3b">slide bonito.</div></div>
+    <div class="abs ctr" style="top:980px"><div class="k3 split" id="t3c">É uma apresentação que</div></div>
+    <div class="abs ctr" style="top:1050px"><div class="k2 split g" id="t3d">comunica melhor.</div></div>
+    <div class="abs ctr" id="m1" style="top:975px"><span class="k2">Mais clareza.</span></div>
+    <div class="abs ctr" id="m2" style="top:1095px"><span class="k2 g">Mais impacto.</span></div>
+    <div class="abs ctr" id="m3" style="top:1215px"><span class="k2" style="color:#ECECF1">Menos <span style="position:relative;color:#77777f">slide morto<i class="strike abs" id="m3s" style="left:-6px;right:-6px;top:55%;height:10px;border-radius:5px;background:#FF5A4E;transform-origin:left center"></i></span>.</span></div>
+  </div>
+
+  <!-- ========== SCENE 4 : SITES ========== -->
+  <div class="layer" id="S4">
+    <div class="abs ctr" id="p4" style="top:200px"><div class="pill"><span class="dot"></span>SITES</div></div>
+    <div class="abs ctr" style="top:640px"><div class="k3 split" id="t4a">Nos sites,</div></div>
+    <div class="abs ctr" style="top:720px"><div class="k1 split" id="t4b">mesma <span class="g">lógica.</span></div></div>
+    <div class="abs glass" id="note" style="left:300px;top:560px;width:480px;height:460px;padding:44px;border-radius:30px;background:linear-gradient(170deg,#24201c,#17151a)">
+      <div class="ib" style="width:84px;height:84px;border-radius:24px;background:rgba(255,184,80,.15)" data-ic="bulb" data-s="46" data-c="#FFB850"></div>
+      <div style="font-size:44px;font-weight:700;margin-top:30px;letter-spacing:-.02em">Ideia solta</div>
+      <div style="font-size:32px;font-style:italic;color:#b8b2aa;margin-top:18px;line-height:1.35">"um site pra minha startup, moderno, que explique o produto…"</div>
+    </div>
+    <div class="abs glass" id="br" style="left:100px;top:300px;width:880px;height:1100px;border-radius:30px;overflow:hidden;background:linear-gradient(180deg,#141419,#0d0d11)">
+      <div style="height:64px;display:flex;align-items:center;gap:12px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)">
+        <i style="width:16px;height:16px;border-radius:50%;background:#FF5F57"></i><i style="width:16px;height:16px;border-radius:50%;background:#FEBC2E"></i><i style="width:16px;height:16px;border-radius:50%;background:#28C840"></i>
+        <div style="margin-left:24px;flex:1;height:36px;border-radius:18px;background:rgba(255,255,255,.06);font-size:20px;color:#8b8b96;display:flex;align-items:center;padding-left:22px">suastartup.com</div>
+      </div>
+      <div class="sec abs" id="sNav" style="left:36px;top:92px;width:808px;height:50px;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:30px;font-weight:800;letter-spacing:-.03em">nova<span class="g">.</span></div>
+        <div style="display:flex;gap:26px"><div class="bar" style="width:70px;height:12px"></div><div class="bar" style="width:70px;height:12px"></div><div class="bar" style="width:70px;height:12px"></div></div>
+      </div>
+      <div class="sec abs" id="sHero" style="left:36px;top:170px;width:808px;height:330px">
+        <div style="font-size:58px;font-weight:800;letter-spacing:-.04em;line-height:1.02;width:470px">Construa o futuro <span class="g">mais rápido.</span></div>
+        <div class="bar" style="margin-top:22px;width:400px;height:12px"></div><div class="bar" style="margin-top:12px;width:320px;height:12px"></div>
+        <div id="sCta" class="gbg" style="position:absolute;left:0;top:254px;padding:18px 40px;border-radius:999px;font-size:26px;font-weight:700;box-shadow:0 10px 40px rgba(242,71,126,.45)">Começar agora →</div>
+        <div class="gbg" style="position:absolute;right:0;top:0;width:290px;height:320px;border-radius:26px;opacity:.9"><div style="position:absolute;inset:18px;border-radius:18px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.25)"></div></div>
+      </div>
+      <div class="sec abs" id="sBen" style="left:36px;top:530px;width:808px;height:200px;display:flex;gap:20px">
+        <div class="glass" style="flex:1;border-radius:22px;padding:24px;box-shadow:none"><div class="ib" style="width:56px;height:56px;border-radius:16px;background:rgba(255,122,26,.15)" data-ic="zap" data-s="30" data-c="#FF8A3D"></div><div style="font-size:26px;font-weight:700;margin-top:18px">Rápido</div><div class="bar" style="margin-top:12px;width:80%;height:10px"></div></div>
+        <div class="glass" style="flex:1;border-radius:22px;padding:24px;box-shadow:none"><div class="ib" style="width:56px;height:56px;border-radius:16px;background:rgba(242,71,126,.15)" data-ic="shield" data-s="30" data-c="#F2477E"></div><div style="font-size:26px;font-weight:700;margin-top:18px">Seguro</div><div class="bar" style="margin-top:12px;width:80%;height:10px"></div></div>
+        <div class="glass" style="flex:1;border-radius:22px;padding:24px;box-shadow:none"><div class="ib" style="width:56px;height:56px;border-radius:16px;background:rgba(94,109,248,.18)" data-ic="trend" data-s="30" data-c="#8C97FF"></div><div style="font-size:26px;font-weight:700;margin-top:18px">Escala</div><div class="bar" style="margin-top:12px;width:80%;height:10px"></div></div>
+      </div>
+      <div class="sec abs" id="sDep" style="left:36px;top:760px;width:808px;height:170px;display:flex;gap:20px">
+        <div style="flex:1;border-radius:22px;padding:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;gap:18px"><div style="width:62px;height:62px;border-radius:50%;flex:none;background:linear-gradient(135deg,#FFB06B,#F2477E)"></div><div style="flex:1"><div style="color:#FFB850;font-size:22px;letter-spacing:.1em">★★★★★</div><div class="bar" style="margin-top:12px;width:95%;height:10px"></div><div class="bar" style="margin-top:10px;width:70%;height:10px"></div></div></div>
+        <div style="flex:1;border-radius:22px;padding:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;gap:18px"><div style="width:62px;height:62px;border-radius:50%;flex:none;background:linear-gradient(135deg,#B15CF4,#5E6DF8)"></div><div style="flex:1"><div style="color:#FFB850;font-size:22px;letter-spacing:.1em">★★★★★</div><div class="bar" style="margin-top:12px;width:95%;height:10px"></div><div class="bar" style="margin-top:10px;width:60%;height:10px"></div></div></div>
+      </div>
+      <div class="sec abs" id="sFoot" style="left:0;top:960px;width:880px;height:140px;background:rgba(255,255,255,.035);border-top:1px solid rgba(255,255,255,.08);padding:34px 36px;display:flex;justify-content:space-between">
+        <div style="font-size:28px;font-weight:800">nova<span class="g">.</span></div>
+        <div style="display:flex;gap:40px"><div><div class="bar" style="width:90px;height:10px"></div><div class="bar" style="width:70px;height:10px;margin-top:12px"></div></div><div><div class="bar" style="width:90px;height:10px"></div><div class="bar" style="width:60px;height:10px;margin-top:12px"></div></div></div>
+      </div>
+    </div>
+    <div class="abs tag" id="tg1" style="left:760px;top:380px"><div class="pill" style="letter-spacing:.04em;font-size:28px;background:#121217;border-color:rgba(242,71,126,.6)">Hero</div></div>
+    <div class="abs tag" id="tg2" style="left:690px;top:580px"><div class="pill" style="letter-spacing:.04em;font-size:28px;background:#121217;border-color:rgba(242,71,126,.6)">CTA</div></div>
+    <div class="abs tag" id="tg3" style="left:740px;top:800px"><div class="pill" style="letter-spacing:.04em;font-size:28px;background:#121217;border-color:rgba(242,71,126,.6)">Benefícios</div></div>
+    <div class="abs tag" id="tg4" style="left:700px;top:1020px"><div class="pill" style="letter-spacing:.04em;font-size:28px;background:#121217;border-color:rgba(242,71,126,.6)">Depoimentos</div></div>
+    <div class="abs tag" id="tg5" style="left:780px;top:1230px"><div class="pill" style="letter-spacing:.04em;font-size:28px;background:#121217;border-color:rgba(242,71,126,.6)">Rodapé</div></div>
+    <svg class="abs" id="cursor" style="left:0;top:0" width="56" height="56" viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.5L9 19z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/></svg>
+    <div class="abs ctr" style="top:1250px"><div class="k2 split" id="t4z">Da ideia ao <span class="g">layout.</span></div></div>
+  </div>
+
+  <!-- ========== SCENE 5 : EXAMPLES ========== -->
+  <div class="layer" id="S5">
+    <div class="abs ctr" id="p5" style="top:200px"><div class="pill"><span class="dot"></span>NA PRÁTICA</div></div>
+    <div class="abs ctr" style="top:640px"><div class="k1 split" id="t5a">Na <span class="g">prática?</span></div></div>
+    <!-- ex1 -->
+    <div class="abs glass ex" id="ex1" style="left:100px;top:320px;width:880px;height:1040px;padding:56px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div class="g" style="font-size:96px;font-weight:800;letter-spacing:-.05em">01</div><div class="pill" style="font-size:24px">APRESENTAÇÃO</div></div>
+      <div style="font-size:60px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-top:30px">Como a IA ajuda<br><span class="g">pequenas empresas</span></div>
+      <div style="margin-top:52px;display:flex;flex-direction:column;gap:22px">
+        <div class="row" style="display:flex;align-items:center;gap:24px;padding:24px;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><div class="ib gbg" style="width:76px;height:76px" data-ic="store" data-s="40" data-c="#fff"></div><div style="flex:1;font-size:36px;font-weight:700">Atendimento 24h</div><div data-ic="check" data-s="40" data-c="#7CF29A"></div></div>
+        <div class="row" style="display:flex;align-items:center;gap:24px;padding:24px;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><div class="ib gbg" style="width:76px;height:76px" data-ic="cpu" data-s="40" data-c="#fff"></div><div style="flex:1;font-size:36px;font-weight:700">Processos automáticos</div><div data-ic="check" data-s="40" data-c="#7CF29A"></div></div>
+        <div class="row" style="display:flex;align-items:center;gap:24px;padding:24px;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><div class="ib gbg" style="width:76px;height:76px" data-ic="trend" data-s="40" data-c="#fff"></div><div style="flex:1;font-size:36px;font-weight:700">Mais vendas</div><div data-ic="check" data-s="40" data-c="#7CF29A"></div></div>
+      </div>
+    </div>
+    <!-- ex2 -->
+    <div class="abs glass ex" id="ex2" style="left:100px;top:320px;width:880px;height:1040px;padding:56px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div class="g" style="font-size:96px;font-weight:800;letter-spacing:-.05em">02</div><div class="pill" style="font-size:24px">SITE INSTITUCIONAL</div></div>
+      <div style="margin-top:36px;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0e0e12">
+        <div style="height:50px;display:flex;align-items:center;gap:10px;padding:0 20px;background:rgba(255,255,255,.04)"><i style="width:13px;height:13px;border-radius:50%;background:#FF5F57"></i><i style="width:13px;height:13px;border-radius:50%;background:#FEBC2E"></i><i style="width:13px;height:13px;border-radius:50%;background:#28C840"></i></div>
+        <div style="position:relative;padding:40px 40px 44px;height:640px;background:radial-gradient(ellipse at 80% 0%,rgba(177,92,244,.35),transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(255,122,26,.22),transparent 60%)">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:30px;font-weight:800">orbit<span class="g">.ai</span></div><div style="padding:10px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.25);font-size:20px">Entrar</div></div>
+          <div class="ex2h" style="font-size:64px;font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-top:56px">A startup que <span class="g">simplifica</span> sua operação.</div>
+          <div class="ex2b" style="display:inline-block;margin-top:34px;padding:18px 36px;border-radius:999px;background:#fff;color:#111;font-size:26px;font-weight:700">Conheça →</div>
+          <div class="ex2f" style="position:absolute;left:40px;right:40px;bottom:40px;display:flex;gap:18px">
+            <div style="flex:1;padding:22px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"><div data-ic="rocket" data-s="40" data-c="#FF8A3D"></div><div class="bar" style="margin-top:16px;width:80%;height:10px"></div></div>
+            <div style="flex:1;padding:22px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"><div data-ic="zap" data-s="40" data-c="#F2477E"></div><div class="bar" style="margin-top:16px;width:80%;height:10px"></div></div>
+            <div style="flex:1;padding:22px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"><div data-ic="shield" data-s="40" data-c="#8C97FF"></div><div class="bar" style="margin-top:16px;width:80%;height:10px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ex3 -->
+    <div class="abs glass ex" id="ex3" style="left:100px;top:320px;width:880px;height:1040px;padding:56px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div class="g" style="font-size:96px;font-weight:800;letter-spacing:-.05em">03</div><div class="pill" style="font-size:24px">PITCH VISUAL</div></div>
+      <div style="display:flex;gap:14px;margin-top:34px">
+        <div class="pill" style="font-size:24px;letter-spacing:.02em;padding:12px 24px">Problema</div><div class="pill" style="font-size:24px;letter-spacing:.02em;padding:12px 24px">Solução</div><div class="pill" style="font-size:24px;letter-spacing:.02em;padding:12px 24px;background:#fff;color:#111">Resultado</div>
+      </div>
+      <div style="font-size:40px;font-weight:600;color:#a9a9b4;margin-top:50px">Seu produto em números</div>
+      <div class="g" id="metric" style="font-size:170px;font-weight:800;letter-spacing:-.06em;line-height:1;margin-top:10px">+240%</div>
+      <svg width="768" height="330" viewBox="0 0 768 330" style="margin-top:20px;display:block">
+        <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF7A1A"/><stop offset=".5" stop-color="#F2477E"/><stop offset="1" stop-color="#5E6DF8"/></linearGradient>
+        <linearGradient id="lg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(242,71,126,.35)"/><stop offset="1" stop-color="rgba(242,71,126,0)"/></linearGradient></defs>
+        <line x1="0" y1="320" x2="768" y2="320" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+        <line x1="0" y1="220" x2="768" y2="220" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+        <line x1="0" y1="120" x2="768" y2="120" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+        <path id="area3" d="M0 300 C120 290 170 260 260 250 S420 200 500 150 S680 60 768 30 L768 320 L0 320Z" fill="url(#lg3)"/>
+        <path id="line3" d="M0 300 C120 290 170 260 260 250 S420 200 500 150 S680 60 768 30" fill="none" stroke="url(#lg2)" stroke-width="8" stroke-linecap="round"/>
+        <circle id="dot3" cx="768" cy="30" r="14" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ========== SCENE 6 : DIFFERENTIAL ========== -->
+  <div class="layer" id="S6">
+    <div class="abs ctr" style="top:300px"><div class="k3 split" id="t6a">E o ponto não é só</div></div>
+    <div class="abs ctr" style="top:380px"><div class="k1 split" id="t6b">estética.</div></div>
+    <div class="abs glass pr" id="pr1" style="left:110px;top:650px;width:860px;height:170px;padding:0 40px;display:flex;align-items:center;gap:32px">
+      <div class="ib gbg" style="width:100px;height:100px;flex:none;border-radius:28px" data-ic="zap" data-s="52" data-c="#fff"></div>
+      <div style="flex:1"><div style="font-size:52px;font-weight:800;letter-spacing:-.03em">Velocidade</div><div class="bar" style="margin-top:16px;height:12px;overflow:hidden"><div class="fill gbg" style="height:100%;border-radius:9px"></div></div></div>
+    </div>
+    <div class="abs glass pr" id="pr2" style="left:110px;top:850px;width:860px;height:170px;padding:0 40px;display:flex;align-items:center;gap:32px">
+      <div class="ib gbg" style="width:100px;height:100px;flex:none;border-radius:28px" data-ic="eye" data-s="52" data-c="#fff"></div>
+      <div style="flex:1"><div style="font-size:52px;font-weight:800;letter-spacing:-.03em">Clareza</div><div class="bar" style="margin-top:16px;height:12px;overflow:hidden"><div class="fill gbg" style="height:100%;border-radius:9px"></div></div></div>
+    </div>
+    <div class="abs glass pr" id="pr3" style="left:110px;top:1050px;width:860px;height:170px;padding:0 40px;display:flex;align-items:center;gap:32px">
+      <div class="ib gbg" style="width:100px;height:100px;flex:none;border-radius:28px" data-ic="msg" data-s="52" data-c="#fff"></div>
+      <div style="flex:1"><div style="font-size:52px;font-weight:800;letter-spacing:-.03em">Comunicação</div><div class="bar" style="margin-top:16px;height:12px;overflow:hidden"><div class="fill gbg" style="height:100%;border-radius:9px"></div></div></div>
+    </div>
+    <div class="abs ctr" style="top:560px"><div class="k3 split" id="t6c" style="color:#D8D8DF">É transformar ideia em algo<br>que as pessoas</div></div>
+    <div class="abs ctr" style="top:760px"><div class="k1 split g" id="t6d">realmente<br>entendem.</div></div>
+  </div>
+
+  <!-- ========== SCENE 7 : CLOSING ========== -->
+  <div class="layer" id="S7">
+    <div class="abs ctr" style="top:420px"><div class="k3 split" id="t7a">Hoje, não basta ter</div></div>
+    <div class="abs ctr" style="top:500px"><div class="k2 split" id="t7b">uma ideia boa.</div></div>
+    <div class="abs ctr" style="top:760px"><div class="k3 split" id="t7c">Você precisa</div></div>
+    <div class="abs ctr" style="top:840px"><div class="k1 split g" id="t7d">apresentar<br>bem.</div></div>
+    <div class="abs ctr" style="top:620px"><div class="k3 split" id="t7e" style="color:#D8D8DF">E quando a tecnologia te ajuda<br>a comunicar melhor…</div></div>
+    <div class="abs ctr" style="top:640px"><div class="k1 split" id="t7f">a diferença<br><span class="g">aparece.</span></div></div>
+    <div class="abs" id="eglow" style="left:90px;top:400px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(242,71,126,.4),rgba(94,109,248,.15) 42%,transparent 68%)"></div>
+    <div class="abs" id="elock" style="left:0;top:720px;width:1080px;height:200px;display:flex;align-items:center;justify-content:center;gap:34px">
+      <img id="eheart" src="assets/heart.png" style="height:190px">
+      <div style="position:relative;height:166px;overflow:hidden" id="ewmwrap"><img src="assets/wordmark.png" style="height:166px;display:block"></div>
+    </div>
+    <div class="abs ctr" id="etag" style="top:990px;font-size:42px;font-weight:500;color:#B9B9C4;letter-spacing:-.01em">Apresentações e sites, <span class="g" style="font-weight:700">com IA.</span></div>
+  </div>
+
+  </div><!-- /world -->
+
+  <div id="vig"></div>
+  <canvas id="grain" width="540" height="960"></canvas>
+  <div id="cap"></div>
+  <div id="handle"><div>@sfelipe0fc</div></div>
+</div>
+
+<script src="timing.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),expo:x=>x>=1?1:1-Math.pow(2,-10*x),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,
+  back:x=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)}};
+const P=(t,a,d)=>cl((t-a)/d);
+const tw=(t,a,d,e='expo')=>E[e](P(t,a,d));
+
+/* ---------- icons ---------- */
+const IC={
+ sparkle:'<path d="M12 2.5l2.1 6.2 6.4 2.3-6.4 2.3L12 19.5l-2.1-6.2L3.5 11l6.4-2.3z" fill="C" stroke="none"/><path d="M19 2v4M17 4h4" />',
+ send:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+ present:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+ layout:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/>',
+ zap:'<path d="M13 2L4 14h8l-1 8 9-12h-8l1-8z"/>',
+ eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',
+ store:'<path d="M3 9l1.5-5h15L21 9M3 9h18v11H3zM9 20v-6h6v6"/>',
+ cpu:'<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+ trend:'<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
+ rocket:'<path d="M12 2c4 3 5 8 3 13H9C7 10 8 5 12 2z"/><path d="M9 15l-3 4M15 15l3 4M12 15v5"/><circle cx="12" cy="9" r="1.6"/>',
+ shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+ bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+ hourglass:'<path d="M6 2h12M6 22h12M7 2c0 5 10 6 10 10S7 17 7 22M17 2c0 5-10 6-10 10s10 5 10 10"/>',
+ check:'<path d="M5 12l5 5L20 7"/>'
+};
+document.querySelectorAll('[data-ic]').forEach(el=>{
+  const s=el.dataset.s||40,c=el.dataset.c||'#fff';
+  el.insertAdjacentHTML('beforeend',`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${IC[el.dataset.ic].replace(/fill="C"/g,`fill="${c}"`)}</svg>`);
+});
+
+/* ---------- split words ---------- */
+document.querySelectorAll('.split').forEach(el=>{
+  const walk=(node)=>{
+    [...node.childNodes].forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(p=>{
+          if(!p)return;
+          if(/^\s+$/.test(p)){frag.appendChild(document.createTextNode(' '));return;}
+          const w=document.createElement('span');w.className='w';
+          const wi=document.createElement('span');wi.className='wi';wi.textContent=p;
+          // carry gradient if parent is .g
+          w.appendChild(wi);frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if(n.nodeType===1 && n.tagName!=='BR'){walk(n);}
+    });
+  };
+  walk(el);
+  // gradient text inside overflow wrappers: apply .g to each .wi when ancestor has .g
+  el.querySelectorAll('.wi').forEach(wi=>{ if(wi.closest('.g')){wi.classList.add('g');} });
+  el.querySelectorAll('.g .w, .g').forEach(x=>{ if(x!==el && x.tagName==='SPAN' && !x.classList.contains('wi') && x.classList.contains('g')) x.classList.remove('g'); });
+  if(el.classList.contains('g')) el.classList.remove('g');
+  el._wis=[...el.querySelectorAll('.wi')];
+});
+
+/* ---------- style helpers ---------- */
+function S(el,o){
+  if(typeof el==='string')el=$(el);
+  const op=o.o??1,x=o.x||0,y=o.y||0,s=o.s??1,r=o.r||0,b=o.b||0,rx=o.rx||0,ry=o.ry||0;
+  el.style.opacity=op.toFixed(4);
+  el.style.visibility=op<=0.002?'hidden':'visible';
+  el.style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)`+(rx||ry?` perspective(1800px) rotateX(${rx}deg) rotateY(${ry}deg)`:'')+` scale(${s.toFixed(4)}) rotate(${r.toFixed(3)}deg)`;
+  el.style.filter=b>0.15?`blur(${b.toFixed(2)}px)`:'none';
+}
+// generic in/out envelope
+function V(t,a,b,o={}){
+  const {dy=60,dx=0,s0=1,din=.75,dout=.45,dyo=-30,dxo=0,so=1,blur=16,ein='expo'}=o;
+  const ki=tw(t,a,din,ein), ko=b==null?0:E.io(P(t,b,dout));
+  return {o:ki*(1-ko),x:dx*(1-ki)+dxo*ko,y:dy*(1-ki)+dyo*ko,s:lerp(s0,1,ki)*lerp(1,so,ko),b:blur*(1-ki)+blur*ko};
+}
+// word-by-word reveal (rise from mask), with group exit
+function R(el,t,a,b,{st=.065,d=.7,dout=.4}={}){
+  if(typeof el==='string')el=$(el);
+  const ko=b==null?0:E.io(P(t,b,dout));
+  el.style.opacity=(1-ko).toFixed(3);
+  el.style.visibility=(t<a-.01||ko>=.999)?'hidden':'visible';
+  el.style.transform=`translateY(${(-30*ko).toFixed(1)}px)`;
+  el.style.filter=ko>0.02?`blur(${(14*ko).toFixed(1)}px)`:'none';
+  el._wis.forEach((wi,i)=>{
+    const k=tw(t,a+i*st,d);
+    wi.style.transform=`translateY(${((1-k)*105).toFixed(2)}%) rotate(${((1-k)*4).toFixed(2)}deg)`;
+  });
+}
+function dash(path,k){ if(!path._L){path._L=path.getTotalLength();path.style.strokeDasharray=path._L;} path.style.strokeDashoffset=(path._L*(1-k)).toFixed(1); }
+
+/* ---------- grain ---------- */
+const gc=$('grain').getContext('2d'); const grains=[];
+for(let n=0;n<6;n++){const id=gc.createImageData(540,960);let seed=n*9301+49297;for(let i=0;i<id.data.length;i+=4){seed=(seed*16807)%2147483647;const v=seed%255;id.data[i]=id.data[i+1]=id.data[i+2]=v;id.data[i+3]=255;}grains.push(id);}
+
+/* ---------- timing ---------- */
+const T=TIMING.cues, END=TIMING.end;
+const DUR=END+3.6;
+window.DUR=DUR;
+const sc=[['S1',0,T.s2],['S2',T.s2,T.s3],['S3',T.s3,T.s4],['S4',T.s4,T.s5],['S5',T.s5,T.s6],['S6',T.s6,T.s7],['S7',T.s7,DUR+5]];
+
+/* ---------- captions ---------- */
+let capIdx=-2;
+function captions(t){
+  const caps=TIMING.caps; let idx=-1;
+  for(let i=0;i<caps.length;i++){ if(t>=caps[i].s-0.04 && t<caps[i].e){idx=i;break;} }
+  const cap=$('cap');
+  if(idx!==capIdx){
+    capIdx=idx;
+    cap.innerHTML= idx<0?'':caps[idx].w.map(w=>`<span>${w[0]}</span>`).join(' ');
+  }
+  if(idx<0)return;
+  const c=caps[idx], k=tw(t,c.s-0.04,.28);
+  cap.style.opacity=(k*(1-P(t,c.e-0.12,.12))).toFixed(3);
+  cap.style.transform=`translateY(${((1-k)*18).toFixed(1)}px) scale(${(0.94+0.06*k).toFixed(4)})`;
+  [...cap.children].forEach((sp,i)=>{
+    const w=c.w[i]; const spoken=t>=w[1]-0.03;
+    const cur=spoken && (i===c.w.length-1 || t<c.w[i+1][1]-0.03);
+    sp.className=spoken?('now'+(cur?' hl':'')):'fut';
+  });
+}
+
+/* ---------- render ---------- */
+function render(t){
+  // background drift
+  const sp=t*0.12;
+  S('b1',{x:-260+Math.sin(sp)*120,y:-520+Math.cos(sp*.8)*140,o:.55});
+  S('b2',{x:300+Math.cos(sp*.9)*140,y:120+Math.sin(sp*1.1)*120,o:.45});
+  S('b3',{x:-200+Math.sin(sp*.7+2)*160,y:700+Math.cos(sp*.6)*120,o:.5});
+  S('grid',{y:(t*12)%90,o:.9});
+  gc.putImageData(grains[Math.floor(t*24)%6],0,0);
+
+  // global camera: slow breathing push
+  S('world',{s:1+0.012*Math.sin(t*0.35)});
+
+  // scenes envelopes
+  sc.forEach(([id,a,b],i)=>{
+    const el=$(id);
+    const on=t>=a-0.3 && t<b+0.6;
+    el.style.display=on?'block':'none';
+    if(!on)return;
+    const ki=i===0?1:tw(t,a-0.12,.6), ko=E.io(P(t,b-0.22,.42));
+    const lp=P(t,a,b-a);
+    el.style.opacity=(ki*(1-ko)).toFixed(3);
+    const s=lerp(1.06,1,ki)*lerp(1,0.94,ko)*(1+0.025*lp);
+    el.style.transform=`scale(${s.toFixed(4)}) translateY(${(-60*ko).toFixed(1)}px)`;
+    el.style.filter=(ki<.98||ko>.02)?`blur(${((1-ki)*18+ko*18).toFixed(1)}px)`:'none';
+  });
+
+  if(t<T.s2+0.7) s1(t);
+  if(t>T.s2-0.4&&t<T.s3+0.7) s2(t);
+  if(t>T.s3-0.4&&t<T.s4+0.7) s3(t);
+  if(t>T.s4-0.4&&t<T.s5+0.7) s4(t);
+  if(t>T.s5-0.4&&t<T.s6+0.7) s5(t);
+  if(t>T.s6-0.4&&t<T.s7+0.7) s6(t);
+  if(t>T.s7-0.4) s7(t);
+  captions(t);
+}
+
+/* ---------- SCENE 1 ---------- */
+function s1(t){
+  // h1
+  const a1=Math.max(0,T.h1-0.15), b1=T.h2-0.15;
+  S('h1g',{o:1-E.io(P(t,b1,.45)),x:-120*E.io(P(t,b1,.45)),b:18*E.io(P(t,b1,.45))});
+  R('h1a',t,a1,null,{st:.05});
+  R('h1b',t,a1+0.45,null,{st:.1,d:.8});
+  const pk=tw(t,a1+0.25,1.0);
+  S('pdf',{o:pk,y:(1-pk)*160+Math.sin(t*1.3)*6,r:lerp(-12,-4,pk),s:lerp(.9,1,pk),rx:lerp(30,8,pk),b:(1-pk)*10});
+  S('pauseic',{o:tw(t,a1+1.0,.5),s:lerp(.6,1,tw(t,a1+1.0,.6,'back'))});
+  // h2
+  const a2=T.h2-0.1, b2=T.h3-0.15;
+  const k2o=E.io(P(t,b2,.45));
+  S('h2g',{o:(t>a2-.05?1:0)*(1-k2o),b:18*k2o,s:1-.06*k2o});
+  R('h2a',t,a2,null,{st:.05}); R('h2b',t,a2+0.35,null,{st:.09,d:.8});
+  const ck=tw(t,a2+0.15,1.4,'out');
+  dash($('cloudp'),ck);
+  S('cloud',{o:tw(t,a2,.4),y:Math.sin(t*1.1)*10});
+  S('cb1',{o:tw(t,a2+.8,.4)}); S('cb2',{o:tw(t,a2+1,.4)});
+  $('wire').setAttribute('opacity',(0.25+0.65*tw(t,a2+.6,.8))*(0.75+0.25*Math.sin(t*5.0)));
+  // h3
+  const a3=T.h3-0.1, b3=T.h4-0.2;
+  const k3o=E.io(P(t,b3,.45));
+  S('h3g',{o:(t>a3-.05?1:0)*(1-k3o),b:18*k3o,y:-40*k3o});
+  R('h3a',t,a3,null,{st:.045});
+  [['hd',T.hd],['hl',T.hl],['hm',T.hm]].forEach(([id,c])=>{
+    const k=tw(t,c-0.08,.5,'back');
+    S(id,{o:cl(k*1.4),s:lerp(1.25,1,k),y:(1-k)*30,b:(1-cl(k))*14});
+    const st=$(id).querySelector('.strike');
+    st.style.transform=`scaleX(${tw(t,c+0.35,.45,'io').toFixed(3)})`;
+  });
+  S('hglass',{o:tw(t,T.hd,.6)*.9,r:(Math.floor((t-T.hd)/1.1)*180)+180*E.io(cl(((t-T.hd)%1.1)/.5)),s:.9});
+  // h4
+  const a4=T.h4-0.1;
+  S('h4g',{o:t>a4-.05?1:0});
+  const ok=tw(t,a4,1.6,'out');
+  S('orb',{o:.0+.55*ok,s:lerp(.3,1,ok)*(1+0.04*Math.sin(t*2))});
+  R('h4a',t,a4,null,{st:.06});
+  R('h4b',t,T.h4b-0.1,null,{st:.1});
+  const ak=tw(t,T.h4b+0.15,.7,'back');
+  S('h4arrow',{o:cl(ak),s:lerp(.3,1,ak),r:t*40});
+  R('h4c',t,T.h4b+0.35,null,{st:.12,d:.9});
+}
+
+/* ---------- SCENE 2 ---------- */
+const PTXT='Crie uma apresentação interativa sobre IA para pequenas empresas';
+function s2(t){
+  const a=T.s2, b=T.s2b;
+  // logo reveal
+  const hk=tw(t,a-0.05,.9,'back');
+  const mv=E.io(P(t,b-0.1,.8)); // move logo up
+  S('lockup',{o:cl(tw(t,a-0.05,.5)),s:lerp(1,.5,mv),y:lerp(0,-400,mv)});
+  S('lheart',{s:lerp(.4,1,hk),r:lerp(-25,0,hk),b:(1-cl(hk))*10});
+  const wk=tw(t,a+0.25,1.0);
+  $('lwmwrap').style.width=(wk*$('lwm').naturalWidth*(166/$('lwm').naturalHeight)).toFixed(1)+'px';
+  S('lwm',{x:(1-wk)*-60});
+  S('lglow',{o:tw(t,a,1.2)*(1-mv*.6)*(0.85+0.15*Math.sin(t*2.2)),s:lerp(.5,1,tw(t,a,1.4))*(1-mv*.3),y:-380*mv});
+  // prompt
+  const pk=tw(t,b+0.1,.8);
+  S('prompt',{o:pk,y:(1-pk)*50,s:lerp(.94,1,pk),b:(1-pk)*10});
+  $('prompt').className='abs glass';
+  const n=Math.floor(cl((t-b-0.45)*26,0,PTXT.length));
+  const caret=(Math.floor(t*2.2)%2===0 || n<PTXT.length)?'<span style="display:inline-block;width:4px;height:42px;background:#F2477E;vertical-align:-8px;margin-left:4px"></span>':'';
+  $('ptext').innerHTML=(n?PTXT.slice(0,n):'<span style="color:#6f6f7a">Descreva sua ideia…</span>')+caret;
+  // outputs
+  [['oc1','ln1',T.s2c],['oc2','ln2',T.s2d],['oc3','ln3',T.s2e]].forEach(([id,ln,c])=>{
+    dash($(ln),tw(t,c-0.35,.5,'io'));
+    $(ln).style.opacity=t>c-0.36?1:0;
+    const k=tw(t,c-0.1,.7,'back');
+    S(id,{o:cl(tw(t,c-0.1,.4)),y:(1-k)*80,s:lerp(.85,1,k)});
+  });
+  // chips
+  const ck=tw(t,T.s2f,.6);
+  $('ln4').style.opacity=ck;
+  [...document.querySelectorAll('#chips .chip')].forEach((ch,i)=>{const k=tw(t,T.s2f+0.15+i*0.35,.6,'back');S(ch,{o:cl(k),y:(1-k)*30,s:lerp(.8,1,k)});});
+}
+
+/* ---------- SCENE 3 ---------- */
+function s3(t){
+  const a=T.s3;
+  S('p3',V(t,a,null,{dy:-30}));
+  const k=tw(t,a+0.1,1.1);
+  const shrink=E.io(P(t,T.s3e-0.2,.7));
+  S('slide',{o:cl(k*1.3),rx:lerp(35,0,k),y:(1-k)*120-shrink*40,s:lerp(.85,1,k)*lerp(1,.92,shrink)});
+  S('ghost1',{o:tw(t,a+.4,.8)*.9,y:-30*tw(t,a+.4,.8)-shrink*40,s:lerp(1,.92,shrink)});
+  S('ghost2',{o:tw(t,a+.3,.8)*.9,y:-15*tw(t,a+.3,.8)-shrink*40,s:lerp(1,.92,shrink)});
+  S('sl_title',V(t,a+0.4,null,{dy:30}));
+  S('sl_tag',V(t,a+0.3,null,{dy:20}));
+  [...document.querySelectorAll('#S3 .sb')].forEach((el,i)=>S(el,V(t,T.s3b-0.1+i*0.18,null,{dx:-40,dy:0})));
+  [...document.querySelectorAll('#S3 .sb .ib')].forEach((el,i)=>{const kk=tw(t,T.s3c-0.1+i*0.15,.6,'back');S(el,{s:lerp(.4,1,kk)*(T.s3c<=t?1:1),o:1});});
+  S('chart',V(t,T.s3c+0.1,null,{dy:40}));
+  [...document.querySelectorAll('#S3 .cb')].forEach((el,i)=>{const kk=tw(t,T.s3d-0.05+i*0.1,.9,'out');el.style.transform=`scaleY(${kk.toFixed(3)})`;el.style.transformOrigin='bottom';});
+  R('t3a',t,T.s3e-0.05,T.s3f-0.2); R('t3b',t,T.s3e+0.25,T.s3f-0.2,{st:.08});
+  R('t3c',t,T.s3f-0.05,T.s3g-0.2); R('t3d',t,T.s3f+0.25,T.s3g-0.2,{st:.08});
+  [['m1',T.s3g],['m2',T.s3h],['m3',T.s3i]].forEach(([id,c])=>{const kk=tw(t,c-0.08,.6,'back');S(id,{o:cl(tw(t,c-0.08,.35)),y:(1-kk)*60,s:lerp(.9,1,kk),b:(1-cl(kk))*10});});
+  $('m3s').style.transform=`scaleX(${tw(t,T.s3i+0.45,.45,'io').toFixed(3)})`;
+}
+
+/* ---------- SCENE 4 ---------- */
+function s4(t){
+  const a=T.s4;
+  S('p4',V(t,a,null,{dy:-30}));
+  R('t4a',t,a,T.s4b-0.25); R('t4b',t,a+0.25,T.s4b-0.25,{st:.09});
+  // note
+  const nk=tw(t,T.s4b-0.05,.8,'back');
+  const nf=E.io(P(t,T.s4c-0.1,.7));
+  S('note',{o:cl(nk)*(1-nf),y:(1-nk)*80-nf*300,x:-nf*260,r:lerp(-12,-4,nk)+nf*-8,s:lerp(.8,1,nk)*lerp(1,.4,nf)});
+  // browser
+  const bk=tw(t,T.s4c,.9);
+  const zk=E.io(P(t,T.s4z-0.15,.8));
+  S('br',{o:bk,y:(1-bk)*120-zk*70,s:lerp(.9,1,bk)*lerp(1,.8,zk),rx:lerp(20,0,bk)});
+  const secs=[['sNav',T.s4c+0.3],['sHero',T.s4hero-0.1],['sBen',T.s4ben-0.1],['sDep',T.s4dep-0.1],['sFoot',T.s4rod-0.1]];
+  secs.forEach(([id,c])=>{const k=tw(t,c,.7);S(id,{o:k,y:(1-k)*40,b:(1-k)*8});});
+  const ctk=tw(t,T.s4cta-0.05,.6,'back');
+  S('sCta',{o:cl(ctk),s:lerp(.6,1,ctk)*(1+0.04*Math.sin((t-T.s4cta)*6)*P(t,T.s4cta,.3)*(1-P(t,T.s4cta+1.2,.5)))});
+  const tags=[['tg1',T.s4hero],['tg2',T.s4cta],['tg3',T.s4ben],['tg4',T.s4dep],['tg5',T.s4rod]];
+  tags.forEach(([id,c],i)=>{const k=tw(t,c+0.05,.55,'back');const nxt=i<4?tags[i+1][1]:T.s4z;const ko=E.io(P(t,Math.max(nxt+0.6,c+1.2),.4));S(id,{o:cl(k)*(1-ko),x:(1-k)*40,s:lerp(.7,1,k)});});
+  // cursor path between section targets
+  const pts=[[880,1500,T.s4c],[700,560,T.s4hero],[330,780,T.s4cta],[560,960,T.s4ben],[440,1170,T.s4dep],[620,1330,T.s4rod],[900,1600,T.s4z]];
+  let cx=pts[0][0],cy=pts[0][1];
+  for(let i=0;i<pts.length-1;i++){ if(t>=pts[i][2]-0.4){const k=E.io(P(t,pts[i+1][2]-0.45,.45));cx=lerp(pts[i][0],pts[i+1][0],k);cy=lerp(pts[i][1],pts[i+1][1],k);} }
+  const click=[T.s4hero,T.s4cta,T.s4ben,T.s4dep,T.s4rod].some(c=>t>c&&t<c+0.18);
+  S('cursor',{x:cx,y:cy,o:tw(t,T.s4c+0.3,.4)*(1-P(t,T.s4z,.4)),s:click?.85:1});
+  R('t4z',t,T.s4z,null,{st:.08});
+}
+
+/* ---------- SCENE 5 ---------- */
+function s5(t){
+  const a=T.s5;
+  S('p5',V(t,a,null,{dy:-30}));
+  R('t5a',t,a,T.s5a-0.3,{st:.1});
+  const cs=[['ex1',T.s5a,T.s5b],['ex2',T.s5b,T.s5c],['ex3',T.s5c,null]];
+  cs.forEach(([id,c,n])=>{
+    const ki=tw(t,c-0.3,.85), ko=n==null?0:E.io(P(t,n-0.35,.6));
+    S(id,{o:ki*(1-ko*.999),x:(1-ki)*700-ko*760,s:lerp(.9,1,ki)*lerp(1,.86,ko),ry:(1-ki)*-28+ko*24,b:(1-ki)*8+ko*10});
+  });
+  [...document.querySelectorAll('#ex1 .row')].forEach((el,i)=>S(el,V(t,T.s5a+0.4+i*0.35,null,{dx:60,dy:0})));
+  S(document.querySelector('#ex2 .ex2h'),V(t,T.s5b+0.25,null,{dy:40}));
+  S(document.querySelector('#ex2 .ex2b'),V(t,T.s5b+0.6,null,{dy:30,s0:.8}));
+  S(document.querySelector('#ex2 .ex2f'),V(t,T.s5b+0.85,null,{dy:50}));
+  const lk=tw(t,T.s5c+0.3,1.6,'io');
+  dash($('line3'),lk); $('area3').style.opacity=lk*0.9; $('dot3').style.opacity=P(t,T.s5c+1.7,.3);
+  const num=Math.round(240*tw(t,T.s5c+0.3,1.6,'out'));
+  $('metric').textContent='+'+num+'%';
+}
+
+/* ---------- SCENE 6 ---------- */
+function s6(t){
+  const a=T.s6, e=T.s6e;
+  R('t6a',t,a,e-0.25); R('t6b',t,a+0.45,e-0.25,{st:.1});
+  [['pr1',T.s6b],['pr2',T.s6c],['pr3',T.s6d]].forEach(([id,c],i)=>{
+    const v=V(t,c-0.15,e-0.25+i*0.06,{dx:-80,dy:0});S(id,v);
+    $(id).querySelector('.fill').style.width=(100*tw(t,c+0.05,1.1,'io')).toFixed(1)+'%';
+  });
+  R('t6c',t,e,null,{st:.05}); R('t6d',t,e+0.6,null,{st:.12,d:.9});
+}
+
+/* ---------- SCENE 7 ---------- */
+function s7(t){
+  const a=T.s7;
+  R('t7a',t,a,T.s7c-0.25); R('t7b',t,a+0.3,T.s7c-0.25,{st:.08});
+  R('t7c',t,T.s7b-0.05,T.s7c-0.25); R('t7d',t,T.s7b+0.2,T.s7c-0.25,{st:.12,d:.9});
+  R('t7e',t,T.s7c,T.s7d-0.2,{st:.05});
+  const lg=END+0.5; // logo end card
+  R('t7f',t,T.s7d-0.05,lg-0.2,{st:.1,d:.9});
+  const k=tw(t,lg,1.0,'back');
+  S('elock',{o:cl(tw(t,lg,.5)),s:lerp(.7,1,k)});
+  S('eheart',{s:lerp(.3,1,k),r:lerp(-20,0,cl(k))});
+  const wk=tw(t,lg+0.3,1.0);
+  const wm=$('ewmwrap').querySelector('img');
+  $('ewmwrap').style.width=(wk*wm.naturalWidth*(166/wm.naturalHeight)).toFixed(1)+'px';
+  S('eglow',{o:tw(t,lg,1.2)*(0.85+0.15*Math.sin(t*2)),s:lerp(.4,1,tw(t,lg,1.5))});
+  S('etag',V(t,lg+0.9,null,{dy:30}));
+}
+
+window.render=render;
+window.getSFX=function(){
+  const ev=[];
+  const W=(t,g=1)=>ev.push({t,type:'whoosh',g});
+  const Pp=(t,g=1)=>ev.push({t,type:'pop',g});
+  const C=(t,g=1)=>ev.push({t,type:'click',g});
+  const Sh=(t,g=1)=>ev.push({t,type:'shimmer',g});
+  Pp(T.h1+0.5,.8); W(T.h2-0.2,.7); W(T.h3-0.2,.6);
+  [T.hd,T.hl,T.hm].forEach(c=>{Pp(c,.7);C(c+0.45,.5);});
+  Sh(T.h4b+0.15,.6);
+  W(T.s2-0.25,1); Sh(T.s2+0.05,1);
+  W(T.s2b,.5);
+  for(let i=0;i<PTXT.length;i+=2) C(T.s2b+0.45+i/26,.18);
+  [T.s2c,T.s2d,T.s2e].forEach(c=>Pp(c-0.05,.7));
+  [0,1,2].forEach(i=>Pp(T.s2f+0.15+i*0.35,.45));
+  W(T.s3-0.2,.9); Pp(T.s3b,.5); Pp(T.s3c,.5); Pp(T.s3d,.5);
+  [T.s3g,T.s3h,T.s3i].forEach(c=>Pp(c-0.05,.7)); C(T.s3i+0.45,.5);
+  W(T.s4-0.2,.9); Pp(T.s4b,.6); W(T.s4c,.5);
+  [T.s4hero,T.s4cta,T.s4ben,T.s4dep,T.s4rod].forEach(c=>C(c,.6));
+  Sh(T.s4z,.5);
+  W(T.s5-0.2,.9); W(T.s5a-0.3,.6); W(T.s5b-0.35,.6); W(T.s5c-0.35,.6);
+  W(T.s6-0.2,.9); [T.s6b,T.s6c,T.s6d].forEach(c=>Pp(c-0.1,.6)); Sh(T.s6e+0.6,.5);
+  W(T.s7-0.2,.8); Sh(T.s7d,.6);
+  W(END+0.4,.8); Sh(END+0.55,1.1);
+  return ev;
+};
+render(0);
+</script>
+</body>
+</html>
