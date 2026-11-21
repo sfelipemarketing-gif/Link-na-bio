@@ -146,11 +146,11 @@ def main(root):
     e = np.abs(voice); w = int(.25 * SR)
     e = np.convolve(e, np.ones(w) / w, 'same')
     e = e / (e.max() + 1e-9)
-    duck = 1 - .55 * np.clip(e * 6, 0, 1)
+    duck = 1 - .65 * np.clip(e * 6, 0, 1)
     duck = np.convolve(duck, np.ones(int(.15 * SR)) / int(.15 * SR), 'same')
     t = np.arange(N) / SR
     fade = np.clip((DUR - t) / 3.0, 0, 1)                # cinematic fade-out
-    mix = voice * 1.0 + m * .32 * duck + sfx * .5
+    mix = voice * 1.0 + m * .20 * duck + sfx * .22
     mix *= np.where(t > DUR - 3, fade ** 1.5, 1)
     mix = np.tanh(mix * 1.1) / 1.1
     return mix.astype(np.float32)

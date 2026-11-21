@@ -49,7 +49,7 @@ function cover(img,x,y,w,h,{scale=1,ox=0,oy=0,alpha=1,filter=null}={}){
   ctx.drawImage(img,x+(w-iw)/2+ox,y+(h-ih)/2+oy,iw,ih);ctx.restore();
 }
 function placeholder(x,y,w,h,alpha){ctx.save();ctx.globalAlpha*=alpha;ctx.fillStyle='#1a1d24';ctx.fillRect(x,y,w,h);
-  txt('SHOT RUNWAY PENDENTE',x+w/2,y+h/2,{size:28,w:700,color:C.gray});ctx.restore();}
+  txt('CENA RUNWAY PENDENTE',x+w/2,y+h/2,{size:28,w:700,color:C.gray});ctx.restore();}
 function bg(col=C.graphite){ctx.fillStyle=col;ctx.fillRect(0,0,W,H);}
 function vignette(a=.55){const g=ctx.createRadialGradient(W/2,H*.45,H*.25,W/2,H*.45,H*.8);
   g.addColorStop(0,'rgba(8,9,13,0)');g.addColorStop(1,`rgba(8,9,13,${a})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
@@ -204,13 +204,13 @@ function s02(t){
 }
 
 // S03 TEXT TO VIDEO 17.6–25.8
-const DPROMPT='A single water droplet falls in slow motion onto a glossy black surface, cinematic lighting, macro camera.';
+const DPROMPT='Uma única gota de água cai em câmera lenta sobre uma superfície preta e brilhante, iluminação cinematográfica, câmera macro.';
 function s03(t){
   bg(C.black);
   if(t<20.9){ // typing prompt
     const a=eo(P(t,17.6,18.0));const k=P(t,17.9,20.3);const n=Math.floor(DPROMPT.length*k);
     ctx.save();ctx.globalAlpha=a*(1-P(t,20.6,20.9));ctx.translate(0,(1-a)*60);
-    chip('PROMPT',W/2,470,{});
+    chip('COMANDO DE TEXTO',W/2,470,{});
     rr(90,560,900,640,30);ctx.fillStyle='#111318';ctx.fill();ctx.strokeStyle='rgba(57,153,255,.5)';ctx.lineWidth=2;ctx.stroke();
     // wrap mono text
     font(500,44,'mono');const words=DPROMPT.slice(0,n).split(' ');let lineS='',yy=650;const lines=[];
@@ -237,7 +237,7 @@ function s03(t){
     const la=eo(P(t,21.8,22.3))*(1-P(t,25.5,25.8));
     if(la>0){ctx.save();ctx.globalAlpha=la;rr(W/2-290,190,580,110,55);ctx.fillStyle='rgba(8,9,13,.82)';ctx.fill();ctx.strokeStyle='rgba(57,153,255,.5)';ctx.lineWidth=2;ctx.stroke();
       arrowRow('TEXTO','VÍDEO',246,46);ctx.restore();}
-    txt('Frame gerado com Runway Gen-4 Image · movimento aplicado na edição',W/2,1440,{size:20,w:500,color:C.gray,alpha:la*.9});
+    txt('Quadro gerado no Runway (Gen-4 Image) · movimento de câmera feito na edição',W/2,1440,{size:20,w:500,color:C.gray,alpha:la*.9});
     vignette(.5);
   }
 }
@@ -284,7 +284,7 @@ function s04(t){
 }
 
 // S05 THE TIP 31.2–45.4
-const GOOD='The camera slowly orbits the stationary car while soft reflections move across its surface.';
+const GOOD='A câmera orbita lentamente o carro parado enquanto reflexos suaves deslizam pela lataria.';
 function s05(t){
   bg(C.graphite);
   // title card 31.2–33.3
@@ -299,7 +299,7 @@ function s05(t){
   ctx.save();ctx.globalAlpha=split*(1-merge);line(LW,lerp(H/2,240,split),LW,lerp(H/2,1450,split),{color:'rgba(245,244,240,.25)',w:2});ctx.restore();
   // LEFT (vague)
   if(merge<1){ctx.save();ctx.beginPath();ctx.rect(0,0,LW,H);ctx.clip();ctx.globalAlpha=split*(1-merge);
-    const cx=LW/2;txt('PROMPT VAGO',cx,300,{size:22,w:700,color:C.gray,ls:4});
+    const cx=LW/2;txt('COMANDO VAGO',cx,300,{size:22,w:700,color:C.gray,ls:4});
     txt('“FAÇA UM VÍDEO',cx,390,{size:38,w:800});txt('BONITO.”',cx,440,{size:38,w:800});
     // minimal uninformative visual
     rr(cx-200,540,400,620,24);ctx.fillStyle='#1a1d24';ctx.fill();
@@ -314,14 +314,14 @@ function s05(t){
   ctx.save();ctx.beginPath();ctx.rect(RX,0,RW,H);ctx.clip();ctx.globalAlpha=split;
   const cx=RX+RW/2;
   if(merge<1){ctx.save();ctx.globalAlpha*=(1-merge);
-    txt('PROMPT DIRIGIDO',cx,300,{size:22,w:700,color:C.blue,ls:4,alpha:ra});
+    txt('COMANDO DIRIGIDO',cx,300,{size:22,w:700,color:C.blue,ls:4,alpha:ra});
     txt('DESCREVA A AÇÃO',cx,390,{size:36,w:800,alpha:ra});txt('+ A CÂMERA.',cx,440,{size:36,w:800,alpha:ra,color:C.blue});
     // prompt card with segments
     rr(RX+30,520,RW-60,560,24);ctx.fillStyle='#0D0F14';ctx.globalAlpha=split*ra*(1-merge);ctx.fill();ctx.strokeStyle='rgba(57,153,255,.45)';ctx.stroke();
-    const segs=[['The camera slowly orbits',3,39.6],[' the stationary car',1,37.1],[' while soft reflections move across its surface.',2,38.3]];
+    const segs=[['A câmera orbita lentamente',3,39.6],[' o carro parado',1,37.1],[' enquanto reflexos suaves deslizam pela lataria.',2,38.3]];
     font(500,30,'mono');let x0=RX+58,x=x0,y=590;const maxX=RX+RW-58;const boxes=[];
     for(const [s,id,tt] of segs){const ws=s.split(/(?= )/);let first=null,last=null;
-      for(const w of ws){const ww=ctx.measureText(w).width;if(x+ww>maxX){x=x0;y+=50;}
+      for(const w of ws){const ww=ctx.measureText(w).width;if(x+ww>maxX){x=x0-(w.startsWith(' ')?ctx.measureText(' ').width:0);y+=50;}
         const hl=t>tt;ctx.fillStyle=hl?(id===3?C.blue:C.white):'rgba(245,244,240,.55)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.globalAlpha=split*ra*(1-merge);
         ctx.fillText(w,x,y);const r={x:w.startsWith(' ')?x+ctx.measureText(' ').width:x,y,w:w.startsWith(' ')?ww-ctx.measureText(' ').width:ww};
         if(!first)first=r;last=r;
@@ -375,7 +375,7 @@ function s06(t){
   // timeline panel
   rr(60,1000,960,420,22);ctx.fillStyle='#161920';ctx.fill();ctx.strokeStyle='rgba(245,244,240,.08)';ctx.stroke();
   txt('VISUALIZAÇÃO EXPLICATIVA DE EDIÇÃO',W/2,980,{size:18,w:600,color:C.gray,ls:3});
-  const tracks=[['V1',1080],['A1',1200],['FX',1300]];
+  const tracks=[['V1',1080],['A1',1200],['EF',1300]];
   tracks.forEach(([n,y])=>{txt(n,95,y+40,{size:22,w:700,color:C.gray,align:'left'});rr(150,y,840,80,10);ctx.fillStyle='rgba(245,244,240,.03)';ctx.fill();});
   // ruler ticks
   for(let i=0;i<=28;i++){line(150+i*30,1040,150+i*30,i%5?1052:1062,{color:'rgba(245,244,240,.25)',w:1});}
